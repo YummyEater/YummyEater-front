@@ -17,7 +17,6 @@ import {
   cilMagnifyingGlass,
 } from '@coreui/icons'
 
-
 const Dashboard = () => {
   const typeTag = ['배달', '요리', '완제품']
 
@@ -26,8 +25,10 @@ const Dashboard = () => {
   // 태그 받아오기
   useEffect(() => {
     call("/api/tag", "GET", null)
-    .then((response) => setFoodTag(response.data))
-  })
+    .then(
+      response => setFoodTag(response.data.map((x) => x.name))
+      )
+  }, [])
   
   // 분류 선택
   const [selectedType, setSelectedType] = useState('')
