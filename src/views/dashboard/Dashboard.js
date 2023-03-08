@@ -17,7 +17,6 @@ import CIcon from '@coreui/icons-react'
 import {
   cilMagnifyingGlass,
 } from '@coreui/icons'
-import { string } from 'prop-types'
 
 const Dashboard = () => {
   const typeTag = [
@@ -37,7 +36,6 @@ const Dashboard = () => {
   
   // 분류 선택
   const [selectedType, setSelectedType] = useState('')
-  console.log({selectedType})
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
@@ -45,7 +43,6 @@ const Dashboard = () => {
 
   // 태그 선택
   const [selectedTags, setSelectedTags] = useState([])
-  console.log({selectedTags})
 
   const handleTagChange = (event) => {
     const index = selectedTags.indexOf(event.target.value)
@@ -81,7 +78,7 @@ const Dashboard = () => {
     if(!mounted.current){
       mounted.current = true;
     } else {
-      console.log(searchResponse);
+      // console.log(searchResponse);
       navigate('/searchresult', { state: searchResponse});
     }
   }, [searchResponse]);

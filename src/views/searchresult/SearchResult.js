@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { call } from 'src/service/ApiService'
 
 import {
   CAvatar,
@@ -40,11 +41,23 @@ const SearchResult = () => {
     url: apiURL
   });
   const handleChange = (event, pg) => {
-    setSelectedPage({page: pg, url:`${apiURL}&page=${pg}`});
+    setSelectedPage({page: pg, url:`${apiURL}&page=${pg-1}`});
   }
 
   useEffect(() => {
-    console.log(selectedPage.url);
+    // console.log(selectedPage.url);
+
+    call(selectedPage.url, "GET", null)
+    .then(
+      (response) => {
+        setSearched({
+          sResponse: response,
+          sType: searchedType,
+          sTags: searchedTag,
+          sUrl: apiURL
+        })
+      }
+    )
   }, [selectedPage])
   
   return (
