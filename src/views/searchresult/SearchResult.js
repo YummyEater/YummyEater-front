@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import {
   CAvatar,
@@ -7,45 +8,44 @@ import {
   CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
   CCol,
   CProgress,
   CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-  CFormInput,
-  CFormCheck,
   CFormSelect,
-  CInputGroup,
-  CInputGroupText,
   CPagination,
   CPaginationItem,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import {
-  cilMagnifyingGlass,
-} from '@coreui/icons'
 
+import { Divider } from "@material-ui/core"
+import { Rating, Pagination } from '@mui/material'
 
 const SearchResult = () => {
-  // const typeTag = ['배달', '요리', '완제품']
-  const searchedTag = ['한식', '양식', '중식', '일식', '매콤한', '달콤한']
-  const articleData = [
-    { title: '고르곤졸라 피자', tags: ['양식', '빵'] },
-    { title: '비빔밥', tags: ['한식', '매콤한', '밥'] },
-    { title: '밀푀유나베', tags: ['일식', '국물류', '소고기'] },
-    { title: '크렘브륄레', tags: ['양식', '달콤한', '디저트류'] },
-    { title: '고르곤졸라 피자1', tags: ['양식', '빵'] },
-    { title: '비빔밥1', tags: ['한식', '매콤한', '밥'] },
-    { title: '밀푀유나베1', tags: ['일식', '국물류', '소고기'] },
-    { title: '크렘브륄레1', tags: ['양식', '달콤한', '디저트류'] },
-  ]
+  // 검색결과 전달받음
+  const data = useLocation();
+  const [searched, setSearched] = useState(data.state);
+  console.log(searched);
 
+  // const searchedType = searched.state.sType;
+  // const searchedTag = searched.state.sTags;
+  // const articleData = searched.state.sResponse.content;
+  // const apiURL = searched.state.sUrl;
+  const searchedType = searched.sType;
+  const searchedTag = searched.sTags;
+  const articleData = searched.sResponse.content;
+  const apiURL = searched.sUrl;
+
+  // Pagination
+  const [selectedPage, setSelectedPage] = useState({
+    page: searched.sResponse.number+1,
+    url: apiURL
+  });
+  const handleChange = (event, pg) => {
+    setSelectedPage({page: pg, url:`${apiURL}&page=${pg}`});
+  }
+
+  useEffect(() => {
+    console.log(selectedPage.url);
+  }, [selectedPage])
   
   return (
     <>
@@ -57,8 +57,8 @@ const SearchResult = () => {
                 <CCol className="col-auto">
                 </CCol>
                 <CCol className="me-auto" xs="auto">
-                  {searchedTag.map((item)=> (
-                    <h5 className='d-inline'><CBadge color="info" shape="rounded-pill" className='m-1 px-3 py-2 w-auto'>{item}</CBadge></h5>
+                  {searchedTag.map((item, index)=> (
+                    <h5 className='d-inline'><CBadge key={index} color="info" shape="rounded-pill" className='m-1 px-3 py-2 w-auto'>{item}</CBadge></h5>
                   ))}
                 </CCol>
               </CRow>
@@ -81,19 +81,41 @@ const SearchResult = () => {
             <CCard>
               <CCardBody>
                 <CRow className='align-items-center px-3'>
-                  <CCol className="col-auto">
-                    <h6 className="mb-0">
+                  <CCol className="justify-content-center align-items-center col-auto">
+                    <h5 className="mb-0 d-inline">
                       {item.title}
-                    </h6>
+                    </h5>
+                    <div className="mx-3 mb-0 fs-6 d-inline">
+                      {item.name}
+                    </div>
                   </CCol>
-                  <CCol>
+                  <Divider orientation='vertical' flexItem className='px-0'/>
+                  <CCol className="justify-content-center align-items-center col-auto">
+                    <div className="mx-3 mb-0 fs-6 d-inline text-muted">
+                      {item.maker}
+                    </div>
+                  </CCol>
+
+                </CRow>
+                <CRow className='align-items-center px-3 mt-2'>
+                  <CCol className="justify-content-center align-items-center col-auto">
+                    <div className="mb-0 fs-6 d-inline text-muted">
+                      {item.userName}
+                    </div>
+                  </CCol>
+                  <CCol className="d-flex justify-content-center align-items-center col-auto pe-0">
                     {
-                      item.tags.map((tag)=>{
+                      item.tags.map((tag, idx)=>{
                         return (
-                          <CBadge color="secondary" shape="rounded-pill" className='mx-2 px-3 py-2 w-auto'>{tag}</CBadge>
+                          <CBadge color="secondary" shape="rounded-pill" className='me-2 px-3 py-1 w-auto' key={idx}>{tag}</CBadge>
                         )
                       })
                     }
+                    <Rating value={item.rating} precision={0.5} size="small" readOnly className='pe-3'/>
+                    <Divider orientation='vertical' flexItem className='px-0 my-1'/>
+                    <div className="mb-0 fs-6 px-3 d-inline text-muted">
+                      가격 {item.price}원
+                    </div>
                   </CCol>
                 </CRow>
               </CCardBody>
@@ -102,17 +124,7 @@ const SearchResult = () => {
         )
       })}
 
-      <CPagination align="center" className='my-4'>
-        <CPaginationItem aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </CPaginationItem>
-        <CPaginationItem active>1</CPaginationItem>
-        <CPaginationItem>2</CPaginationItem>
-        <CPaginationItem>3</CPaginationItem>
-        <CPaginationItem aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </CPaginationItem>
-      </CPagination>
+      <Pagination count={searched.sResponse.totalPages-1} className='d-flex my-4 justify-content-center' page={selectedPage.page} onChange={handleChange}/>
     </>
   )
 }

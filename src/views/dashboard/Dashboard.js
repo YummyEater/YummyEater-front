@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { call } from 'src/service/ApiService'
 
 import {
@@ -16,18 +17,22 @@ import CIcon from '@coreui/icons-react'
 import {
   cilMagnifyingGlass,
 } from '@coreui/icons'
+import { string } from 'prop-types'
 
 const Dashboard = () => {
-  const typeTag = ['배달', '요리', '완제품']
+  const typeTag = [
+    {label:'배달', value:'DELIVERY'},
+    {label:'요리', value:'RECIPE'},
+    {label:'완제품', value:'PRODUCT'},
+  ]
 
-  // const foodTag = ['한식', '양식', '중식', '일식', '매콤', '달콤', 'A', 'B', 'C','한식', '양식', '중식', '일식', '매콤', '달콤', 'A', 'B', 'C','한식', '양식', '중식', '일식', '매콤', '달콤', 'A', 'B', 'C']
   const [foodTag, setFoodTag] = useState([]);
   // 태그 받아오기
   useEffect(() => {
     call("/api/tag", "GET", null)
     .then(
       response => setFoodTag(response.data.map((x) => x.name))
-      )
+    )
   }, [])
   
   // 분류 선택
@@ -67,19 +72,67 @@ const Dashboard = () => {
   }
 
   // 키워드 검색
-  const [keyword, setKeyword] = useState('')
+  const [keyword, setKeyword] = useState('');
 
-  // const onClickBtn = () => {
-  //   alert('selectedType: ' + JSON.stringify({selectedType}) + ' | ' + 'selectedTags: ' + JSON.stringify({selectedTags}))
-  // }
+  // 검색 버튼 클릭
+  const [searchResponse, setSearchResponse] = useState({});
+  const mounted = useRef(false);
+  useEffect(() => {
+    if(!mounted.current){
+      mounted.current = true;
+    } else {
+      console.log(searchResponse);
+      navigate('/searchresult', { state: searchResponse});
+    }
+  }, [searchResponse]);
 
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault()
-    alert('selectedType: ' + JSON.stringify({selectedType}) + ' | ' + 'selectedTags: ' + JSON.stringify({selectedTags}) + ' | ' + 'keyword: ' + JSON.stringify(({keyword})))
-    // 선택 초기화
-    setSelectedType('')
-    setSelectedTags([])
-    setKeyword('')
+    // alert('selectedType: ' + JSON.stringify({selectedType}) + ' | ' + 'selectedTags: ' + JSON.stringify({selectedTags}) + ' | ' + 'keyword: ' + JSON.stringify(({keyword})))
+    // // 선택 초기화
+    // setSelectedType('')
+    // setSelectedTags([])
+    // setKeyword('')
+
+    let apiURL = `/api/food?type=${selectedType}`;
+
+    if (keyword.length > 0) {
+      apiURL = `${apiURL}&name=${keyword}`
+    }
+
+    if (selectedTags.length > 0) {
+      apiURL = `${apiURL}${selectedTags.map((item) => (
+        `&tag=${item}`
+      )).join('')}`;
+    }
+
+    // alert(apiURL);
+
+    call(apiURL, "GET", null)
+    .then(
+      (response) => {
+        const searchOption = {
+          sResponse: response, 
+          sType: selectedType,
+          sTags: selectedTags,
+          sUrl: apiURL
+        }
+        setSearchResponse(searchOption);
+        // setSearchResponse(response);
+        // console.log(searchResponse);
+        // navigate('/searchresult', { state: searchResponse});
+      }
+    )
+    // .then(
+    //   () => {
+    //     console.log(searchResponse);
+    //     navigate('/searchresult', { state: searchResponse});
+    //   }
+    // )
+
+    // alert(searchResponse);
+    // navigate('/searchresult', { state: searchResponse})
   }
 
   return (
@@ -98,11 +151,7 @@ const Dashboard = () => {
                   </CCol>
                   <CCol className="me-auto d-grid gap-3 d-md-flex" xs="auto">
                     {typeTag.map((item, index)=> (
-                      // <CFormCheck button={{color:'secondary', variant:'outline'}} className="mx-2 px-5" type="radio" name="type-tag" id={item} key={index} label={item} checked={bChecked} onChange={(e)=> checkHandler(e)}></CFormCheck>
-                      // <CFormCheck button={{color:'secondary', variant:'outline'}} className="mx-2 px-5" type="radio" name="type-tag" value={item} key={index} label={item} checked={selectedType.includes({item})} onChange={handleTypeChange}></CFormCheck>
-                      
-                      // <CFormCheck className="mx-2 px-5" type="radio" name="type-tag" value={item} id={item} key={index} label={item} checked={selectedType.includes({item})} onChange={handleTypeChange}></CFormCheck>
-                      <CFormCheck button={{color:'secondary', variant:'outline'}} type="radio" name="type-tag" value={item} id={item} key={index} label={item} checked={selectedType.includes({item})} onChange={handleTypeChange}></CFormCheck>
+                      <CFormCheck button={{color:'secondary', variant:'outline'}} type="radio" name="type-tag" value={item.value} id={item.value} key={index} label={item.label} checked={selectedType.includes(item.value)} onChange={handleTypeChange}></CFormCheck>
                     ))}
                   </CCol>
                 </CRow>
@@ -129,9 +178,7 @@ const Dashboard = () => {
               <CCardBody>
                 <CCol className='d-flex gap-2 flex-wrap justify-content-center'>
                   {foodTag.map((item, index)=> (
-                  // <CFormCheck button={{color:'secondary', variant:'outline', shape:"rounded-pill"}} key={index} label={item} value={item} checked={selectedTags.includes({item})} onChange={handleTagChange}></CFormCheck>
-                    // <CFormCheck button={{color:'secondary', variant:'outline', shape:"rounded-pill"}} id={item} key={index} label={item} value={item} checked={selectedTags.includes({item})} onChange={handleTagChange}></CFormCheck>
-                    <CFormCheck button={{color:'secondary', variant:'outline', shape:"rounded-pill"}} id={item} key={index} label={item} value={item} checked={selectedTags.includes({item})} onChange={handleTagChange}></CFormCheck>
+                    <CFormCheck button={{color:'secondary', variant:'outline', shape:"rounded-pill"}} id={item} key={index} label={item} value={item} checked={selectedTags.includes(item)} onChange={handleTagChange}></CFormCheck>
                   ))}
                 </CCol>
                 
@@ -146,7 +193,7 @@ const Dashboard = () => {
               <CCardBody>
                 <CCol className='d-flex gap-2 flex-wrap justify-content-center'>
                   {ingredients.map((item, index)=> (
-                    <CFormCheck button={{color:'secondary', variant:'outline', shape:"rounded-pill"}} id={item} key={index} label={item} value={item} checked={selectedIngredients.includes({item})} onChange={handleIngredientChange}></CFormCheck>
+                    <CFormCheck button={{color:'secondary', variant:'outline', shape:"rounded-pill"}} id={item} key={index} label={item} value={item} checked={selectedIngredients.includes(item)} onChange={handleIngredientChange}></CFormCheck>
                   ))}
                 </CCol>
               </CCardBody>
