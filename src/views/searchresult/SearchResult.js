@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { call } from 'src/service/ApiService'
 
 import {
-  CAvatar,
   CBadge,
   CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
   CCol,
   CProgress,
   CRow,
   CFormSelect,
-  CPagination,
-  CPaginationItem,
 } from '@coreui/react'
 
 import { Divider } from "@material-ui/core"
-import { Rating, Pagination } from '@mui/material'
+import { 
+  Rating, 
+  Pagination, 
+  InputLabel, 
+  FormControl,
+  Select, SelectChangeEvent, 
+  MenuItem } from '@mui/material'
 
 const SearchResult = () => {
   // 검색결과 전달받음
@@ -26,80 +28,128 @@ const SearchResult = () => {
   const [searched, setSearched] = useState(data.state);
   console.log(searched);
 
-  // const searchedType = searched.state.sType;
-  // const searchedTag = searched.state.sTags;
-  // const articleData = searched.state.sResponse.content;
-  // const apiURL = searched.state.sUrl;
   const searchedType = searched.sType;
   const searchedTag = searched.sTags;
   const articleData = searched.sResponse.content;
   const apiURL = searched.sUrl;
 
+  // Sorting
+  const [selectedSort, setSelectedSort] = useState({
+    sorting: '',
+    url: apiURL 
+  });
+  const handleSelect = (event) => {
+    let sortUrl = apiURL
+    if (event.target.value !== '') {
+      sortUrl = `${apiURL}&sort=${event.target.value}`
+    }
+    setSelectedSort({sorting: event.target.value, url: sortUrl});
+    setSelectedPage({page: 1, url: sortUrl});
+  }
+
   // Pagination
   const [selectedPage, setSelectedPage] = useState({
     page: searched.sResponse.number+1,
-    url: apiURL
+    url: selectedSort.url
   });
   const handleChange = (event, pg) => {
-    setSelectedPage({page: pg, url:`${apiURL}&page=${pg-1}`});
+    setSelectedPage({page: pg, url:`${selectedSort.url}&page=${pg-1}`});
   }
 
+  const mounted1 = useRef(false);
   useEffect(() => {
-    // console.log(selectedPage.url);
+    if(!mounted1.current){
+      mounted1.current = true;
+    } else {
+      console.log(`* ${selectedPage.url}`)
+      call(selectedPage.url, "GET", null)
+      .then(
+        (response) => {
+          setSearched({
+            sResponse: response,
+            sType: searchedType,
+            sTags: searchedTag,
+            sUrl: apiURL
+          })
+        }
+      )
+    }
+    
+  }, [selectedPage])
 
-    call(selectedPage.url, "GET", null)
+  const navigate = useNavigate();
+  const [foodDetail, setFoodDetail] = useState({});
+  const handleClick = (e) => {
+    const fdUrl = `/api/food/${e.currentTarget.id}`;
+    call(fdUrl, "GET", null)
     .then(
       (response) => {
-        setSearched({
-          sResponse: response,
-          sType: searchedType,
-          sTags: searchedTag,
-          sUrl: apiURL
-        })
+        setFoodDetail(response);
       }
     )
-  }, [selectedPage])
+    // console.log(`** ${e.currentTarget.id}`);
+    // navigate('/foodarticle', { state: e.currentTarget.id });
+  }
+
+  const mounted2 = useRef(false);
+  useEffect(() => {
+    if(!mounted2.current){
+      mounted2.current = true;
+    } else {
+      // console.log(foodDetail);
+      navigate('/foodarticle', { state: foodDetail });
+    }
+    // navigate('/foodarticle', { state: foodDetail });
+  }, [foodDetail]);
   
   return (
     <>
       <CRow className="justify-content-center align-items-center">
         <CCol xs={8} className='ps-0'>
-          <CCard>
-            <CCardBody className='py-2'>
               <CRow className="justify-content-center align-items-center">
                 <CCol className="col-auto">
                 </CCol>
                 <CCol className="me-auto" xs="auto">
+                  <h5 className='d-inline'><CBadge key={searchedType} color="secondary" shape="rounded-pill" className='m-1 px-3 py-2 w-auto'>{searchedType}</CBadge></h5>
                   {searchedTag.map((item, index)=> (
                     <h5 className='d-inline'><CBadge key={index} color="info" shape="rounded-pill" className='m-1 px-3 py-2 w-auto'>{item}</CBadge></h5>
                   ))}
                 </CCol>
               </CRow>
-            </CCardBody>
-          </CCard>
         </CCol>
-        <CCol xs={4} className='pe-0'>
-          <CFormSelect aria-label="sorting">
-            <option>정렬 기준</option>
-            <option value="1">최신순</option>
-            <option value="2">등록순</option>
-            <option value="3">평점높은순</option>
-            <option value="3">평점낮은순</option>
-          </CFormSelect>
+        <CCol xs={4} className='pe-0 bg'>
+              <FormControl variant="standard" fullWidth>
+                <InputLabel id="sort-label">정렬기준</InputLabel>
+                <Select labelId='sort-label' id='sort' value={selectedSort.sorting} onChange={handleSelect} label='정렬 기준'>
+                  <MenuItem value=''><em>None</em></MenuItem>
+                  <MenuItem value='createdAt,asc'><em>최신순</em></MenuItem>
+                  <MenuItem value='createdAt,desc'><em>등록순</em></MenuItem>
+                  <MenuItem value='rating,desc'><em>평점높은순</em></MenuItem>
+                  <MenuItem value='rating,asc'><em>평점낮은순</em></MenuItem>
+                </Select>
+              </FormControl>
         </CCol>
       </CRow>
       {articleData.map((item)=> {
         return (
-          <CRow className="justify-content-center align-items-center mt-3">
+          <CRow className="justify-content-center align-items-center mt-3" key={item.id}>
             <CCard>
               <CCardBody>
                 <CRow className='align-items-center px-3'>
                   <CCol className="justify-content-center align-items-center col-auto">
-                    <h5 className="mb-0 d-inline">
+                    {/* <h5 className="mb-0 d-inline">
                       {item.title}
                     </h5>
                     <div className="mx-3 mb-0 fs-6 d-inline">
                       {item.name}
+                    </div> */}
+                    <div onClick={handleClick} id={item.id} style={{cursor:'pointer'}}>
+                      <h5 className="mb-0 d-inline">
+                        {item.title}
+                      </h5>
+                      <div className="mx-3 mb-0 fs-6 d-inline">
+                        {item.name}
+                      </div>
                     </div>
                   </CCol>
                   <Divider orientation='vertical' flexItem className='px-0'/>
@@ -108,7 +158,6 @@ const SearchResult = () => {
                       {item.maker}
                     </div>
                   </CCol>
-
                 </CRow>
                 <CRow className='align-items-center px-3 mt-2'>
                   <CCol className="justify-content-center align-items-center col-auto">
@@ -137,7 +186,7 @@ const SearchResult = () => {
         )
       })}
 
-      <Pagination count={searched.sResponse.totalPages-1} className='d-flex my-4 justify-content-center' page={selectedPage.page} onChange={handleChange}/>
+      <Pagination count={searched.sResponse.totalPages} className='d-flex my-4 justify-content-center' page={selectedPage.page} onChange={handleChange}/>
     </>
   )
 }

@@ -100,7 +100,7 @@ const Dashboard = () => {
 
     if (selectedTags.length > 0) {
       apiURL = `${apiURL}${selectedTags.map((item) => (
-        `&tag=${item}`
+        `&tags=${item}`
       )).join('')}`;
     }
 
