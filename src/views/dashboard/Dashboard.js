@@ -86,12 +86,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault()
-    // alert('selectedType: ' + JSON.stringify({selectedType}) + ' | ' + 'selectedTags: ' + JSON.stringify({selectedTags}) + ' | ' + 'keyword: ' + JSON.stringify(({keyword})))
-    // // 선택 초기화
-    // setSelectedType('')
-    // setSelectedTags([])
-    // setKeyword('')
-
     let apiURL = `/api/food?type=${selectedType}`;
 
     if (keyword.length > 0) {
@@ -104,8 +98,6 @@ const Dashboard = () => {
       )).join('')}`;
     }
 
-    // alert(apiURL);
-
     call(apiURL, "GET", null)
     .then(
       (response) => {
@@ -116,20 +108,7 @@ const Dashboard = () => {
           sUrl: apiURL
         }
         setSearchResponse(searchOption);
-        // setSearchResponse(response);
-        // console.log(searchResponse);
-        // navigate('/searchresult', { state: searchResponse});
-      }
-    )
-    // .then(
-    //   () => {
-    //     console.log(searchResponse);
-    //     navigate('/searchresult', { state: searchResponse});
-    //   }
-    // )
-
-    // alert(searchResponse);
-    // navigate('/searchresult', { state: searchResponse})
+    })
   }
 
   return (
