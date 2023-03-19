@@ -22,3 +22,18 @@ export function call (api, method, request) {
         console.log(error);
     });
 }
+
+// 로그인 요청
+export function signin(userDTO) {
+    return call("/api/user/signIn", "POST", userDTO)
+        .then((response) => {
+            console.log(response);
+        });
+}
+
+export function sendPWResetLink(userDTO) {
+    return call("/api/user/sendResetPasswordLink", "POST", userDTO)
+        .then((response) => {
+            console.log(response);
+        });
+}

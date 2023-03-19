@@ -1,5 +1,7 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
+import { sendPWResetLink } from 'src/service/ApiService'
+
 import {
   CButton,
   CCard,
@@ -9,19 +11,35 @@ import {
   CContainer,
   CForm,
   CFormInput,
+  CFormLabel,
   CInputGroup,
   CInputGroupText,
   CRow,
   CNavLink,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
-
-function onLogin() {
-  alert("Login button clicked");
-}
+import { Stepper }  from '@mui/material'
 
 const Login = () => {
+  // 이메일 형식 확인
+  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+  const [emailFormat, setEmailFormat] = useState(false)
+  const handleEmailEnter = (e) => {
+    if (emailRegEx.test(e.target.value)) {
+      setEmailFormat(true)
+    } else {
+      setEmailFormat(false)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const email = data.get("inputEmail");
+    console.log(email);
+
+    sendPWResetLink({ email: email });
+  }
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -30,39 +48,27 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody className="p-5">
-                  <CForm>
+                  <CForm onSubmit={handleSubmit}>
                     <h1>비밀번호 재설정</h1>
-                    <p className="text-medium-emphasis mb-4">등록된 이메일로 비밀번호 재설정을 위한 링크가 전달됩니다.</p>
-                    <CInputGroup className="mb-4">
-                      <CInputGroupText>@</CInputGroupText>
-                      <CFormInput placeholder="이메일 주소" autoComplete="email" />
-                      <CButton type="button" color="secondary" variant="outline" id="button-addon2">
-                        이메일 인증
-                      </CButton>
-                    </CInputGroup>
-                    {/* <CInputGroup className="mb-3">
-                      <CInputGroupText>
-                        <CIcon icon={cilLockLocked} />
-                      </CInputGroupText>
-                      <CFormInput
-                        type="password"
-                        placeholder="새로운 비밀번호"
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="mb-4">
-                      <CInputGroupText>
-                        <CIcon icon={cilLockLocked} />
-                      </CInputGroupText>
-                      <CFormInput
-                        type="password"
-                        placeholder="새로운 비밀번호 확인"
-                      />
-                    </CInputGroup> */}
-                    <div className="mb-3 d-grid">
-                      <CButton color="primary" className="px-4" type='button' onClick={onLogin}>
-                        비밀번호 재설정
-                      </CButton>
-                    </div>
+                    <p className="text-medium-emphasis mb-5">등록된 이메일로 비밀번호 재설정을 위한 링크가 전달됩니다.</p>
+                    <CRow className='justify-content-center'>
+                      <CFormLabel htmlFor='inputEmail' className="col-sm-2 col-form-label flex-wrap fw-bold">이메일</CFormLabel>
+                      <CCol md={8}>
+                        <CFormInput
+                          placeholder="user@example.com" autoComplete="email" id="inputEmail" 
+                          onChange={handleEmailEnter} name="inputEmail" required />
+                      </CCol>
+                    </CRow>
+                    <CRow className="mt-5 justify-content-center">
+                      <CCol md={7}>
+                        <div className='d-grid'>
+                          {/* <CButton color="primary" type='button' onClick={handleLogin}> */}
+                          <CButton color="primary" type='submit' disabled={ emailFormat ? false : true }>
+                            비밀번호 재설정
+                          </CButton>
+                        </div>
+                      </CCol>
+                    </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
