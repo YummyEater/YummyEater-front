@@ -40,14 +40,14 @@ const Register = () => {
     if (emailFormat.entered && emailFormat.formatted) {
       // console.log(emailRef.current.value);
       const req = { "email": emailRef.current.value }
-      setSent(true);
-      // call(`/api/user/join/sendVerificationEmail`, "POST", req)
-      //   .then(
-      //     (response) => {
-      //       console.log(response);
-      //       //setSent(true);
-      //     }
-      //   )
+      //setSent(true);
+       call(`/api/user/join/sendVerificationEmail`, "POST", req)
+         .then(
+           (response) => {
+             console.log(response);
+             setSent(true);
+           }
+         )
     }
   }
 
