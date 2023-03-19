@@ -25,8 +25,8 @@ const Dashboard = () => {
     {label:'완제품', value:'PRODUCT'},
   ]
 
+  // 태그 받기
   const [foodTag, setFoodTag] = useState([]);
-  // 태그 받아오기
   useEffect(() => {
     call("/api/tag", "GET", null)
     .then(
@@ -36,14 +36,12 @@ const Dashboard = () => {
   
   // 분류 선택
   const [selectedType, setSelectedType] = useState('')
-
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
   }
 
   // 태그 선택
   const [selectedTags, setSelectedTags] = useState([])
-
   const handleTagChange = (event) => {
     const index = selectedTags.indexOf(event.target.value)
     if (index === -1) {
@@ -117,7 +115,6 @@ const Dashboard = () => {
         <CRow className="justify-content-center mt-5">
           <CCol md={9}>
             <CCard className="my-4">
-              
               <CCardBody>
                 <CRow className="justify-content-center mx-2 align-items-center">
                   <CCol className="col-auto">
@@ -127,7 +124,11 @@ const Dashboard = () => {
                   </CCol>
                   <CCol className="me-auto d-grid gap-3 d-md-flex" xs="auto">
                     {typeTag.map((item, index)=> (
-                      <CFormCheck button={{color:'secondary', variant:'outline'}} type="radio" name="type-tag" value={item.value} id={item.value} key={index} label={item.label} checked={selectedType.includes(item.value)} onChange={handleTypeChange}></CFormCheck>
+                      <CFormCheck button={{color:'secondary', variant:'outline'}} 
+                        type="radio" name="type-tag" value={item.value} 
+                        id={item.value} key={index} label={item.label} 
+                        checked={selectedType.includes(item.value)} 
+                        onChange={handleTypeChange}></CFormCheck>
                     ))}
                   </CCol>
                 </CRow>

@@ -32,13 +32,22 @@ const Login = () => {
                 <CCardBody className="p-5">
                   <CForm>
                     <h1>비밀번호 재설정</h1>
-                    <p className="text-medium-emphasis mb-4">submessage</p>
-                    <CInputGroup className="mb-3">
+                    <p className="text-medium-emphasis mb-4">등록된 이메일로 비밀번호 재설정을 위한 링크가 전달됩니다.</p>
+                    <CInputGroup className="mb-4">
                       <CInputGroupText>@</CInputGroupText>
                       <CFormInput placeholder="이메일 주소" autoComplete="email" />
                       <CButton type="button" color="secondary" variant="outline" id="button-addon2">
                         이메일 인증
                       </CButton>
+                    </CInputGroup>
+                    {/* <CInputGroup className="mb-3">
+                      <CInputGroupText>
+                        <CIcon icon={cilLockLocked} />
+                      </CInputGroupText>
+                      <CFormInput
+                        type="password"
+                        placeholder="새로운 비밀번호"
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -46,10 +55,9 @@ const Login = () => {
                       </CInputGroupText>
                       <CFormInput
                         type="password"
-                        placeholder="새로운 비밀번호"
-                        // autoComplete="current-password"
+                        placeholder="새로운 비밀번호 확인"
                       />
-                    </CInputGroup>
+                    </CInputGroup> */}
                     <div className="mb-3 d-grid">
                       <CButton color="primary" className="px-4" type='button' onClick={onLogin}>
                         비밀번호 재설정

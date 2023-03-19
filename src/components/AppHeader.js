@@ -12,7 +12,7 @@ import {
   CNavItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilMenu, cilArrowThickToRight } from '@coreui/icons'
+import { cilMenu, cilArrowThickToRight, cilPencil } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
@@ -49,8 +49,13 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink  to="/login" component={NavLink}>
+            <CNavLink className='me-2' to="/login" component={NavLink}>
               <CIcon icon={cilArrowThickToRight} size="lg" />
+            </CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink  to="/newarticle" component={NavLink}>
+              <CIcon icon={cilPencil} size="lg" />
             </CNavLink>
           </CNavItem>
         </CHeaderNav>

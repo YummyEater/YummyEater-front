@@ -6,6 +6,8 @@ const Dashboard1 = React.lazy(() => import('./views/dashboard/Dashboard1'))
 
 const SearchResult = React.lazy(() => import('./views/searchresult/SearchResult'))
 const FoodArticle = React.lazy(() => import('./views/foodarticle/FoodArticle'))
+const NewArticle = React.lazy(() => import('./views/newarticle/NewArticle'))
+
 
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
@@ -64,6 +66,7 @@ const routes = [
 
   { path: '/searchresult', name: 'Search Result', element: SearchResult },
   { path: '/foodarticle', name: 'Food Article', element: FoodArticle },
+  { path: '/newarticle', name: 'New Article', element: NewArticle },
 
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
