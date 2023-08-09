@@ -1,38 +1,125 @@
-.App {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+em {
+  font-style: normal;
+}
+
+@media screen and ( max-height: 840px ){
+  .container1 {
+    padding: 45px 0 !important;
+  }
+}
+.container1 {
+  padding: 90px 0;
+}
+
+button.gButton {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #dadce0;
+  color: #3c4043;
+  cursor: pointer;
+  font-family: "Google Sans", arial, sans-serif;
+  font-size: 14px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
   text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button.gButton:hover {
+  cursor: pointer;
+  -webkit-box-shadow: none;
+  background-color: #f8fafe;
+  box-shadow: none;
+  border-color: #d2e3fc;
+  outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button.gButton:focus,
+button.gButton:focus-visible,
+button.gButton:active:focus,
+button.gButton:disabled {
+  -webkit-box-shadow: none;
+  background-color: #edf2fd;
+  box-shadow: none;
+  border-color: #d2e3fc;
+  outline: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.gButton1 {
+  -webkit-transition: background-color .218s;
+  transition: background-color .218s;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.gButton2 {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
-  flex-direction: column;
+  -webkit-align-items: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  position: relative;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.gIcon {
+  display: inline-block !important;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  min-width: 18px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.gText {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  font-family: "Google Sans", arial, sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+input.filled {
+  padding: 8px 15px;
+  border-radius: 10px;
+  width: 370px;
+  font-size: 16px;
+  background-color: #F7F6F5;
+}
+
+input.filled:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+input.filled:focus-visible {
+  outline: none;
+}
+
+.css-9mgopn-MuiDivider-root {
+  border-color: #F7F6F5 !important;
 }
