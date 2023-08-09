@@ -160,6 +160,16 @@ export const MoreV = () => {
       <path d="M7.99967 4.00008C8.36786 4.00008 8.66634 3.7016 8.66634 3.33341C8.66634 2.96522 8.36786 2.66675 7.99967 2.66675C7.63148 2.66675 7.33301 2.96522 7.33301 3.33341C7.33301 3.7016 7.63148 4.00008 7.99967 4.00008Z" stroke="#B4B2B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M7.99967 13.3333C8.36786 13.3333 8.66634 13.0349 8.66634 12.6667C8.66634 12.2985 8.36786 12 7.99967 12C7.63148 12 7.33301 12.2985 7.33301 12.6667C7.33301 13.0349 7.63148 13.3333 7.99967 13.3333Z" stroke="#B4B2B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  )
+}
 
+export const Frown = () => {
+  return (
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 27.5C21.9036 27.5 27.5 21.9036 27.5 15C27.5 8.09644 21.9036 2.5 15 2.5C8.09644 2.5 2.5 8.09644 2.5 15C2.5 21.9036 8.09644 27.5 15 27.5Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M20 20C20 20 18.125 17.5 15 17.5C11.875 17.5 10 20 10 20" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M11.25 11.25H11.2625" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18.75 11.25H18.7625" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
   )
 }

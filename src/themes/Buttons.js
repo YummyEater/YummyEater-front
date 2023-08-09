@@ -133,7 +133,7 @@ export const tagButtonTheme = createTheme({
           backgroundColor: colors.palette.orange.light,
           border: `1px solid ${colors.palette.orange.light} !important`,
           borderRadius: '20px!important',
-          padding: '0 5px',
+          padding: '0 6px', minWidth: 'unset',
           '&:hover, &:focus': {
             backgroundColor: colors.palette.orange.light,
             border: `1px solid ${colors.palette.orange.main} !important`,
@@ -143,6 +143,68 @@ export const tagButtonTheme = createTheme({
             backgroundColor: colors.palette.orange.main,
             border: '1px solid ${colors.palette.orange.main} !important'
           }
+        }
+      }
+    }
+  },
+});
+
+export const infoButtonTheme = createTheme({
+  components: {
+    MuiButtonBase: { defaultProps: { disableRipple: true, }, },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: '13px !important', fontWeight: '400', lineHeight: '160%',
+          color: colors.palette.black,
+          backgroundColor: colors.palette.gray.light,
+          border: `1px solid ${colors.palette.gray.light} !important`,
+          borderRadius: '20px!important',
+          padding: '0 6px', minWidth: 'unset',
+          '&:hover, &:focus': {
+            color: colors.palette.black,
+            backgroundColor: colors.palette.gray.light,
+            border: `1px solid ${colors.palette.gray.dark} !important`,
+          },
+          '&:active': {
+            color: colors.palette.black,
+            backgroundColor: colors.palette.gray.dark,
+            border: '1px solid ${colors.palette.gray.dark} !important'
+          }
+        }
+      }
+    }
+  },
+});
+
+export const bTypeButtonTheme = createTheme({
+  components: {
+    MuiButtonBase: { defaultProps: { disableRipple: true, }, },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: '13px !important', fontWeight: '400', lineHeight: '140%',
+          color: colors.palette.white, backgroundColor: colors.palette.orange.main,
+          border: `1px solid ${colors.palette.orange.main} !important`,
+          borderRadius: '20px!important', padding: '0 6px', minWidth: 'unset',
+          "&.Mui-disabled": { color: colors.palette.white, },
+        }
+      }
+    }
+  },
+});
+
+export const bCategoryButtonTheme = createTheme({
+  components: {
+    MuiButtonBase: { defaultProps: { disableRipple: true, }, },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: '13px !important', fontWeight: '400', lineHeight: '140%',
+          color: colors.palette.orange.main, backgroundColor: colors.palette.white,
+          border: `1px solid ${colors.palette.orange.main} !important`,
+          borderRadius: '20px!important', padding: '0 6px', minWidth: 'unset',
+          "&.Mui-disabled": { color: colors.palette.orange.main, },
         }
       }
     }

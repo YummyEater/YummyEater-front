@@ -9,7 +9,6 @@ import { selectTheme } from '../themes';
 export const Sorting = (props) => {
   const handleReviewSort = (event) => {
     let sortUrl = props.apiURL;
-
     if (event.target.value != '') {
       sortUrl = props.apiURL.includes('?')
         ? `${props.apiURL}&sort=${event.target.value}`
@@ -31,6 +30,7 @@ export const Sorting = (props) => {
     }
     props.setSort(event.target.value);
     navigate({ pathname: props.path, search: props.params.toString() });
+    window.scrollTo(0, 0);
   }
 
   return (

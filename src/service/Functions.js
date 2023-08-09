@@ -18,6 +18,8 @@ export const FormatDate = (dateStr, type) => {
     return `${year}.${month}.${date} ${time}`;
   } else if (type === 2) {
     return `${year}년 ${month}월 ${date}일`;
+  } else if (type === 3) {
+    return `${year.toString().slice(2)}.${month}.${date}`;
   }
 }
 
@@ -110,4 +112,15 @@ export const nutrientUnit = (nutrient) => {
   else if (nutrient === 'calorie') { return 'kcal' }
   else if (nutrient === 'natrium') { return 'mg' } 
   else { return 'g' }
+}
+
+export const nutrientText = (data) => {
+  const dataArray = data.split('_')
+  const nutrient = nutrientInfo(null).find((n) => n.value === dataArray[0]);
+  const nutrientT = nutrient.label;
+  
+  const unitT = nutrientUnit(nutrient.value)
+  const compareT = dataArray[1] === 'greater' ? '이상' : '이하'
+  
+  return(`${nutrientT} ${dataArray[2]}${unitT} ${compareT}`)
 }

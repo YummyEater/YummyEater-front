@@ -2,7 +2,7 @@ import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
-// const SearchResult = React.lazy(() => import('./views/searchresult/SearchResult'))
+const Search = React.lazy(() => import('./views/search/Search'))
 // const UserSearch = React.lazy(() => import('./views/searchresult/UserSearch'))
 
 const FoodArticle = React.lazy(() => import('./views/foodarticle/FoodArticle'))
@@ -24,7 +24,7 @@ const NewPw = React.lazy(() => import('./views/auth/newpw/NewPw'))
 const routes = [
   // { path: '/', exact: true, name: 'Home' },
   { path: '/', name: 'Home', element: Dashboard },
-  // { path: '/searchresult', name: 'Search Result', element: SearchResult },
+  { path: '/search', name: 'Search', element: Search },
   // { path: '/usersearch', name: 'User Search', element: UserSearch },
 
   { path: '/foodarticle/:articleId', name: 'Food Article', element: FoodArticle },

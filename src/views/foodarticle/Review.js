@@ -95,7 +95,7 @@ export const Review = (props) => {
             </div>
         }
         <ReviewSection />
-        <Pagination count={props.reviews.totalPages} className='flex mt-[20px] justify-center' size="small" page={reviewPage.page} onChange={handleChange} />
+        <Pagination className='flex mt-[20px] justify-center' count={props.reviews.totalPages} size="small" page={reviewPage.page} onChange={handleChange} />
       </div>
     </div>
   )
