@@ -56,14 +56,25 @@ export async function callH(api, method, request) {
 
 // 토큰 처리
 // - 만료 여부 판단 : 30분
-export function checkLogged() {
+export async function checkLogged(navigate) {
   const now = new Date();
   const loginTime = localStorage.getItem("SAVED_TIME");
   let elapsed = now.getTime() - loginTime;
-  if (elapsed < 30 * 1000 * 60) {
-    return true
-  } else {
-    return false
+
+  if (elapsed < 2 * 1000 * 60) {
+    callH("/api/user/info", "GET", null)
+      .then((response) => {
+        console.log('===== CHECKED API =====')
+        console.log(response);
+        if (response.errorCode === "C00000") {
+          return true;
+        }
+      }).catch((err) => {
+        return refreshAccessToken(navigate);
+      })
+  }
+  else { 
+    return refreshAccessToken(navigate); 
   }
 }
 
@@ -71,7 +82,6 @@ export function checkLogged() {
 export async function refreshAccessToken(navigate) {
   const access = localStorage.getItem("ACCESS_TOKEN");
   const refresh = localStorage.getItem("REFRESH_TOKEN");
-
   const tokens = { "accessToken": access, "refreshToken": refresh }
 
   return call("/api/user/refreshAccessToken", "POST", tokens)
@@ -83,12 +93,9 @@ export async function refreshAccessToken(navigate) {
         // // refresh token도 재발급하는 경우
         // localStorage.setItem("REFRESH_TOKEN", response.data.refreshToken);
         localStorage.setItem("SAVED_TIME", date.getTime());
+        console.log('===== TOKEN REFRESHED =====')
+        return true;
       }
-      // else if (response.errorCode === "C10001") {
-      //   alert("로그인이 유효하지 않습니다.")
-      // } else if (response.errorCode === "FORBIDDEN") {
-      //   alert("로그인이 유효하지 않습니다.")
-      // }
     })
     .catch((error) => {
       alert("로그인이 유효하지 않습니다. 다시 로그인해주세요.")
@@ -219,9 +226,9 @@ export async function deleteArticle(articleId, navigate) {
         alert("게시물이 삭제되었습니다.");
         navigate(-1);
       }
-    }).catch((error) => { 
+    }).catch((error) => {
       if (error.errorCode === "C100000" || "C10002") {
-        alert('게시물 삭제를 실패했습니다. 다시 시도해주세요.') 
+        alert('게시물 삭제를 실패했습니다. 다시 시도해주세요.')
       } else if (error.errorCode === "C10001") {
         alert("게시물 삭제를 실패했습니다. 다시 로그인해 시도해주세요.");
       }

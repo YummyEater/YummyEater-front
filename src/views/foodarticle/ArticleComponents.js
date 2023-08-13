@@ -31,7 +31,7 @@ export const ArticleTitle = (props) => {
             {
               props.foodData.tags.map((tag, idx) => (
                 <ThemeProvider theme={tagButtonTheme}>
-                  <Button onClick={(e) => handleTagClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText)} key={`tag-${idx}`}>
+                  <Button onClick={(e) => handleTagClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText.slice(2))} key={`tag-${idx}`}>
                     <div className='flex flex-row'><span className='pe-[2px]'>#</span><span>{tag}</span></div>
                   </Button>
                 </ThemeProvider>

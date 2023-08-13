@@ -10,6 +10,10 @@ const loading = (
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
+// Pages
+const Login = React.lazy(() => import('./views/auth/login/Login'))
+const OauthSignIn = React.lazy(() => import('./views/auth/login/OauthSignIn'))
+const OauthSignUp = React.lazy(() => import('./views/auth/register/OauthSignUp'))
 
 class App extends Component {
   render() {
@@ -17,6 +21,9 @@ class App extends Component {
       <BrowserRouter>
         <Suspense fallback={loading}>
           <Routes>
+            <Route exact path="/login" name="Login Page" element={<Login />} />
+            <Route exact path="/oauth/signin" name="Oauth SignIn" element={<OauthSignIn />} />
+            <Route exact path="/oauth/signup" name="Oauth SignUp" element={<OauthSignUp />} />
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>
@@ -25,27 +32,4 @@ class App extends Component {
   }
 }
 
-export default App
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
+export default App;

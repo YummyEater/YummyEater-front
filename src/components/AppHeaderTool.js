@@ -10,14 +10,14 @@ const AppHeaderTool = () => {
 
   const [logged, setLogged] = useState();
   useEffect(() => {
-    const check = checkLogged();
-    console.log(`############ check : ${check}`);
-    if (accessToken && accessToken != null) {
-      if (check === false) {
-        refreshAccessToken(navigate);
-      }
+    console.log(`${accessToken} | ############ logged : ${logged}`);
+    // const check = checkLogged();
+    if (accessToken && accessToken !== null && accessToken !== 'null') {
+      const check = checkLogged(navigate);
+      console.log(`############ check : `)
+      console.log(check)
       setLogged(check);
-    }
+    } else { setLogged(false); }
   },[accessToken, navigate])
 
   const [anchorEl, setAnchorEl] = useState(null);

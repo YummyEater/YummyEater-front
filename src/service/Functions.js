@@ -63,7 +63,7 @@ export const handleUsrname = (usrname, setUsrname, setUsrnameChecked) => {
 export const handlePw = (pw1, pw2, setPwMatch) => {
   const passwordRegEx = /^[A-Za-z0-9`~!@#$%^&*()-_=+\|[\]{};:'",.<>/?]{8,20}$/
   if (passwordRegEx.test(pw1)) {
-    if (pw2 != '') {
+    if (pw2 !== '') {
       if (pw1 === pw2) { setPwMatch({ 'entered1': true, 'entered2': true, 'matched': true, 'formatted': true }); }
       else { setPwMatch({ 'entered1': true, 'entered2': true, 'matched': false, 'formatted': true }); }
     } else {
@@ -106,10 +106,10 @@ export const handleVerify = (setVerifyCode, verCode) => {
 }
 
 export const handleTagClick = (nav, type, tag) => {
-  nav(`/searchresult?type=${type}&tags=${tag}`);
+  nav(`/search?type=${type}&tags=${tag}`);
 }
 export const handleCategoryClick = (nav, type, cate) => {
-  nav(`/searchresult?type=${type}&categories=${cate}`);
+  nav(`/search?type=${type}&categories=${cate}`);
 }
 
 // 분류
