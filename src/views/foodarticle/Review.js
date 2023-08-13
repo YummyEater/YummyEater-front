@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { call, callH } from '../../service/ApiService'
 import { FormatDate } from '../../service/Functions'
 import { Sorting } from '../../components'
-import { commentRatingTheme, commentButtonTheme, commentInputTheme } from '../../themes'
+import { commentRatingTheme, uploadButtonTheme, commentInputTheme } from '../../themes'
 import { RatingFilled, RatingEmpty } from '../../assets/icons'
 
 import { ReviewTool, ReviewStats } from './ReviewComponents.js'
@@ -24,58 +24,58 @@ export const Review = (props) => {
         props.setReviews(response);
       })
     }
-  }, [reviewPage])
+  }, [props, reviewPage])
 
   // 리뷰 수정용
   const [editTarget, setEditTarget] = useState(null);
   const handleEdit = (target) => { setEditTarget(target); }
 
   const ReviewSection = () => {
-    console.log(`editTarget : ${editTarget}`);
-    console.log(props.reviews);
     if (Object.keys(props.reviews).length === 0) {
       return (
         <Skeleton variant="rounded" width={210} height={60} />
       );
     } else if (props.reviews.totalElements !== 0) {
-      console.log(props.reviews.content)
       return (
-        <div className='flex flex-col'>
-          <Divider />
-          {
-            props.reviews.content.map((review, idx) => {
-              return (
-                <div className='flex flex-col' key={`review-${idx}`}>
-                  <div className='flex flex-row self-center w-[660px] py-[20px]' >
-                    <span className='w-[150px] me-[15px] font-semibold text-[16px]'>{review.userName}</span>
-                    <div className='flex flex-row w-[495px]'>
-                      {
-                        editTarget !== null && editTarget === review.id
-                          ? <ReviewInput updateReview={props.updateReview} foodId={props.data.id} val={review.content}
-                            rt={review.rating} formId={review.id} setEditTarget={setEditTarget} />
-                          : <div className='flex flex-col w-[100%]'>
-                            <div className='flex flex-row justify-between items-center'>
-                              <div className='flex flex-row gap-[25px]'>
-                                <ThemeProvider theme={commentRatingTheme}>
-                                  <Rating className='items-center' value={review.rating} precision={0.5} icon={<RatingFilled />} emptyIcon={<RatingEmpty />} readOnly></Rating>
-                                </ThemeProvider>
-                                <span className='text-[14px] text-gray3'>{FormatDate(review.createdAt, 0)}</span>
+        <>
+          <div className='flex flex-col'>
+            <Divider />
+            {
+              props.reviews.content.map((review, idx) => {
+                return (
+                  <div className='flex flex-col' key={`review-${idx}`}>
+                    <div className='flex flex-row self-center w-[660px] py-[20px]' >
+                      <span className='w-[150px] me-[15px] font-semibold text-[16px]'>{review.userName}</span>
+                      <div className='flex flex-row w-[495px]'>
+                        {
+                          editTarget !== null && editTarget === review.id
+                            ? <ReviewInput updateReview={props.updateReview} foodId={props.data.id} val={review.content}
+                              rt={review.rating} formId={review.id} setEditTarget={setEditTarget} />
+                            : <div className='flex flex-col w-[100%]'>
+                              <div className='flex flex-row justify-between items-center'>
+                                <div className='flex flex-row gap-[25px]'>
+                                  <ThemeProvider theme={commentRatingTheme}>
+                                    <Rating className='items-center' value={review.rating} precision={0.5} icon={<RatingFilled />} emptyIcon={<RatingEmpty />} readOnly></Rating>
+                                  </ThemeProvider>
+                                  <span className='text-[14px] text-gray3'>{FormatDate(review.createdAt, 0)}</span>
+                                </div>
+                                {props.usrId === review.userId
+                                  ? <span className='self-end'><ReviewTool reviewId={review.id} updateReview={props.updateReview} handleEdit={handleEdit} /></span>
+                                  : <></>}
                               </div>
-                              {props.usrId === review.userId
-                                ? <span className='self-end'><ReviewTool reviewId={review.id} updateReview={props.updateReview} handleEdit={handleEdit} /></span>
-                                : <></>}
+                              <span className='text-[16px] pt-[10px] pe-[16px]'>{review.content}</span>
                             </div>
-                            <span className='text-[16px] pt-[10px] pe-[16px]'>{review.content}</span>
-                          </div>
-                      }
+                        }
+                      </div>
                     </div>
+                    <Divider />
                   </div>
-                  <Divider />
-                </div>
-              )
-            })
-          }
-        </div>
+                )
+              })
+            }
+          </div>
+          <Pagination className='flex mt-[20px] justify-center' count={props.reviews.totalPages} size="small" page={reviewPage.page} onChange={handleChange} />
+        </>
       )
     }
   }
@@ -95,7 +95,7 @@ export const Review = (props) => {
             </div>
         }
         <ReviewSection />
-        <Pagination className='flex mt-[20px] justify-center' count={props.reviews.totalPages} size="small" page={reviewPage.page} onChange={handleChange} />
+        {/* <Pagination className='flex mt-[20px] justify-center' count={props.reviews.totalPages} size="small" page={reviewPage.page} onChange={handleChange} /> */}
       </div>
     </div>
   )
@@ -119,7 +119,7 @@ export const ReviewInput = (props) => {
     if (reviewRate === 0) { alert('추천도를 선택해주세요.') }
     else {
       callH(apiUrl, method, req).then((response) => {
-        console.log(response)
+        // console.log(response)
         if (response.errorCode === "C00000") {
           if (targetId === 'newReview') { alert('리뷰가 성공적으로 등록되었습니다.') }
           else {
@@ -158,7 +158,7 @@ export const ReviewInput = (props) => {
             disabled={(accessToken && accessToken != null) ? false : true}
             defaultValue={props.formId === 'newReview' ? '' : props.val} required />
         </ThemeProvider>
-        <ThemeProvider theme={commentButtonTheme}>
+        <ThemeProvider theme={uploadButtonTheme}>
           <Button type='submit' className='self-end'>등록</Button>
         </ThemeProvider>
       </div>

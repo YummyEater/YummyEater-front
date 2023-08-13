@@ -1,33 +1,26 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { call } from '../../service/ApiService'
-import { SearchHeader, ArticleList } from './SearchComponents'
+import { UserSearchHeader, ArticleList } from './SearchComponents'
 import { CircularProgress } from '@mui/material'
 
-const Search = () => {
+const SearchUser = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const apiURL = `/api/food?${searchParams.toString()}`;
+
   const [searched, setSearched] = useState({});
-
-  let apiURL = `/api/food`;
-  let paramString = searchParams.toString();
-  if (paramString.length > 0) { apiURL = `${apiURL}?${paramString}` }
-
   const [selectedSort, setSelectedSort] = useState(searchParams.get('sort') || 'createdAt,desc');
-  const [selectedPage, setSelectedPage] = useState();
+  const [selectedPage, setSelectedPage] = useState({});
 
   useEffect(() => {
     call(apiURL, "GET", null)
       .then((response) => {
-        setSearched({
-          sResponse: response, sTitle: searchParams.get('title'), sType: searchParams.get('type'),
-          sCate: searchParams.getAll('categories'), sIngred: searchParams.getAll('ingredient'),
-          sTag: searchParams.getAll('tags'), sNutrient: searchParams.getAll('nutrient'), sUrl: apiURL
-        })
+        console.log(response);
+        setSearched({ sResponse: response, sUrl: apiURL })
         setSelectedPage(response.number + 1)
       })
   }, [searchParams])
 
-  // food article 이동
   const [selectedArticle, setSelectedArticle] = useState(-1);
   const navigate = useNavigate();
   const mounted2 = useRef(false);
@@ -38,18 +31,20 @@ const Search = () => {
 
   return (
     <div className='flex flex-col'>
-      <SearchHeader searched={searched} sort={selectedSort} apiURL={apiURL} path='/search'
-        setSort={setSelectedSort} setPage={setSelectedPage} params={searchParams} setParams={setSearchParams} />
+      <UserSearchHeader searched={searched} sort={selectedSort} apiURL={apiURL} path='/search/user'
+        setSort={setSelectedSort} setPage={setSelectedPage} params={searchParams} />
       <div className='flex w-[800px] pt-[16px] pb-[75px] justify-center'>
         {
           Object.keys(searched).length === 0
             ? <CircularProgress className='text-primary-orange' />
             : <ArticleList data={searched.sResponse} setSelectedArticle={setSelectedArticle} setSelectedPage={setSelectedPage}
-              selectedPage={selectedPage} selectedSort={selectedSort} params={searchParams} path='/search' />
+              selectedPage={selectedPage} selectedSort={selectedSort} params={searchParams} path='/search/user' />
 
         }
       </div>
     </div>
   )
+
 }
-export default Search
+
+export default SearchUser;

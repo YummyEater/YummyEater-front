@@ -13,12 +13,12 @@ const AppHeaderTool = () => {
     const check = checkLogged();
     console.log(`############ check : ${check}`);
     if (accessToken && accessToken != null) {
-      if (check == false) {
+      if (check === false) {
         refreshAccessToken(navigate);
       }
       setLogged(check);
     }
-  })
+  },[accessToken, navigate])
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -45,11 +45,11 @@ const AppHeaderTool = () => {
     )
   }
 
-  if (accessToken && accessToken != null && logged) {
+  if (accessToken && accessToken !== null && logged) {
     return (
       <div className='flex flex-row gap-[20px]'>
         <p className="flex w-[20px] h-[20px] ">
-          <a href="/"><Edit /></a>
+          <a href="/editor"><Edit /></a>
         </p>
         <p className="flex w-[20px] h-[20px]">
           <IconButton onClick={handleClick} aria-controls={open ? 'account-menu' : undefined}

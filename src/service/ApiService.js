@@ -188,17 +188,14 @@ export async function modifyuser(nav, userDTO) {
 }
 
 export async function uploadImg(blob) {
-  console.log(blob)
   const formData = new FormData();
   formData.append('resource', blob);
-  console.log(formData);
 
   let options = {
     headers: new Headers({}),
     url: API_BASE_URL + '/upload',
     method: "POST",
     body: formData,
-    // body: blob,
   };
 
   return fetch(options.url, options).then((response) => {
@@ -208,6 +205,7 @@ export async function uploadImg(blob) {
   }).catch((error) => {
     console.log("http error");
     console.log(error);
+    alert('이미지 업로드를 실패했습니다. 다시 시도해주세요.')
   });
 }
 

@@ -40,7 +40,7 @@ export const ArticleTitle = (props) => {
           </div>
         </div>
         <div className='flex flex-col'>
-          <div onClick={props.handleUserClick} className='text-[16px] font-semibold'>{props.foodData.userName}</div>
+          <div className='text-[16px] font-semibold cursor-pointer' onClick={props.handleUserClick}>{props.foodData.userName}</div>
           <div className='flex flex-row text-[16px] select-none items-center'>
             <span>{FormatDate(props.foodData.createdAt, 0)}</span>
             <div className='flex flex-row ps-[20px] items-center'><Eye /><span className='ps-[10px]'>{props.foodData.views}</span></div>
@@ -79,10 +79,16 @@ export const ArticleInfo = (props) => {
   return (
     <div className='flex justify-center'>
       <div className='flex flex-col w-[645px] gap-[28px]'>
-        <div className='flex flex-row justify-between'>
-          <InfoElement title='가격' data={props.foodData.price} postfix='원' />
-          <InfoElement title='중량' data={props.foodData.amount.toFixed(2)} postfix='g' />
-          <InfoElement title='인원' data={props.foodData.servings} postfix='인분' />
+        <div className='flex flex-row gap-[112px]'>
+          <InfoElement title='가격' data={props.foodData.price ? props.foodData.price : '-'} postfix='원' />
+          {
+            props.foodData.amount 
+            ? <InfoElement title='중량' data={props.foodData.amount.toFixed(2)} postfix='g' /> : <></>
+          }
+          {
+            props.foodData.servings 
+            ? <InfoElement title='인원' data={props.foodData.servings} postfix='인분' /> : <></>
+          }
         </div>
         {
           props.foodData.ingredient !== null && props.foodData.ingredient !== ''

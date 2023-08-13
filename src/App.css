@@ -15,6 +15,15 @@ em {
   padding: 90px 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 button.gButton {
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -122,4 +131,19 @@ input.filled:focus-visible {
 
 .css-9mgopn-MuiDivider-root {
   border-color: #F7F6F5 !important;
+}
+
+.output-wrap {
+  padding: 2px 8px;
+  min-width: unset; gap: 10px;
+  cursor: default;
+  font-size: 13px !important; font-weight: 400;
+  line-height: 160%;
+  color: #271D16; background-color: #F7F6F5;
+  border-radius: 20px !important;
+}
+
+
+.toastui-editor-defaultUI {
+  z-index: 9;
 }

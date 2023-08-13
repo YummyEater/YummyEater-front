@@ -1,16 +1,18 @@
 import { submitButtonTheme, verifyButtonTheme, loginTextButtonTheme,
   typeButtonTheme, categoryButtonTheme, tagButtonTheme, infoButtonTheme,
   bTypeButtonTheme, bCategoryButtonTheme,
-  articleButtonTheme, commentButtonTheme } from './Buttons'
-import { loginInputTheme, commentInputTheme,
+  articleButtonTheme, uploadButtonTheme, addButtonTheme,
+  typeToggleTheme, categoryToggleTheme, uploadImgButtonTheme,  } from './Buttons'
+import { loginInputTheme, commentInputTheme, editorInputTheme,
   statRatingTheme, commentRatingTheme, selectTheme } from './Inputs'
 
 export {
   submitButtonTheme, verifyButtonTheme, loginTextButtonTheme,
   typeButtonTheme, categoryButtonTheme, tagButtonTheme, infoButtonTheme,
   bTypeButtonTheme, bCategoryButtonTheme,
-  articleButtonTheme, commentButtonTheme,
+  articleButtonTheme, uploadButtonTheme, addButtonTheme,
+  typeToggleTheme, categoryToggleTheme, uploadImgButtonTheme,
 
-  loginInputTheme, commentInputTheme,
+  loginInputTheme, commentInputTheme, editorInputTheme,
   statRatingTheme, commentRatingTheme, selectTheme
 }

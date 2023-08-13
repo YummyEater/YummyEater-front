@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUserinfo, modifyuser } from '../../service/ApiService'
 import { ContentHeader, UserVerifyText, PwMatchText } from '../../components'
-import { handleUsrname, handlePw } from '../../service/Functions'
+import { handleUsrnameChange, usrCheck, handlePw } from '../../service/Functions'
 import { loginInputTheme, submitButtonTheme, verifyButtonTheme } from '../../themes';
 import { Button, ThemeProvider, TextField } from '@mui/material';
 
@@ -15,21 +15,11 @@ const UserInfo = () => {
 
   // 닉네임 확인 여부
   const [usrnameChecked, setUsrnameChecked] = useState({ 'checked': false, 'confirmed': false });
-  const handleUsrnameChange = (e) => {
-    if (usrnameChecked.checked === true) {
-      setUsrnameChecked({ 'checked': false, 'confirmed': false });
-    }
-  }
   // 닉네임 중복 확인
   const usrnameRef = useRef(null);
   const [usrname, setUsrname] = useState({ 'entered': false, 'unique': false, 'formatted': false });
-  const usrCheck = (e) => {
-    if (usrnameRef.current.value !== '') {
-      handleUsrname(usrnameRef.current.value, setUsrname, setUsrnameChecked);
-    }
-  }
 
-    // 비밀번호 일치
+  // 비밀번호 일치
   const pwRef = useRef(null);
   const pwRef1 = useRef(null);
   const pwRef2 = useRef(null);
@@ -61,10 +51,10 @@ const UserInfo = () => {
           <span className='w-[150px] text-[16px] font-normal'>닉네임</span>
           <div className='flex flex-col gap-[5px]'>
             <div className='flex flex-row'>
-              <input className='w-[400px] filled' type="text" defaultValue={userinfo.userName} onChange={handleUsrnameChange}
+              <input className='w-[400px] filled' type="text" defaultValue={userinfo.userName} onChange={e => handleUsrnameChange(usrnameChecked, setUsrnameChecked)}
                 name='field1' id='field1' ref={usrnameRef} />
               <ThemeProvider theme={verifyButtonTheme}>
-                <Button type='button' onClick={usrCheck} className='ms-[16px]'>중복확인</Button>
+                <Button type='button' onClick={e => usrCheck(usrnameRef, setUsrname, setUsrnameChecked)} className='ms-[16px]'>중복확인</Button>
               </ThemeProvider>
             </div>
           </div>

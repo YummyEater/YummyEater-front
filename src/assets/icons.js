@@ -21,6 +21,22 @@ export const X = () => {
   </svg>)
 }
 
+export const XFill = () => {
+  return (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="20" height="20" rx="10" fill="#271D16" fillOpacity="0.5" />
+    <g clipPath="url(#clip0_230_472)">
+      <path d="M14 6L6 14" stroke="#F7F6F5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 6L14 14" stroke="#F7F6F5" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_230_472">
+        <rect width="10" height="10" fill="white" transform="translate(5 5)" />
+      </clipPath>
+    </defs>
+  </svg>)
+
+}
+
 export const Google = () => {
   return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
     <g>
@@ -166,10 +182,10 @@ export const MoreV = () => {
 export const Frown = () => {
   return (
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M15 27.5C21.9036 27.5 27.5 21.9036 27.5 15C27.5 8.09644 21.9036 2.5 15 2.5C8.09644 2.5 2.5 8.09644 2.5 15C2.5 21.9036 8.09644 27.5 15 27.5Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M20 20C20 20 18.125 17.5 15 17.5C11.875 17.5 10 20 10 20" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M11.25 11.25H11.2625" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M18.75 11.25H18.7625" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
+      <path d="M15 27.5C21.9036 27.5 27.5 21.9036 27.5 15C27.5 8.09644 21.9036 2.5 15 2.5C8.09644 2.5 2.5 8.09644 2.5 15C2.5 21.9036 8.09644 27.5 15 27.5Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M20 20C20 20 18.125 17.5 15 17.5C11.875 17.5 10 20 10 20" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M11.25 11.25H11.2625" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18.75 11.25H18.7625" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }

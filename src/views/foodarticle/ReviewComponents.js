@@ -29,7 +29,7 @@ export const ReviewStats = (props) => {
             return (
               <div className='grid grid-cols-[24px_150px_auto] gap-[15px] items-center ' key={`reviewstat-row-${idx}`}>
                 <span className='w-[24px]'>{curr}점</span>
-                <BorderLinearProgress variant="determinate" value={(props.ratingData[rt] / props.num) * 100} />
+                <BorderLinearProgress variant="determinate" value={props.ratingData[rt] === 0 ? 0 : (props.ratingData[rt] / props.num) * 100} />
                 <span className='justify-self-end'><span>{props.ratingData[rt]}</span></span>
               </div>
             )

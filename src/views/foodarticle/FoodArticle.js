@@ -47,7 +47,7 @@ const FoodArticle = () => {
   const navigate = useNavigate();
   const handleUserClick = (e) => {
     let params = createSearchParams({ 'userName': e.currentTarget.innerText });
-    navigate({ pathname: '/usersearch', search: params.toString() });
+    navigate({ pathname: '/search/user', search: params.toString() });
   }
   const handleModifyClick = (e) => {
     navigate(`/editor/${foodId}`)

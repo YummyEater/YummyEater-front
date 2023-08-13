@@ -2,7 +2,7 @@ import React from 'react'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { handleTagClick, handleCategoryClick, TypeLabel, nutrientText, FormatDate } from '../../service/Functions'
 import { Sorting } from '../../components'
-import { ThemeProvider, Button, Divider, Rating, Pagination } from '@mui/material'
+import { ThemeProvider, Button, Divider, Pagination } from '@mui/material'
 import {
   typeButtonTheme, categoryButtonTheme, tagButtonTheme, infoButtonTheme,
   bTypeButtonTheme, bCategoryButtonTheme,
@@ -14,7 +14,7 @@ export const SearchHeader = (props) => {
   console.log(props.searched)
   return (
     <div className='sticky top-[146px] bg-white z-10'>
-      <div className='flex flex-col'>
+      <div className='flex flex-col pb-[14px]'>
         <div className='flex flex-row justify-between w-[800px] py-[20px]'>
           <div className='flex flex-col w-[625px]' id='section1'>
             <span className='text-[18px] font-semibold'>{props.searched.sTitle}</span>
@@ -102,6 +102,38 @@ export const SearchHeader = (props) => {
   )
 }
 
+export const UserSearchHeader = (props) => {
+  console.log(props.searched)
+  return (
+    <div className='sticky top-[146px] bg-white z-10'>
+      <div className='flex flex-col pb-[14px]'>
+        <div className='flex flex-row justify-between w-[800px] py-[20px]'>
+          <div className='flex flex-col w-[625px]' id='section1'>
+            <span className='text-[18px] font-semibold'>{props.params.get('userName')}</span>
+          </div>
+          <div className='flex justify-end w-[150px]' id='section2'>
+            {
+              (props.searched.sResponse === undefined || props.searched.sResponse.totalElements === 0)
+                ? <></>
+                : <div className='flex flex-col gap-[5px] items-end'>
+                  <div className='flex flex-row text-[14px] gap-[5px]'>
+                    <span>작성 게시물</span>
+                    <span className='font-semibold'>{props.searched.sResponse.totalElements}</span>
+                  </div>
+                  <div className='w-[85px]'>
+                    <Sorting size="small" value={props.sort} apiURL={props.apiURL} path={props.path}
+                      setSort={props.setSort} setPage={props.setPage} params={props.params} />
+                  </div>
+                </div>
+            }
+          </div>
+        </div>
+        <Divider />
+      </div>
+    </div>
+  )
+}
+
 export const ArticleList = (props) => {
   const navigate = useNavigate();
   const handleClick = (e) => { props.setSelectedArticle(e.currentTarget.id); }
@@ -114,7 +146,7 @@ export const ArticleList = (props) => {
 
   const handleUserClick = (e) => {
     let params = createSearchParams({ 'userName': e.currentTarget.innerText });
-    navigate({ pathname: '/usersearch', search: params.toString() });
+    navigate({ pathname: '/search/user', search: params.toString() });
   }
 
   const Block = (props) => {
@@ -123,7 +155,7 @@ export const ArticleList = (props) => {
         <img height={150} width={175} className='h-[150px] w-[175px] object-cover rounded-[5px]' src={props.data.imgUrl || thumb} />
         <div className='flex flex-col w-[165px] justify-between'>
           <div className='flex flex-col'>
-            <span className='text-[18px] font-semibold cursor-pointer' onClick={handleClick}>{props.data.title}</span>
+            <span className='text-[18px] font-semibold cursor-pointer' id={props.data.id} onClick={handleClick}>{props.data.title}</span>
             <div className='flex flex-row justify-between items-center'>
               <span className='w-[109px] pt-[4px] text-[14px] font-semibold cursor-pointer' onClick={handleUserClick}>{props.data.userName}</span>
               <span className='text-[13px] text-gray3'>{FormatDate(props.data.createdAt, 3)}</span>

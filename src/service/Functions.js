@@ -124,3 +124,15 @@ export const nutrientText = (data) => {
   
   return(`${nutrientT} ${dataArray[2]}${unitT} ${compareT}`)
 }
+
+export const handleUsrnameChange = (usrnameChecked, setUsrnameChecked) => {
+  if (usrnameChecked.checked === true) {
+    setUsrnameChecked({ 'checked': false, 'confirmed': false });
+  }
+}
+
+export const usrCheck = (usrnameRef, setUsrname, setUsrnameChecked) => {
+  if (usrnameRef.current.value !== '') {
+    handleUsrname(usrnameRef.current.value, setUsrname, setUsrnameChecked);
+  }
+}
