@@ -59,7 +59,7 @@ export const SearchHeader = (props) => {
                   : <>{
                     props.searched.sIngred.map((ingred, idx) => (
                       <ThemeProvider theme={infoButtonTheme}>
-                        <Button key={`ingred-${idx}`}>
+                        <Button key={`ingred-${idx}`} disabled>
                           {ingred}</Button>
                       </ThemeProvider>
                     ))
@@ -71,7 +71,7 @@ export const SearchHeader = (props) => {
                   : <>{
                     props.searched.sNutrient.map((nut, idx) => (
                       <ThemeProvider theme={infoButtonTheme}>
-                        <Button key={`nut-${idx}`}>
+                        <Button key={`nut-${idx}`} disabled>
                           {nutrientText(nut)}</Button>
                       </ThemeProvider>
                     ))

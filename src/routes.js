@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+const Main = React.lazy(() => import('./views/main/Main'))
 
 const Search = React.lazy(() => import('./views/search/Search'))
 const SearchUser = React.lazy(() => import('./views/search/SearchUser'))
@@ -21,7 +21,7 @@ const NewPw = React.lazy(() => import('./views/auth/newpw/NewPw'))
 
 const routes = [
   // { path: '/', exact: true, name: 'Home' },
-  { path: '/', name: 'Home', element: Dashboard },
+  { path: '/', name: 'Main', element: Main },
   { path: '/search', name: 'Search', element: Search },
   { path: '/search/user', name: 'User Search', element: SearchUser },
 

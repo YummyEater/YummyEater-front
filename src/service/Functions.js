@@ -25,6 +25,18 @@ export const FormatDate = (dateStr, type) => {
 
 // 회원정보 처리
 // - 닉네임 확인
+export const handleUsrnameChange = (usrnameChecked, setUsrnameChecked) => {
+  if (usrnameChecked.checked === true) {
+    setUsrnameChecked({ 'checked': false, 'confirmed': false });
+  }
+}
+
+export const usrCheck = (usrnameRef, setUsrname, setUsrnameChecked) => {
+  if (usrnameRef.current.value !== '') {
+    handleUsrname(usrnameRef.current.value, setUsrname, setUsrnameChecked);
+  }
+}
+
 export const handleUsrname = (usrname, setUsrname, setUsrnameChecked) => {
   const usrnameRegEx = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{3,}$/
   if (usrnameRegEx.test(usrname)) {
@@ -59,6 +71,37 @@ export const handlePw = (pw1, pw2, setPwMatch) => {
     }
   } else {
     setPwMatch({ 'entered1': true, 'entered2': false, 'matched': false, 'formatted': false });
+  }
+}
+
+// - 이메일 인증코드 발송 요청
+export const handleSend = (setSent, runTimer, setRunTimer, email) => {
+  call(`/api/user/join/sendVerificationEmail`, "POST", { "email": email })
+    .then(
+      (response) => {
+        if (response.errorCode === "C00000") {
+          setSent(true);
+          setRunTimer(runTimer + 1);
+        } else if (response.errorCode === "C100000") {
+
+        }
+      }
+    )
+}
+
+// - 인증코드 확인
+export const handleVerify = (setVerifyCode, verCode) => {
+  if (verCode !== '') {
+    call(`/api/user/join/verifyEmail`, "POST", { "code": verCode })
+      .then(
+        (response) => {
+          if (response.data.isVerified) {
+            setVerifyCode({ 'entered': true, 'verified': true })
+          } else {
+            setVerifyCode({ 'entered': true, 'verified': false })
+          }
+        }
+      )
   }
 }
 
@@ -123,16 +166,4 @@ export const nutrientText = (data) => {
   const compareT = dataArray[1] === 'greater' ? '이상' : '이하'
   
   return(`${nutrientT} ${dataArray[2]}${unitT} ${compareT}`)
-}
-
-export const handleUsrnameChange = (usrnameChecked, setUsrnameChecked) => {
-  if (usrnameChecked.checked === true) {
-    setUsrnameChecked({ 'checked': false, 'confirmed': false });
-  }
-}
-
-export const usrCheck = (usrnameRef, setUsrname, setUsrnameChecked) => {
-  if (usrnameRef.current.value !== '') {
-    handleUsrname(usrnameRef.current.value, setUsrname, setUsrnameChecked);
-  }
 }

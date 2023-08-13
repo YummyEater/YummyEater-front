@@ -111,7 +111,6 @@ export const InputTag = (props) => {
           </Collapse>
           : <></>
       }
-
     </div>
   )
 }

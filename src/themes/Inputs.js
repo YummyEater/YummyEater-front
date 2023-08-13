@@ -73,6 +73,19 @@ export const selectTheme = createTheme({
           '&:hover, &.Mui-selected:hover': { backgroundColor: 'rgba(255, 239, 229, 0.5)' },
         }
       }
+    },
+    MuiInputLabel: { // for Main
+      styleOverrides: {
+        root: {
+          fontSize: '14px !important', maxWidth: 'unset !important',
+          left: '5px', top: '-5px', color: `${colors.palette.black} !important`,
+          '&.Mui-focused': { color: `${colors.palette.orange.main} !important` }
+        },
+        shrink: {
+          transform: 'translate(-5px,5px) scale(0.75)',
+          color: `${colors.palette.orange.main} !important`
+        }
+      }
     }
   }
 })
@@ -126,5 +139,20 @@ export const editorInputTheme = createTheme({
         }
       }
     }
+  }
+})
+
+export const searchInputTheme = createTheme({
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'transparent',
+          '&.Mui-focused': { backgroundColor: 'transparent' }
+        },
+        input: { fontSize: '15px', padding: 0, },
+        notchedOutline: { border: 'none', }
+      },
+    },
   }
 })

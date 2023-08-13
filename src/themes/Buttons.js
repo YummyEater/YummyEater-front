@@ -19,7 +19,8 @@ export const submitButtonTheme = createTheme({
           '&:active': {
             backgroundColor: colors.palette.orange.dark,
             border: '1px solid ${colors.palette.orange.dark} !important'
-          }
+          },
+          '&.Mui-disabled': { color: colors.palette.white, opacity: 0.6 }
         }
       }
     }
@@ -35,8 +36,7 @@ export const verifyButtonTheme = createTheme({
           width: '112px', padding: '8px',
           fontSize: '16px !important', fontWeight: '400', lineHeight: '160%',
           color: colors.palette.orange.main, backgroundColor: colors.palette.orange.light,
-          border: `1px solid ${colors.palette.orange.light} !important`,
-          borderRadius: '20px!important',
+          border: `1px solid ${colors.palette.orange.light} !important`, borderRadius: '20px!important',
           '&:hover, &:focus': {
             backgroundColor: colors.palette.orange.light,
             border: `1px solid ${colors.palette.orange.main} !important`,
@@ -45,7 +45,28 @@ export const verifyButtonTheme = createTheme({
             color: colors.palette.white,
             backgroundColor: colors.palette.orange.main,
             border: '1px solid ${colors.palette.orange.main} !important'
-          }
+          },
+          '&.Mui-disabled': { color: colors.palette.orange.main, opacity: 0.6 }
+        }
+      }
+    }
+  },
+});
+
+export const verifyButtonTheme2 = createTheme({
+  components: {
+    MuiButtonBase: { defaultProps: { disableRipple: true, }, },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          width: '112px', padding: '8px',
+          fontSize: '16px !important', fontWeight: '400', lineHeight: '160%',
+          color: colors.palette.orange.main, backgroundColor: colors.palette.white,
+          border: `1px solid ${colors.palette.orange.main} !important`, borderRadius: '20px!important',
+          '&:hover, &:focus, &:active': {
+            backgroundColor: colors.palette.orange.light,
+            // border: `1px solid ${colors.palette.orange.main} !important`,
+          },
         }
       }
     }
@@ -152,16 +173,16 @@ export const infoButtonTheme = createTheme({
           color: colors.palette.black, backgroundColor: colors.palette.gray.light,
           border: `1px solid ${colors.palette.gray.light} !important`,
           borderRadius: '20px!important', padding: '0 6px', minWidth: 'unset',
+          textTransform: 'none',
           '&:hover, &:focus': {
-            color: colors.palette.black,
             backgroundColor: colors.palette.gray.light,
             border: `1px solid ${colors.palette.gray.dark} !important`,
           },
           '&:active': {
-            color: colors.palette.black,
             backgroundColor: colors.palette.gray.dark,
             border: '1px solid ${colors.palette.gray.dark} !important'
-          }
+          },
+          '&.Mui-disabled': {color: colors.palette.black,}
         }
       }
     }

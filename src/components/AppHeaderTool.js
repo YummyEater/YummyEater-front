@@ -31,14 +31,14 @@ const AppHeaderTool = () => {
       <Menu anchorEl={anchorEl} id='account-menu' open={open} onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted
         transformOrigin={{ vertical: 'top', horizontal: 'right', }} sx={{ mt: '35px' }}>
-        <MenuItem component={Link} to='/userinfo'>
+        <MenuItem disableRipple component={Link} to='/userinfo'>
           <ListItemIcon><UserThin /></ListItemIcon>회원정보
         </MenuItem>
-        <MenuItem component={Link} to='/userarticle'>
+        <MenuItem disableRipple component={Link} to='/userarticle'>
           <ListItemIcon><Document /></ListItemIcon>작성 게시물
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleSignout}>
+        <MenuItem disableRipple onClick={handleSignout}>
           <ListItemIcon><Logout /></ListItemIcon>로그아웃
         </MenuItem>
       </Menu>
@@ -53,7 +53,7 @@ const AppHeaderTool = () => {
         </p>
         <p className="flex w-[20px] h-[20px]">
           <IconButton onClick={handleClick} aria-controls={open ? 'account-menu' : undefined}
-            aria-expanded={open ? 'true' : undefined}>
+             disableRipple aria-expanded={open ? 'true' : undefined}>
             <User />
           </IconButton>
           <MenuPop />

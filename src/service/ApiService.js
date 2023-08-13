@@ -144,7 +144,7 @@ export async function register(nav, userDTO) {
       }
     }).catch((error) => {
       console.error(error)
-      if (error.errorCode === "C100000") {
+      if (error.errorCode === "C10000") {
         alert("가입에 실패했습니다. 입력 정보를 다시 확인해주세요.");
       }
     });
