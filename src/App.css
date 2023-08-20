@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body,	
+.MuiTypography-root, .MuiButtonBase-root, .MuiInputBase-root, .MuiInputLabel-root {
+  font-family: 'SUIT', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif !important;
+}
+
 em {
   font-style: normal;
 }
@@ -32,6 +37,14 @@ input[type=number] {
   border-radius: 30px;
   /* box-shadow: 0px 5px 10px -2px rgba(0,0,0,0.14), 0px 5px 10px 1px rgba(0,0,0,0.14), 0px 3px 10px 2px rgba(0,0,0,0.14); */
   box-shadow: 0px 5px 16px #8a959e45
+}
+
+.shadow {
+  box-shadow: 0px 5px 16px #8a959e45
+}
+
+.slick-track {
+  padding-top: 20px; padding-bottom: 25px;
 }
 
 button.gButton {
@@ -151,9 +164,73 @@ input.filled:focus-visible {
   line-height: 160%;
   color: #271D16; background-color: #F7F6F5;
   border-radius: 20px !important;
+  user-select: none;
+}
+
+.output-wrap2 {
+  padding: 2px 8px;
+  min-width: unset; gap: 10px;
+  cursor: default;
+  font-size: 13px !important; font-weight: 400;
+  line-height: 160%;
+  color: #FD9E5E; background-color: #FFEFE5;
+  border-radius: 20px !important;
+  user-select: none;
 }
 
 
 .toastui-editor-defaultUI {
   z-index: 9;
+}
+
+/* .slick-dots {
+  display: inline-block; vertical-align: middle;
+  margin: auto 0; padding: 0;
+}
+.slick-dots li {
+  list-style: none; cursor: pointer; display: inline-block;
+  margin: 0 6px; padding: 0;
+}
+.slick-dots li button {
+  height: 8px;  width: 8px;  padding: 0;
+  border-radius: 100%;
+}
+.slick-dots li button:before {
+  border: none; cursor: pointer; display: block;
+  color: transparent;
+  height: 8px;  width: 8px;  padding: 0;
+  border-radius: 100%;
+}
+.slick-dots li.slick-active button {
+  width: 22px; height: 8px;
+}
+.slick-dots li.slick-active button:before {
+  color: #08c1ce !important;
+  width: 22px; height: 8px;
+} */
+
+.slick-dots {
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding: 1rem 0;
+	
+	list-style-type: none;
+}
+.slick-dots li {
+  margin: 0 0.25rem;
+  height: 8px; width: auto;
+}
+.slick-dots li button {
+  display: flex; justify-content: center;
+  width: 8px !important; height: 8px !important;
+  padding: 0;
+  border: none; border-radius: 100%;
+  background-color: #D0CECC !important;
+  transition: all .3s;
+  text-indent: -9999px;
+}
+.slick-dots li.slick-active button {
+  background-color: #FD9E5E !important;
+  width: 22px !important; border-radius: 25px;
 }

@@ -8,9 +8,7 @@ export const TitleLabel = (props) => {
   return (
     <div className="flex flex-row gap-[4px] w-[122px] text-[16px] font-semibold">
       <span>{props.label}</span>
-      {
-        props.req === 1 ? <span className="text-point-orange">*</span> : <></>
-      }
+      { props.req === 1 ? <span className="text-point-orange">*</span> : <></> }
     </div>
   )
 }

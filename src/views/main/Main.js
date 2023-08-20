@@ -1,18 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import { call, callH, uploadImg, getUserinfo } from '../../service/ApiService'
-import { nutrientInfo, nutrientUnit } from '../../service/Functions'
+import { MainCategory, MainNutrient, MainInput, RecSlide } from './MainComponents'
 
-import { TitleLabel, InputIngredient, InputTag } from '../editor/EditorComponents'
-
-import { FoodType, FoodCategory } from '../../components/Common'
-import { InputNutrient } from './MainComponents'
-import { searchInputTheme, uploadButtonTheme, uploadImgButtonTheme } from '../../themes'
+import { FoodType } from '../../components/Common'
+import { searchInputTheme, uploadButtonTheme } from '../../themes'
 import { MagnifyingGlass } from '../../assets/icons'
-import {
-  ThemeProvider, CircularProgress, TextField, Divider, Button, Collapse,
-  FormControl, InputLabel, OutlinedInput, InputAdornment,
-} from '@mui/material'
+import { ThemeProvider, TextField, Divider, Button } from '@mui/material'
 
 const Main = () => {
   const [selectedType, setSelectedType] = useState('')
@@ -20,7 +13,6 @@ const Main = () => {
   const [keyword, setKeyword] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [tags, setTags] = useState([]);
-
   const [nutrient, setNutrient] = useState({ nut: '', range: '', amount: '' })  // 입력된 영양성분
   const [selectedNutrients, setSelectedNutrients] = useState({});  // 추가된 영양성분
 
@@ -28,8 +20,8 @@ const Main = () => {
   const navigate = useNavigate();
   const mounted = useRef(false);
   const [searchParams, setSearchParams] = useState({});
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault()
     setSearchParams({
       type: selectedType.length > 0 ? selectedType : '',
       title: keyword.length > 0 ? keyword : '',
@@ -53,10 +45,10 @@ const Main = () => {
       target.forEach(key => { params.delete(key); })
       navigate({ pathname: '/search', search: params.toString() });
     }
-  }, [searchParams]);
+  }, [searchParams, navigate]);
 
   return (
-    <div className='flex w-[800px] mt-[65px] mb-[100px] justify-center'>
+    <div className='flex flex-col w-[800px] mt-[65px] mb-[125px] justify-center'>
       <form className='flex flex-col items-center' onSubmit={handleSubmit}>
         <div className='searchBox'>
           <MagnifyingGlass />
@@ -68,31 +60,47 @@ const Main = () => {
           </ThemeProvider>
         </div>
 
-        <div className='flex flex-col mt-[50px]'>
-          <div className='flex flex-row items-center pb-[25px]'>
-            <TitleLabel label='분류' req={1} />
-            <FoodType selectedType={selectedType} setSelectedType={setSelectedType} rq={true} />
+        <div className='flex flex-col w-[500px] my-[50px]'>
+          <div className='flex flex-row items-center pb-[20px]'>
+            <span className=' w-[90px] text-[16px] font-semibold'>분류</span>
+            <FoodType selectedType={selectedType} setSelectedType={setSelectedType} rq={false} />
           </div>
-          <div className='mx-[12.5px]'><Divider /></div>
-          <div className='flex flex-row items-center pb-[25px]'>
-            <div className='self-start pt-[3.5px]'><TitleLabel label='카테고리' req={0} /></div>
-            <FoodCategory selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
+          <div className='flex flex-row items-center pb-[20px]'>
+            <span className='w-[90px] self-start pt-[3.5px] text-[16px] font-semibold'>카테고리</span>
+            <MainCategory selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
           </div>
-          <div className='flex flex-row items-center pb-[25px]'>
-            <div className='self-start pt-[3.5px]'><TitleLabel label='재료' req={0} /></div>
-            <InputIngredient setTargets={setIngredients} targets={ingredients} />
+          <div className='flex flex-row items-center pb-[20px]'>
+            <span className='w-[90px] self-start pt-[3.5px] text-[16px] font-semibold'>재료</span>
+            <MainInput setTargets={setIngredients} targets={ingredients} name='재료' />
           </div>
-          <div className='flex flex-row items-center pb-[25px]'>
-            <div className='self-start pt-[3.5px]'><TitleLabel label='태그' req={0} /></div>
-            <InputTag setTargets={setTags} targets={tags} />
+          <div className='flex flex-row items-center pb-[20px]'>
+            <span className='w-[90px] self-start pt-[3.5px] text-[16px] font-semibold'>태그</span>
+            <MainInput setTargets={setTags} targets={tags} name='태그' prefix='#' />
           </div>
-          <div className='flex flex-row items-center pb-[25px]'>
-            <div className='self-start pt-[3.5px]'><TitleLabel label='영양성분' req={0} /></div>
-            <InputNutrient nutrient={nutrient} setNutrient={setNutrient}
-                  selectedNutrients={selectedNutrients} setSelectedNutrients={setSelectedNutrients} />
+          <div className='flex flex-row items-center pb-[20px]'>
+            <span className='w-[90px] self-start pt-[8px] text-[16px] font-semibold'>영양성분</span>
+            <MainNutrient nutrient={nutrient} setNutrient={setNutrient}
+              selectedNutrients={selectedNutrients} setSelectedNutrients={setSelectedNutrients} />
           </div>
         </div>
       </form>
+      <Divider />
+
+      <div className='flex flex-col my-[50px]'>
+        <div className='flex flex-row text-[20px]'>
+          <span className='font-semibold'>인기 레시피</span>
+          <span className='ps-[7px]'>둘러보기</span>
+        </div>
+        <RecSlide />
+      </div>
+      <Divider />
+      <div className='flex flex-col mt-[50px]'>
+        <div className='flex flex-row text-[20px]'>
+          <span className='font-semibold'>인기 제품</span>
+          <span className='ps-[7px]'>둘러보기</span>
+        </div>
+        <RecSlide />
+      </div>
     </div>
   )
 }

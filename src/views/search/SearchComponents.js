@@ -18,7 +18,7 @@ export const SearchHeader = (props) => {
         <div className='flex flex-row justify-between w-[800px] py-[20px]'>
           <div className='flex flex-col w-[625px]' id='section1'>
             <span className='text-[18px] font-semibold'>{props.searched.sTitle}</span>
-            <div className='flex flex-row pt-[8px] gap-[5px]'>
+            <div className='flex flex-row flex-wrap pt-[8px] gap-[5px]'>
               {
                 (props.searched.sType === '' || props.searched.sType === null || props.searched.sType === undefined)
                   ? <></>
@@ -31,15 +31,15 @@ export const SearchHeader = (props) => {
                   ? <></>
                   : <>{
                     props.searched.sCate.map((cate, idx) => (
-                      <ThemeProvider theme={categoryButtonTheme}>
-                        <Button onClick={(e) => handleCategoryClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText)} key={`cate-${idx}`}>
+                      <ThemeProvider theme={categoryButtonTheme} key={`cate-${idx}`}>
+                        <Button onClick={(e) => handleCategoryClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText)}>
                           {cate}</Button>
                       </ThemeProvider>
                     ))
                   }</>
               }
             </div>
-            <div className='flex flex-row pt-[6px] gap-[5px]'>
+            <div className='flex flex-row flex-wrap pt-[6px] gap-[5px]'>
               {
                 (props.searched.sTag === undefined || props.searched.sTag.length === 0)
                   ? <></>

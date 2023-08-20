@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import { call } from './ApiService';
 
 export const FormatDate = (dateStr, type) => {

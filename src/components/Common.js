@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import {
-  Skeleton, InputLabel, FormControl, Select, MenuItem, ThemeProvider,
-  FormControlLabel, Radio, RadioGroup, Button, ToggleButtonGroup, ToggleButton
-} from '@mui/material'
+import { FormControl, Select, MenuItem, ThemeProvider, ToggleButtonGroup, ToggleButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import { ChevronDown } from '../assets/icons';
 import { selectTheme, typeToggleTheme, categoryToggleTheme } from '../themes';
 import { typeTag } from '../service/Functions';
-import { categories, categories1 } from '../service/Category'
+import { categories } from '../service/Category'
 
 // 정렬
 export const Sorting = (props) => {
   const handleReviewSort = (event) => {
     let sortUrl = props.apiURL;
-    if (event.target.value != '') {
+    if (event.target.value !== '') {
       sortUrl = props.apiURL.includes('?')
         ? `${props.apiURL}&sort=${event.target.value}`
         : `${props.apiURL}?sort=${event.target.value}`
@@ -85,7 +82,6 @@ export const FoodCategory = (props) => {
         props.setSelectedCategories(props.selectedCategories.filter((cat) => cat !== e.target.value))
       }
     }
-
   }
 
   return (

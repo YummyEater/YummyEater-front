@@ -19,7 +19,7 @@ const SearchUser = () => {
         setSearched({ sResponse: response, sUrl: apiURL })
         setSelectedPage(response.number + 1)
       })
-  }, [searchParams])
+  }, [searchParams, apiURL])
 
   const [selectedArticle, setSelectedArticle] = useState(-1);
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const SearchUser = () => {
   useEffect(() => {
     if (!mounted2.current) { mounted2.current = true; }
     else if (selectedArticle >= 0) { navigate(`/foodarticle/${selectedArticle}`); }
-  }, [selectedArticle]);
+  }, [selectedArticle, navigate]);
 
   return (
     <div className='flex flex-col'>

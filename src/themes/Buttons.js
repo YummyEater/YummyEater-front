@@ -148,6 +148,7 @@ export const tagButtonTheme = createTheme({
           color: colors.palette.orange.main, backgroundColor: colors.palette.orange.light,
           border: `1px solid ${colors.palette.orange.light} !important`,
           borderRadius: '20px!important', padding: '0 6px', minWidth: 'unset',
+          textTransform: 'none',
           '&:hover, &:focus': {
             backgroundColor: colors.palette.orange.light,
             border: `1px solid ${colors.palette.orange.main} !important`,
@@ -303,6 +304,56 @@ export const categoryToggleTheme = createTheme({
     MuiToggleButtonGroup: {
       styleOverrides: {
         root: { flexWrap: 'wrap !important', border: 'none', gap: '5px', },
+        grouped: { '&:not(:first-of-type)' : { marginLeft: 'unset' } }
+      }
+    },
+    MuiToggleButton: {
+      defaultProps: { disableRipple: true, },
+      styleOverrides: {
+        root: {
+          padding: '2px 8px !important', minWidth: 'unset',
+          border: `0.5px solid ${colors.palette.gray.dark2} !important`, borderRadius: '20px !important',
+          fontSize: '14px', fontWeight: '400px', color: colors.palette.gray.dark2,
+          backgroundColor: colors.palette.white,
+          '&:hover': {
+            backgroundColor: colors.palette.white,
+            border: `0.5px solid ${colors.palette.orange.main} !important`,
+          },
+          '&.Mui-selected, &.Mui-selected:hover': {
+            color: colors.palette.orange.main, backgroundColor: colors.palette.white,
+            border: `0.5px solid ${colors.palette.orange.main} !important`
+          },
+          '&.first-cate:before': {
+            content: '""', display: 'block', position: 'absolute', left: '-12px',
+            backgroundColor: colors.palette.gray.dark2, width: '7px', height: '1px',
+          }
+        }
+      }
+    }
+  },
+});
+
+export const mainButtonTheme = createTheme({
+  components: {
+    MuiButtonBase: { defaultProps: { disableRipple: true, }, },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: '13px !important', fontWeight: '400', lineHeight: '140%',
+          color: colors.palette.orange.main, backgroundColor: colors.palette.orange.light,
+          borderRadius: '20px!important', padding: '2px 8px', minWidth: 'unset', userSelect: 'none',
+          "&.Mui-disabled": { color: colors.palette.orange.main, },
+        }
+      }
+    }
+  },
+});
+
+export const categoryToggleThemeM = createTheme({
+  components: {
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        root: { flexWrap: 'wrap !important', border: 'none', gap: '4px', },
         grouped: { '&:not(:first-of-type)' : { marginLeft: 'unset' } }
       }
     },

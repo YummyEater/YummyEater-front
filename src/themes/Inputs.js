@@ -74,15 +74,65 @@ export const selectTheme = createTheme({
         }
       }
     },
-    MuiInputLabel: { // for Main
+    // MuiInputLabel: { // for Main
+    //   styleOverrides: {
+    //     root: {
+    //       fontSize: '14px !important', maxWidth: 'unset !important',
+    //       left: '5px', top: '-5px', color: `${colors.palette.black} !important`,
+    //       '&.Mui-focused': { color: `${colors.palette.orange.main} !important` }
+    //     },
+    //     shrink: {
+    //       transform: 'translate(-5px,5px) scale(0.75)',
+    //       color: `${colors.palette.orange.main} !important`
+    //     }
+    //   }
+    // }
+  }
+})
+
+export const mainSelectTheme = createTheme({
+  components: {
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          marginTop: '8px !important',
+          '&:before, &:after, &:focus, &:hover:not(.Mui-disabled, .Mui-error):before, &.Mui-focused:after': {
+            borderBottom: `1px solid ${colors.palette.gray.dark}`, backgroundColor: 'transparent',
+          },
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: { cursor: 'pointer !important', },
+        input: {
+          fontSize: '14px', paddingLeft: '5px',
+          // padding: '5px 5px 5px 10px',
+          minWidth: 'unset !important', boxSizing: 'border-box',
+          '&:focus': { backgroundColor: 'transparent', }
+        }
+      }
+    },
+    MuiMenuItem: {
+      defaultProps: { disableRipple: true, },
+      styleOverrides: {
+        root: {
+          fontSize: '14px',
+          '&.Mui-selected, &.Mui-selected.Mui-focusVisible': { backgroundColor: colors.palette.orange.light },
+          '&:hover, &.Mui-selected:hover': { backgroundColor: 'rgba(255, 239, 229, 0.5)' },
+        }
+      }
+    },
+    MuiInputLabel: {
       styleOverrides: {
         root: {
           fontSize: '14px !important', maxWidth: 'unset !important',
-          left: '5px', top: '-5px', color: `${colors.palette.black} !important`,
+          color: `${colors.palette.gray.dark2} !important`, paddingLeft: '5px',
+          top: '-4px',
           '&.Mui-focused': { color: `${colors.palette.orange.main} !important` }
         },
         shrink: {
-          transform: 'translate(-5px,5px) scale(0.75)',
+          transform: 'translate(-5px,5px) scale(0.75)', left: '5px', top: '-5px', 
           color: `${colors.palette.orange.main} !important`
         }
       }
@@ -154,5 +204,38 @@ export const searchInputTheme = createTheme({
         notchedOutline: { border: 'none', }
       },
     },
+  }
+})
+
+export const mainInputTheme = createTheme({
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.palette.white, paddingRight: '5px',
+          borderBottom: `1px solid ${colors.palette.gray.dark} !important`, borderRadius: 0,
+        },
+        input: { padding: '5px', fontSize: '14px' },
+        notchedOutline: { border: 'none !important', top: 0, padding: '5px' }
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: { color: `${colors.palette.gray.dark2} !important` }
+      }
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '14px !important', maxWidth: 'unset !important',
+          left: '-10px', top: '-9px', color: `${colors.palette.gray.dark2} !important`,
+          '&.Mui-focused': { color: `${colors.palette.orange.main} !important` }
+        },
+        shrink: {
+          transform: 'translate(10px,2px) scale(0.75)', top: '-11px',
+          color: `${colors.palette.orange.main} !important`
+        }
+      }
+    }
   }
 })

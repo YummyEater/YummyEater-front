@@ -1,11 +1,11 @@
-export const Hashtag = () => {
-  return (<svg style="width: 1em; height: 1em;vertical-align: middle;overflow: hidden;" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 3L8 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M16 3L14 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M21.1108 9.02754L3 9.0083" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M21.1108 15.0192L3 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>)
-}
+// export const Hashtag = () => {
+//   return (<svg style="width: 1em; height: 1em;vertical-align: middle;overflow: hidden;" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+//     <path d="M10 3L8 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+//     <path d="M16 3L14 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+//     <path d="M21.1108 9.02754L3 9.0083" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+//     <path d="M21.1108 15.0192L3 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+//   </svg>)
+// }
 
 export const X = () => {
   return (<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,21 @@ export const XFill = () => {
       </clipPath>
     </defs>
   </svg>)
+}
 
+export const XOrange = () => {
+  return (<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#clip0_307_1697)">
+      <path d="M9 1L1 9" stroke="#FD9E5E" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M1 1L9 9" stroke="#FD9E5E" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_307_1697">
+        <rect width="10" height="10" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+  )
 }
 
 export const Google = () => {
@@ -115,6 +129,13 @@ export const ChevronDown = () => {
   </svg>)
 }
 
+export const ChevronDownGray = () => {
+  return (<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="#B4B2B0" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+  )
+}
+
 // article
 export const Eye = () => {
   return (<svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,6 +151,21 @@ export const Eye = () => {
   </svg>)
 }
 
+export const EyeSm = () => {
+  return (<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#clip0_307_1223)">
+      <path d="M1.29639 5.44447C1.29639 5.44447 3.37046 1.29633 7.00009 1.29633C10.6297 1.29633 12.7038 5.44447 12.7038 5.44447C12.7038 5.44447 10.6297 9.59262 7.00009 9.59262C3.37046 9.59262 1.29639 5.44447 1.29639 5.44447Z" stroke="#D0CECC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6.99989 7.00003C7.859 7.00003 8.55545 6.30358 8.55545 5.44447C8.55545 4.58536 7.859 3.88892 6.99989 3.88892C6.14078 3.88892 5.44434 4.58536 5.44434 5.44447C5.44434 6.30358 6.14078 7.00003 6.99989 7.00003Z" stroke="#D0CECC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_307_1223">
+        <rect width="14" height="10.8889" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+  )
+}
+
 export const Star = () => {
   return (<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#clip0_9_2347)">
@@ -140,6 +176,19 @@ export const Star = () => {
         <rect width="16" height="16" fill="white" />
       </clipPath>
     </defs>
+  </svg>)
+}
+
+export const StarSm = () => {
+  return (<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clipPath="url(#clip0_307_1228)">
+  <path d="M6 1L7.545 4.13L11 4.635L8.5 7.07L9.09 10.51L6 8.885L2.91 10.51L3.5 7.07L1 4.635L4.455 4.13L6 1Z" fill="#D0CECC" stroke="#D0CECC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </g>
+  <defs>
+  <clipPath id="clip0_307_1228">
+  <rect width="12" height="12" fill="white"/>
+  </clipPath>
+  </defs>
   </svg>)
 }
 
@@ -196,5 +245,13 @@ export const MagnifyingGlass = () => {
       <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#FD9E5E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M20.9999 20.9999L16.6499 16.6499" stroke="#FD9E5E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  )
+}
+
+export const Plus = () => {
+  return (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 4.16666V15.8333" stroke="#B4B2B0" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M4.16663 10H15.8333" stroke="#B4B2B0" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
   )
 }

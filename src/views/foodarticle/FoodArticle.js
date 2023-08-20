@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { createSearchParams, useParams, useNavigate } from 'react-router-dom'
 import { call, getUserinfo, deleteArticle } from '../../service/ApiService'
-import { handleTagClick, handleCategoryClick, TypeLabel, nutrientInfo, nutrientUnit, FormatDate } from '../../service/Functions'
-import { typeButtonTheme, categoryButtonTheme, tagButtonTheme, articleButtonTheme } from '../../themes';
+import { articleButtonTheme } from '../../themes';
 
-import { Eye, Star } from '../../assets/icons'
-import thumb from '../../assets/images/thumb.png'
-
-import { Rating, Divider, ThemeProvider, Button } from '@mui/material'
+import { Divider, ThemeProvider, Button } from '@mui/material'
 import { ArticleTitle, ArticleInfo } from './ArticleComponents';
 import { Review, ReviewInput } from './Review';
 
@@ -42,7 +38,7 @@ const FoodArticle = () => {
       .then((response) => {
         setReviews(response);
       })
-  }, [state])
+  }, [state, foodId])
 
   const navigate = useNavigate();
   const handleUserClick = (e) => {

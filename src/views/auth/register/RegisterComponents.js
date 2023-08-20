@@ -24,7 +24,7 @@ export const Timer = (props) => {
     }
 
     return () => clearInterval(countdown);
-  }, [time]);
+  }, [time, props.verified]);
 
   return (
     <div className={stopped ? "text-gray3" : "text-danger-red"}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { register } from '../../../service/ApiService'
 import { ContentHeader, UserVerifyText, PwMatchText } from '../../../components'

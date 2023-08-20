@@ -4,7 +4,7 @@ import { call, callH, uploadImg, getUserinfo } from '../../service/ApiService'
 import { nutrientInfo, nutrientUnit } from '../../service/Functions'
 import { FoodType, FoodCategory } from '../../components/Common'
 import { TitleLabel, InputIngredient, InputTag, InputThumb } from './EditorComponents'
-import { editorInputTheme, uploadButtonTheme, uploadImgButtonTheme } from '../../themes'
+import { editorInputTheme, uploadButtonTheme } from '../../themes'
 import {
   ThemeProvider, CircularProgress, TextField, Divider, Button, Collapse,
   FormControl, InputLabel, OutlinedInput, InputAdornment,
@@ -84,7 +84,7 @@ const ArticleEditor = () => {
         // setInitialImgList(resourceURLList)
       }
     }
-  }, [foodData]);
+  }, [foodData, foodId, navigate, userinfo.id]);
 
   // 등록 요청
   const [articleData, setArticleData] = useState({});
@@ -138,7 +138,7 @@ const ArticleEditor = () => {
         })
         .catch((error) => { alert(foodId ? '게시물 수정을 실패했습니다.' : '게시물 등록을 실패했습니다.') })
     }
-  }, [articleData]);
+  }, [articleData, foodId, navigate]);
 
   // toast editor 이미지 첨부
   const onUploadImage = async (blob, callback) => {

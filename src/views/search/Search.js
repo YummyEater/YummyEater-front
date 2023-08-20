@@ -25,7 +25,7 @@ const Search = () => {
         })
         setSelectedPage(response.number + 1)
       })
-  }, [searchParams])
+  }, [searchParams, apiURL])
 
   // food article 이동
   const [selectedArticle, setSelectedArticle] = useState(-1);
@@ -34,7 +34,7 @@ const Search = () => {
   useEffect(() => {
     if (!mounted2.current) { mounted2.current = true; }
     else if (selectedArticle >= 0) { navigate(`/foodarticle/${selectedArticle}`); }
-  }, [selectedArticle]);
+  }, [selectedArticle, navigate]);
 
   return (
     <div className='flex flex-col'>

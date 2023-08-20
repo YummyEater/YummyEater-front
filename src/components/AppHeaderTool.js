@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Menu, MenuItem, ListItemIcon, IconButton, Divider } from '@mui/material';
-import { checkLogged, refreshAccessToken, signout } from '../service/ApiService'
+import { checkLogged, signout } from '../service/ApiService'
 import { Login, Edit, User, UserThin, Document, Logout } from '../assets/icons'
 
 const AppHeaderTool = () => {
