@@ -24,7 +24,7 @@ export const Review = (props) => {
         props.setReviews(response);
       })
     }
-  }, [props, reviewPage])
+  }, [reviewPage])
 
   // 리뷰 수정용
   const [editTarget, setEditTarget] = useState(null);

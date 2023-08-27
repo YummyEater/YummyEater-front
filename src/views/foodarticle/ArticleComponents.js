@@ -103,7 +103,7 @@ export const ArticleInfo = (props) => {
           <div className='flex flex-row flex-wrap w-[590px] pt-[8px] justify-self-center gap-[5px] justify-between'>
             {
               nutrientInfo(props.foodData.nutrient).map((item, idx) => (
-                <IngredElement title={item.label} data={item.var} nutrient={item.value} />
+                <IngredElement title={item.label} data={item.var} nutrient={item.value} key={`ingred-${idx}`} />
               ))
             }
           </div>
