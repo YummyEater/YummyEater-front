@@ -29,6 +29,7 @@ const ArticleEditor = () => {
   const [ingredients, setIngredients] = useState([]);
   const [editorFilled, setEditorFilled] = useState(false);
   const [thumbImg, setThumbImg] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (foodId !== undefined) {
@@ -120,7 +121,6 @@ const ArticleEditor = () => {
     })
   }
 
-  const navigate = useNavigate();
   const mounted1 = useRef(false);
   useEffect(() => {
     if (!mounted1.current) { mounted1.current = true; }

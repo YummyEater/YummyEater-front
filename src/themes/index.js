@@ -6,7 +6,7 @@ import { submitButtonTheme, verifyButtonTheme, verifyButtonTheme2, loginTextButt
   mainButtonTheme,   } from './Buttons'
 import { loginInputTheme, commentInputTheme, editorInputTheme,
   searchInputTheme, mainInputTheme,
-  statRatingTheme, commentRatingTheme, selectTheme, mainSelectTheme } from './Inputs'
+  statRatingTheme, commentRatingTheme, selectTheme, mainSelectTheme, tableTheme } from './Inputs'
 
 export {
   submitButtonTheme, verifyButtonTheme, verifyButtonTheme2, loginTextButtonTheme,
@@ -18,5 +18,6 @@ export {
 
   loginInputTheme, commentInputTheme, editorInputTheme,
   searchInputTheme, mainInputTheme,
-  statRatingTheme, commentRatingTheme, selectTheme, mainSelectTheme
+  statRatingTheme, commentRatingTheme, selectTheme, mainSelectTheme,
+  tableTheme,
 }

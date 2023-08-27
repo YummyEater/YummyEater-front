@@ -74,19 +74,6 @@ export const selectTheme = createTheme({
         }
       }
     },
-    // MuiInputLabel: { // for Main
-    //   styleOverrides: {
-    //     root: {
-    //       fontSize: '14px !important', maxWidth: 'unset !important',
-    //       left: '5px', top: '-5px', color: `${colors.palette.black} !important`,
-    //       '&.Mui-focused': { color: `${colors.palette.orange.main} !important` }
-    //     },
-    //     shrink: {
-    //       transform: 'translate(-5px,5px) scale(0.75)',
-    //       color: `${colors.palette.orange.main} !important`
-    //     }
-    //   }
-    // }
   }
 })
 
@@ -132,7 +119,7 @@ export const mainSelectTheme = createTheme({
           '&.Mui-focused': { color: `${colors.palette.orange.main} !important` }
         },
         shrink: {
-          transform: 'translate(-5px,5px) scale(0.75)', left: '5px', top: '-5px', 
+          transform: 'translate(-5px,5px) scale(0.75)', left: '5px', top: '-5px',
           color: `${colors.palette.orange.main} !important`
         }
       }
@@ -234,6 +221,52 @@ export const mainInputTheme = createTheme({
         shrink: {
           transform: 'translate(10px,2px) scale(0.75)', top: '-11px',
           color: `${colors.palette.orange.main} !important`
+        }
+      }
+    }
+  }
+})
+
+export const tableTheme = createTheme({
+  components: {
+    MuiTableContainer: {
+      styleOverrides: {
+        root: {
+          width: '100%', overflowX: 'auto'
+        }
+      }
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          // tableLayout: 'fixed',
+          // wordBreak:'break-all'
+          // overflowY: 'scroll',
+          overflow: 'auto',
+        }
+      }
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          margin: '0 !important', borderSpacing: '15px', borderBottom: `1px solid ${colors.palette.gray.dark2}`,
+          '&:nth-of-type(odd):not(.MuiTableRow-head)': {
+            backgroundColor: colors.palette.gray.light,
+          },
+          '&:last-child td:not(.MuiTableCell-head), &:last-child th:not(.MuiTableCell-head), &:last-child tr': {
+            borderBottom: `1px solid transparent`,
+          },
+        }
+      }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: '12px 0', paddingRight: '15px', fontSize: '14px', userSelect: 'none',
+        },
+        head: {
+          fontSize: '16px', fontWeight: 600,
+          // '&:not(:last-of-type)': { paddingRight: '15px' }
         }
       }
     }
