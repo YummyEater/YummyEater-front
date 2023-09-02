@@ -16,13 +16,11 @@ const OauthSignIn = () => {
   })
 
   return (
-    <div>
-      <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        <AppHeader2 />
-        <div className="body flex-grow-1 flex justify-center ">
-          <div className='flex w-[800px] pt-[50px] justify-center'>
-            <CircularProgress className='text-primary-orange' />
-          </div>
+    <div className="bg-white">
+      <AppHeader2 />
+      <div className="body flex grow justify-center">
+        <div className='flex w-[800px] pt-[50px] justify-center'>
+          <CircularProgress className='text-primary-orange' />
         </div>
       </div>
     </div>

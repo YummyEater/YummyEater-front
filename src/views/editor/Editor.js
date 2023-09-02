@@ -44,13 +44,15 @@ const ArticleEditor = () => {
   }, [foodId])
 
   const [initialImgList, setInitialImgList] = useState([]);
-  // console.log(`initialImgList: ${initialImgList}`)
+  console.log(`initialImgList: ${initialImgList}`)
   const getImgList = (thumbImg) => {
     const imgList = [];
-    const imgElements = Array.from(document.getElementsByClassName('toastui-editor-ww-container')[0].getElementsByTagName('img'));
+    // const imgElements = Array.from(document.getElementsByClassName('toastui-editor-ww-container')[0].getElementsByTagName('img'));
+    const imgElements = Array.from(document.getElementsByClassName('toastui-editor-contents')[0].getElementsByTagName('img'));
     if (imgElements.length > 0) {
       imgElements.forEach(image => {
-        if (image.currentSrc !== "") { imgList.push(image.currentSrc) }
+        // if (image.currentSrc !== "") { imgList.push(image.currentSrc) }
+        if (image.src !== "") { imgList.push(image.src) }
       })
     }
     console.log(`~: ${imgList}`)
@@ -59,34 +61,44 @@ const ArticleEditor = () => {
       imgList.push(thumbImg)
     }
     console.log(`~~: ${imgList}`)
-
     return imgList;
   }
 
   const mounted2 = useRef(false);
   useEffect(() => {
     if (!mounted2.current) { mounted2.current = true; }
-    else {
+    else if (Object.keys(foodData).length !== 0) {
       console.log(foodData)
       if (userinfo.id !== foodData.userId) {
+        console.log('***************')
+        console.log(userinfo.id)
+        console.log(foodData.userId)
+        console.log('***************')
         alert('본인이 작성한 게시글만 수정 가능합니다.')
         navigate(`/foodarticle/${foodId}`)
       } else {
         setSelectedType(foodData.type)
         setSelectedCategories(foodData.categories)
         setTags(foodData.tags)
+        const initIngred = foodData.ingredient.split(',')
         // 현재 테스트 데이터는 ',' 로 분리되어있어 다음과 같이 처리
-        setIngredients(foodData.ingredient.split(','))
+        setIngredients((initIngred.length === 1 && initIngred[0] === '') ? [] : initIngred)
         editorRef.current.getInstance().setMarkdown(foodData.content)
         setEditorFilled(true)
         setThumbImg(foodData.imgUrl)
-
-        // const resourceURLList = getImgList(foodData.imgUrl)
-        // setInitialImgList(resourceURLList)
       }
     }
   }, [foodData, foodId, navigate, userinfo.id]);
 
+  const mounted3 = useRef(false);
+  useEffect(() => {
+    if (!mounted3.current) { mounted3.current = true; }
+    else if (editorFilled) {
+      const imgSrcs = getImgList(thumbImg);
+      setInitialImgList(imgSrcs)
+    }
+  }, [editorFilled])
+  
   // 등록 요청
   const [articleData, setArticleData] = useState({});
   const editorRef = useRef();
@@ -96,7 +108,7 @@ const ArticleEditor = () => {
     e.preventDefault();
     const imgSrcs = getImgList(thumbImg);
     const data = new FormData(e.target);
-    // - 기존 resourceUrlList와 비교해 다른 경우에만 변경하는 코드
+    // - 기존 resourceUrlList와 비교해 다른 경우에만 변경
     setArticleData({
       'title': data.get("inputTitle"),
       'type': selectedType,
@@ -116,8 +128,7 @@ const ArticleEditor = () => {
         'natrium': data.get("natrium")
       },
       'content': editorRef.current.getInstance().getMarkdown(),
-      // 'resourceURLList': (foodId && (imgSrcs === initialImgList)) ? null : imgSrcs
-      'resourceURLList': imgSrcs
+      'resourceURLList': (foodId && (JSON.stringify(imgSrcs) === JSON.stringify(initialImgList))) ? null : imgSrcs
     })
   }
 
@@ -125,7 +136,7 @@ const ArticleEditor = () => {
   useEffect(() => {
     if (!mounted1.current) { mounted1.current = true; }
     else {
-      console.log(articleData.resourceURLList)
+      // console.log(articleData.resourceURLList)
       const method = foodId ? "PATCH" : "POST"
       const apiUrl = foodId ? `/api/food/${foodId}` : `/api/food`
       callH(apiUrl, method, articleData)
@@ -225,7 +236,7 @@ const ArticleEditor = () => {
                 <div className='grid grid-cols-3 gap-x-[45px] gap-y-[10px]'>
                   {
                     nutrientInfo(foodId ? foodData.nutrient : null).map((item, idx) => (
-                      <FormControl>
+                      <FormControl key={`nutrient-${idx}`}>
                         <ThemeProvider theme={editorInputTheme}>
                           <InputLabel htmlFor={item.value}>{item.label}</InputLabel>
                           <OutlinedInput className='w-[150px]' variant="outlined" name={item.value} id={item.value}

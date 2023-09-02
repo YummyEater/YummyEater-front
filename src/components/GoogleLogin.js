@@ -3,7 +3,7 @@ import { Google } from '../assets/icons'
 
 const GoogleLogin = () => {
   return (
-    <div className='px-[170px]'>
+    <div className='max-w-[350px] w-full'>
       <a href='http://localhost:8080/oauth2/authorization/google'>
         <button className="gButton">
           <div className='gButton1'></div>

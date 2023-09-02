@@ -14,7 +14,7 @@ export const loginInputTheme = createTheme({
           '&.Mui-focused': { backgroundColor: colors.palette.gray.light, }
         },
         input: {
-          padding: '8px 15px', width: '370px', fontSize: '16px',
+          padding: '8px 15px', fontSize: '16px', width:'370px',
           '&:-webkit-autofill': { borderRadius: '10px', }
         },
       },

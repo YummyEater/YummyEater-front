@@ -20,8 +20,8 @@ export const ArticleTitle = (props) => {
             </ThemeProvider>
             {
               props.foodData.categories.map((cate, idx) => (
-                <ThemeProvider theme={categoryButtonTheme}>
-                  <Button onClick={(e) => handleCategoryClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText)} key={`cate-${idx}`}>
+                <ThemeProvider theme={categoryButtonTheme} key={`cate-${idx}`}>
+                  <Button onClick={(e) => handleCategoryClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText)}>
                     {cate}</Button>
                 </ThemeProvider>
               ))
@@ -30,8 +30,8 @@ export const ArticleTitle = (props) => {
           <div className='flex flex-row pt-[10px] gap-[5px]'>
             {
               props.foodData.tags.map((tag, idx) => (
-                <ThemeProvider theme={tagButtonTheme}>
-                  <Button onClick={(e) => handleTagClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText.slice(2))} key={`tag-${idx}`}>
+                <ThemeProvider theme={tagButtonTheme} key={`tag-${idx}`}>
+                  <Button onClick={(e) => handleTagClick(props.navigate, props.foodDetail.data.type, e.currentTarget.innerText.slice(2))}>
                     <div className='flex flex-row'><span className='pe-[2px]'>#</span><span>{tag}</span></div>
                   </Button>
                 </ThemeProvider>

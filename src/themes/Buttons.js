@@ -33,7 +33,7 @@ export const verifyButtonTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          width: '112px', padding: '8px',
+          width: '112px', minWidth: '112px', padding: '8px',
           fontSize: '16px !important', fontWeight: '400', lineHeight: '160%',
           color: colors.palette.orange.main, backgroundColor: colors.palette.orange.light,
           border: `1px solid ${colors.palette.orange.light} !important`, borderRadius: '20px!important',
@@ -59,7 +59,7 @@ export const verifyButtonTheme2 = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          width: '112px', padding: '8px',
+          width: '112px', minWidth: '112px', padding: '8px',
           fontSize: '16px !important', fontWeight: '400', lineHeight: '160%',
           color: colors.palette.orange.main, backgroundColor: colors.palette.white,
           border: `1px solid ${colors.palette.orange.main} !important`, borderRadius: '20px!important',
@@ -267,6 +267,9 @@ export const uploadButtonTheme = createTheme({
           '&:active': {
             backgroundColor: colors.palette.orange.dark,
             border: '1px solid ${colors.palette.orange.dark} !important'
+          },
+          '&.Mui-disabled': {
+            color: colors.palette.white, opacity: '50%'
           }
         }
       }

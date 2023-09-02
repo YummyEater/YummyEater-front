@@ -31,10 +31,10 @@ const AppHeaderTool = () => {
       <Menu anchorEl={anchorEl} id='account-menu' open={open} onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted
         transformOrigin={{ vertical: 'top', horizontal: 'right', }} sx={{ mt: '35px' }}>
-        <MenuItem disableRipple component={Link} to='/userinfo'>
+        <MenuItem disableRipple component={Link} to='/userinfo' onClick={handleClose}>
           <ListItemIcon><UserThin /></ListItemIcon>회원정보
         </MenuItem>
-        <MenuItem disableRipple component={Link} to='/userarticle'>
+        <MenuItem disableRipple component={Link} to='/userarticle' onClick={handleClose}>
           <ListItemIcon><Document /></ListItemIcon>작성 게시물
         </MenuItem>
         <Divider />

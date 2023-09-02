@@ -73,7 +73,6 @@ export const FoodType = (props) => {
 export const FoodCategory = (props) => {
 
   const handleCategoryChange = (e) => {
-    console.log(e.target.value)
     if (e.target.value !== undefined) {
       const index = props.selectedCategories.indexOf(e.target.value)
       if (index === -1) {

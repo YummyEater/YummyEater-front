@@ -29,20 +29,17 @@ const Register = () => {
       handleSend(setSent, runTimer, setRunTimer, emailRef.current.value)
     }
   }
-
   // 인증코드 확인
   const verCodeRef = useRef(null);
   const [verifyCode, setVerifyCode] = useState({ 'entered': false, 'verified': false });
   const verifyCheck = (e) => {
     handleVerify(setVerifyCode, verCodeRef.current.value)
   }
-
   // 닉네임 확인 여부
   const [usrnameChecked, setUsrnameChecked] = useState({ 'checked': false, 'confirmed': false });
   // 닉네임 중복, 형식 확인
   const usrnameRef = useRef(null);
   const [usrname, setUsrname] = useState({ 'entered': false, 'unique': false, 'formatted': false });
-
   // 비밀번호 일치
   const pwRef1 = useRef(null);
   const pwRef2 = useRef(null);
@@ -64,105 +61,112 @@ const Register = () => {
     register(navigate, { "code": code, "email": email, "username": username, "password": password });
   }
 
+  const inputtitle = 'w-[150px] max-w-[528px] text-[16px] font-normal'
+  const itemwrap = 'flex flex-row flex-wrap items-center max-[700px]:w-full max-[700px]:gap-[5px]'
   return (
-    <div className='w-[680px] container1'>
+    <div className='w-[680px] container1 max-[700px]:w-screen max-[700px]:px-[25px]'>
       <ContentHeader title='회원가입' />
-      <form className='flex flex-col justify-center' onSubmit={handleSubmit}>
-        <div className='flex flex-row items-center'>
-          <span className='self-start w-[150px] pt-[7px] text-[16px] font-normal'>이메일</span>
-          <div className='flex flex-col'>
-            <div className='flex flex-row'>
-              <ThemeProvider theme={loginInputTheme}>
-                <TextField variant="filled" placeholder='user@example.com' autoComplete='email' name='inputEmail' id='inputEmail' 
-                  onChange={handleEmailEnter} inputRef={emailRef} required />
-                <ThemeProvider theme={sent ? verifyButtonTheme2 : verifyButtonTheme}>
-                  <Button type='button' onClick={requestEmail} className='ms-[16px]'>
-                    {sent ? '재전송' : '인증코드 전송'}</Button>
-                </ThemeProvider>
-              </ThemeProvider>
-            </div>
-            <Collapse in={emailFormat.entered && !(emailFormat.formatted)} timeout={0}>
-              <span className='ms-[10px] text-[13px] text-danger-red'>이메일 형식이 올바르지 않습니다.</span>
-            </Collapse>
-          </div>
-        </div>
-
-        <Collapse in={sent} timeout={0}>
-          <div className='flex flex-row items-center pt-[15px]'>
-            <span className='self-start w-[150px] pt-[7px] text-[16px] font-normal'>인증코드</span>
-            <div className='flex flex-col'>
+      <div className='flex flex-col justify-center items-center'>
+        <form className='flex flex-col justify-center items-center max-[700px]:max-w-[528px] max-[700px]:w-full' onSubmit={handleSubmit}>
+          <div className={itemwrap + ' justify-between'}>
+            <span className={inputtitle}>이메일</span>
+            <div className='flex flex-col max-w-[528px] max-[700px]:w-full'>
               <div className='flex flex-row'>
                 <ThemeProvider theme={loginInputTheme}>
-                  <TextField variant="filled" placeholder='인증코드 8자리 입력' name='inputVerifyCode' id='inputVerifyCode' inputRef={verCodeRef} required />
-                  <ThemeProvider theme={verifyButtonTheme}>
-                    <Button type='button' onClick={verifyCheck} className='ms-[16px]'
-                      disabled={verifyCode.entered && verifyCode.verified ? true : false}>확인</Button>
+                  <TextField variant="filled" placeholder='user@example.com' autoComplete='email' name='inputEmail' id='inputEmail'
+                    onChange={handleEmailEnter} inputRef={emailRef} required className='max-[700px]:w-full max-[700px]:max-w-[400px]' />
+                  <ThemeProvider theme={sent ? verifyButtonTheme2 : verifyButtonTheme}>
+                    <Button type='button' onClick={requestEmail} className='ms-[16px]'>
+                      {sent ? '재전송' : '인증코드 전송'}</Button>
                   </ThemeProvider>
                 </ThemeProvider>
               </div>
-              <div className='flex flex-row justify-between pt-[5px] ms-[10px] me-[138px] text-[13px]'>
-                {
-                  verifyCode.entered && verifyCode.verified
-                    ? <span className='text-success-green'>인증코드가 확인되었습니다.</span>
-                    : <>
-                      <span className='text-gray3'>이메일로 전송된 인증코드를 입력해주세요.</span>
-                      <Timer run={runTimer} verified={verifyCode.verified} />
-                    </>
-                }
-              </div>
-              <Collapse in={verifyCode.entered && !verifyCode.verified} timeout={0}>
-                <span className='ms-[10px] text-[13px] text-danger-red'>인증코드를 다시 확인해주세요.</span>
+              <Collapse in={emailFormat.entered && !(emailFormat.formatted)} timeout={0}>
+                <span className='ms-[10px] text-[13px] text-danger-red'>이메일 형식이 올바르지 않습니다.</span>
               </Collapse>
             </div>
           </div>
-        </Collapse>
 
-        <div className='flex flex-row items-center pt-[15px]'>
-          <span className='w-[150px] text-[16px] font-normal'>닉네임</span>
-          <div className='flex flex-col gap-[5px]'>
-            <div className='flex flex-row'>
-              <input className='w-[400px] filled' type="text" onChange={e => handleUsrnameChange(usrnameChecked, setUsrnameChecked)}
-                placeholder='닉네임 입력' name='field1' id='field1' ref={usrnameRef} />
-              <ThemeProvider theme={verifyButtonTheme}>
-                <Button type='button' onClick={e => usrCheck(usrnameRef, setUsrname, setUsrnameChecked)} className='ms-[16px]'>중복확인</Button>
-              </ThemeProvider>
+          <Collapse in={sent} timeout={0} className='max-[700px]:max-w-[528px] w-full'>
+            <div className={itemwrap + ' justify-between pt-[15px]'}>
+              <span className={inputtitle + ' self-start pt-[7px]'}>인증코드</span>
+              <div className='flex flex-col max-w-[528px] max-[700px]:w-full'>
+                <div className='flex flex-row'>
+                  <ThemeProvider theme={loginInputTheme}>
+                    <TextField variant="filled" placeholder='인증코드 8자리 입력' name='inputVerifyCode' id='inputVerifyCode' inputRef={verCodeRef} required
+                      className='max-[700px]:w-full max-[700px]:max-w-[400px]' />
+                    <ThemeProvider theme={verifyButtonTheme}>
+                      <Button type='button' onClick={verifyCheck} className='ms-[16px]'
+                        disabled={verifyCode.entered && verifyCode.verified ? true : false}>확인</Button>
+                    </ThemeProvider>
+                  </ThemeProvider>
+                </div>
+                <div className='flex flex-row justify-between pt-[5px] ms-[10px] me-[138px] max-[700px]:justify-start max-[700px]:gap-[15px] max-[700px]:me-0 text-[13px]'>
+                  {
+                    verifyCode.entered && verifyCode.verified
+                      ? <span className='text-success-green'>인증코드가 확인되었습니다.</span>
+                      : <>
+                        <span className='text-gray3'>이메일로 전송된 인증코드를 입력해주세요.</span>
+                        <Timer run={runTimer} verified={verifyCode.verified} />
+                      </>
+                  }
+                </div>
+                <Collapse in={verifyCode.entered && !verifyCode.verified} timeout={0}>
+                  <span className='ms-[10px] text-[13px] text-danger-red'>인증코드를 다시 확인해주세요.</span>
+                </Collapse>
+              </div>
+            </div>
+          </Collapse>
+
+          <div className={itemwrap + ' pt-[15px]'}>
+            <span className={inputtitle + ' self-start pt-[10px]'}>닉네임</span>
+            <div className='flex flex-col gap-[5px] max-w-[528px] max-[700px]:w-full'>
+              <div className='flex flex-row'>
+                <input className='w-[400px] max-[700px]:w-full max-[700px]:max-w-[400px] filled' type="text" onChange={e => handleUsrnameChange(usrnameChecked, setUsrnameChecked)}
+                  placeholder='닉네임 입력' name='field1' id='field1' ref={usrnameRef} />
+                <ThemeProvider theme={verifyButtonTheme}>
+                  <Button type='button' onClick={e => usrCheck(usrnameRef, setUsrname, setUsrnameChecked)} className='ms-[16px]'>중복확인</Button>
+                </ThemeProvider>
+              </div>
+              <div className='flex flex-col ps-[10px] pt-[5px]'>
+                <span className='text-[13px] text-gray3'>3자 이상의 한글, 영문, 숫자를 사용해 입력해주세요.</span>
+                <UserVerifyText usrname={usrname} usrnameChecked={usrnameChecked} />
+              </div>
             </div>
           </div>
-        </div>
-        <div className='flex flex-col ps-[160px] pt-[5px]'>
-          <span className='text-[13px] text-gray3'>3자 이상의 한글, 영문, 숫자를 사용해 입력해주세요.</span>
-          <UserVerifyText usrname={usrname} usrnameChecked={usrnameChecked} />
-        </div>
 
-        <div className='flex flex-row items-center pt-[15px]'>
-          <span className='flex w-[150px] text-[16px] font-normal self-start pt-[5px]'>비밀번호</span>
-          <div className='flex flex-col gap-[5px]'>
-            <ThemeProvider theme={loginInputTheme}>
-              <TextField variant="filled" placeholder='비밀번호 입력' autoComplete="new-password" id="inputPassword" name="inputPassword" type='password'
-                onChange={pwCheck} inputRef={pwRef1} required/>
-            </ThemeProvider>
-            <span className={!pwMatch.entered1 || pwMatch.formatted ? 'text-[13px] text-gray3 ps-[10px]' : 'text-[13px] text-danger-red ps-[10px]'}>
-              8-16자 영문 대소문자, 숫자, 특수문자를 사용해 입력해주세요.</span>
+
+          <div className={itemwrap + ' self-start pt-[15px]'}>
+            <span className={inputtitle + ' self-start pt-[7px]'}>비밀번호</span>
+            <div className='flex flex-col gap-[5px] max-w-[528px] max-[700px]:w-full'>
+              <ThemeProvider theme={loginInputTheme}>
+                <TextField variant="filled" placeholder='비밀번호 입력' autoComplete="new-password" id="inputPassword" name="inputPassword" type='password'
+                  onChange={pwCheck} inputRef={pwRef1} required className='max-[700px]:w-full max-[700px]:max-w-[400px]' />
+              </ThemeProvider>
+              <span className={!pwMatch.entered1 || pwMatch.formatted ? 'text-[13px] text-gray3 ps-[10px]' : 'text-[13px] text-danger-red ps-[10px]'}>
+                8-16자 영문 대소문자, 숫자, 특수문자를 사용해 입력해주세요.</span>
+            </div>
           </div>
-        </div>
 
-        <div className='flex flex-row items-center pt-[15px]'>
-          <span className='flex w-[150px] text-[16px] font-normal'>비밀번호 확인</span>
-          <ThemeProvider theme={loginInputTheme}>
-            <TextField variant="filled" placeholder='비밀번호 재입력' autoComplete="new-password" id="inputPasswordVerify" name="inputPasswordVerify" type='password'
-              onChange={pwCheck} inputRef={pwRef2} required/>
-          </ThemeProvider>
-        </div>
-        <div className='flex flex-col ps-[160px] pt-[5px]'>
-          <PwMatchText pwMatch={pwMatch}></PwMatchText>
-        </div>
+          <div className={itemwrap + ' self-start pt-[15px]'}>
+            <span className={inputtitle + ' self-start pt-[7px]'}>비밀번호 확인</span>
+            <div className='flex flex-col gap-[5px] max-w-[528px] max-[700px]:w-full'>
+              <ThemeProvider theme={loginInputTheme}>
+                <TextField variant="filled" placeholder='비밀번호 재입력' autoComplete="new-password" id="inputPasswordVerify" name="inputPasswordVerify" type='password'
+                  onChange={pwCheck} inputRef={pwRef2} required className='max-[700px]:w-full max-[700px]:max-w-[400px]' />
+              </ThemeProvider>
+              <PwMatchText pwMatch={pwMatch}></PwMatchText>
+            </div>
+          </div>
 
-        <div className='flex justify-center items-center pt-[50px]'>
-          <ThemeProvider theme={submitButtonTheme}>
-            <Button type='submit' disabled={verifyCode.verified && usrnameChecked.confirmed && pwMatch.matched ? false : true} >회원가입</Button>
-          </ThemeProvider>
-        </div>
-      </form>
+
+          <div className='flex justify-center items-center pt-[50px]'>
+            <ThemeProvider theme={submitButtonTheme}>
+              <Button type='submit' disabled={verifyCode.verified && usrnameChecked.confirmed && pwMatch.matched ? false : true} >회원가입</Button>
+            </ThemeProvider>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

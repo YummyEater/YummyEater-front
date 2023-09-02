@@ -40,9 +40,9 @@ const OauthSignUp = () => {
   }
 
   return (
-    <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+    <div className="bg-white">
       <AppHeader2 />
-      <div className="body flex-grow-1 flex justify-center ">
+      <div className="body flex grow justify-center">
         <div className='w-[680px] container1'>
           <ContentHeader title='회원정보 변경' />
           <form className='flex flex-col justify-center' onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ const OauthSignUp = () => {
               <span className='w-[150px] text-[16px] font-normal'>이메일</span>
               <div className='flex flex-row items-center gap-[10px]'>
                 <span className='w-[18px] h-[18px]'><Google /></span>
-                <span className='text-[16px] font-normal'>aaa@email.com</span>
+                <span className='text-[16px] font-normal'>{searchParams.get('email')}</span>
               </div>
             </div>
 
@@ -72,7 +72,7 @@ const OauthSignUp = () => {
             </div>
             <div className='flex justify-center items-center pt-[50px]'>
               <ThemeProvider theme={submitButtonTheme}>
-                <Button type='submit'>회원가입</Button>
+                <Button type='submit' disabled={!(searchParams.get('email') !== null && usrnameChecked.confirmed)}>회원가입</Button>
               </ThemeProvider>
             </div>
           </form>

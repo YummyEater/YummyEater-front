@@ -42,6 +42,7 @@ export const Review = (props) => {
             <Divider />
             {
               props.reviews.content.map((review, idx) => {
+                console.log('&&&' + props.usrId)
                 return (
                   <div className='flex flex-col' key={`review-${idx}`}>
                     <div className='flex flex-row self-center w-[660px] py-[20px]' >
@@ -50,7 +51,7 @@ export const Review = (props) => {
                         {
                           editTarget !== null && editTarget === review.id
                             ? <ReviewInput updateReview={props.updateReview} foodId={props.data.id} val={review.content}
-                              rt={review.rating} formId={review.id} setEditTarget={setEditTarget} />
+                              rt={review.rating} formId={review.id} setEditTarget={setEditTarget} usrId={props.usrId} />
                             : <div className='flex flex-col w-[100%]'>
                               <div className='flex flex-row justify-between items-center'>
                                 <div className='flex flex-row gap-[25px]'>
@@ -102,7 +103,7 @@ export const Review = (props) => {
 }
 
 export const ReviewInput = (props) => {
-  const accessToken = localStorage.getItem("ACCESS_TOKEN");
+  // const accessToken = localStorage.getItem("ACCESS_TOKEN");
   // 새로운 리뷰
   const [reviewRate, setReviewRate] = useState(props.formId === 'newReview' ? 0 : props.rt);
   const inputRef = useRef(null);
@@ -136,6 +137,7 @@ export const ReviewInput = (props) => {
     }
 
   }
+  console.log('^*^*^'+props.usrId)
 
   return (
     <form onSubmit={submitReview} id={props.formId} className='w-[100%]'>
@@ -144,7 +146,7 @@ export const ReviewInput = (props) => {
           <div className='flex flex-row gap-[10px]'>
             <span className='text-[14px]'>추천도</span>
             <ThemeProvider theme={commentRatingTheme}>
-              <Rating className='items-center' value={reviewRate} precision={1} disabled={(accessToken && accessToken != null) ? false : true}
+              <Rating className='items-center' value={reviewRate} precision={1} disabled={props.usrId === undefined}
                 icon={<RatingFilled />} emptyIcon={<RatingEmpty />} onChange={(e, newRate) => { setReviewRate(newRate) }}></Rating>
             </ThemeProvider>
           </div>
@@ -153,13 +155,13 @@ export const ReviewInput = (props) => {
           }
         </div>
         <ThemeProvider theme={commentInputTheme}>
-          <TextField variant="filled" placeholder={(accessToken && accessToken != null) ? '리뷰 입력' : '로그인 후 리뷰 작성이 가능합니다.'}
+          <TextField variant="filled" placeholder={(props.usrId !== undefined) ? '리뷰 입력' : '로그인 후 리뷰 작성이 가능합니다.'}
             name='reviewText' id='reviewText' type='password' inputRef={inputRef} multiline rows={2}
-            disabled={(accessToken && accessToken != null) ? false : true}
+            disabled={props.usrId === undefined}
             defaultValue={props.formId === 'newReview' ? '' : props.val} required />
         </ThemeProvider>
         <ThemeProvider theme={uploadButtonTheme}>
-          <Button type='submit' className='self-end'>등록</Button>
+          <Button type='submit' className='self-end' disabled={props.usrId === undefined}>등록</Button>
         </ThemeProvider>
       </div>
     </form>

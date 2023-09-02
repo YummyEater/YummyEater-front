@@ -86,7 +86,7 @@ const FoodArticle = () => {
           <div className='flex flex-col w-[640px] self-center items-center pb-[30px]'>
             <span className='text-[16px] font-semibold self-start'>리뷰 작성</span>
             <div className='px-[15px] pt-[4px]  w-[100%]'>
-              <ReviewInput updateReview={updateReview} foodId={foodId} val={null} formId='newReview' />
+              <ReviewInput updateReview={updateReview} foodId={foodId} val={null} formId='newReview' usrId={userinfo.id} />
             </div>
           </div>
         </div>

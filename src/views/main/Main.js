@@ -47,60 +47,62 @@ const Main = () => {
     }
   }, [searchParams, navigate]);
 
+  const searchitem = 'flex flex-row flex-wrap items-center pb-[20px] max-[800px]:gap-[5px]'
+  const searchtitle = 'w-[90px] max-[800px]:w-full text-[16px] font-semibold'
   return (
-    <div className='flex flex-col w-[800px] mt-[65px] mb-[125px] justify-center'>
-      <form className='flex flex-col items-center' onSubmit={handleSubmit}>
-        <div className='searchBox'>
+    <div className='flex flex-col max-w-[800px] w-screen mt-[65px] mb-[125px] justify-center'>
+      <form className='flex flex-col items-center px-[25px]' onSubmit={handleSubmit}>
+        <div className='searchBox w-[500px] max-[800px]:max-w-[500px] max-[800px]:w-full'>
           <MagnifyingGlass />
           <ThemeProvider theme={searchInputTheme}>
-            <TextField className='w-[326px]' placeholder='찾으려는 레시피 또는 제품을 입력해주세요' onChange={(e) => setKeyword(e.target.value)} />
+            <TextField className='w-[326px] max-[800px]:max-w-[326px]' placeholder='찾으려는 레시피 또는 제품을 입력해주세요' onChange={(e) => setKeyword(e.target.value)} />
           </ThemeProvider>
           <ThemeProvider theme={uploadButtonTheme}>
             <Button type='submit' className='justify-self-end'>검색</Button>
           </ThemeProvider>
         </div>
-
-        <div className='flex flex-col w-[500px] my-[50px]'>
-          <div className='flex flex-row items-center pb-[20px]'>
-            <span className=' w-[90px] text-[16px] font-semibold'>분류</span>
+        <div className='flex flex-col w-[500px] max-[800px]:max-w-[410px] max-[800px]:w-full my-[50px]'>
+          <div className={searchitem}>
+            <span className={searchtitle}>분류</span>
             <FoodType selectedType={selectedType} setSelectedType={setSelectedType} rq={false} />
           </div>
-          <div className='flex flex-row items-center pb-[20px]'>
-            <span className='w-[90px] self-start pt-[3.5px] text-[16px] font-semibold'>카테고리</span>
+          <div className={searchitem}>
+            <span className={searchtitle+' self-start pt-[3.5px]'}>카테고리</span>
             <MainCategory selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
           </div>
-          <div className='flex flex-row items-center pb-[20px]'>
-            <span className='w-[90px] self-start pt-[3.5px] text-[16px] font-semibold'>재료</span>
+          <div className={searchitem}>
+            <span className={searchtitle+' self-start pt-[3.5px]'}>재료</span>
             <MainInput setTargets={setIngredients} targets={ingredients} name='재료' />
           </div>
-          <div className='flex flex-row items-center pb-[20px]'>
-            <span className='w-[90px] self-start pt-[3.5px] text-[16px] font-semibold'>태그</span>
+          <div className={searchitem}>
+            <span className={searchtitle+' self-start pt-[3.5px]'}>태그</span>
             <MainInput setTargets={setTags} targets={tags} name='태그' prefix='#' />
           </div>
-          <div className='flex flex-row items-center pb-[20px]'>
-            <span className='w-[90px] self-start pt-[8px] text-[16px] font-semibold'>영양성분</span>
+          <div className={searchitem}>
+            <span className={searchtitle+'self-start pt-[8px]'}>영양성분</span>
             <MainNutrient nutrient={nutrient} setNutrient={setNutrient}
               selectedNutrients={selectedNutrients} setSelectedNutrients={setSelectedNutrients} />
           </div>
         </div>
       </form>
       <Divider />
-
-      <div className='flex flex-col my-[50px]'>
-        <div className='flex flex-row text-[20px]'>
-          <span className='font-semibold'>인기 레시피</span>
-          <span className='ps-[7px]'>둘러보기</span>
+        <div className='flex flex-col gap-[50px] mt-[50px] max-[810px]:ms-[15px] max-[810px]:me-[25px]'>
+          <div className='flex flex-col'>
+            <div className='flex flex-row text-[20px]'>
+              <span className='font-semibold'>인기 레시피</span>
+              <span className='ps-[7px]'>둘러보기</span>
+            </div>
+            <RecSlide />
+          </div>
+          <Divider />
+          <div className='flex flex-col'>
+            <div className='flex flex-row text-[20px]'>
+              <span className='font-semibold'>인기 제품</span>
+              <span className='ps-[7px]'>둘러보기</span>
+            </div>
+            <RecSlide />
+          </div>
         </div>
-        <RecSlide />
-      </div>
-      <Divider />
-      <div className='flex flex-col mt-[50px]'>
-        <div className='flex flex-row text-[20px]'>
-          <span className='font-semibold'>인기 제품</span>
-          <span className='ps-[7px]'>둘러보기</span>
-        </div>
-        <RecSlide />
-      </div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { nutrientText, nutrientInfo, nutrientUnit } from '../../service/Functions';
 import { categories } from '../../service/Category'
 import { mainSelectTheme, mainButtonTheme, categoryToggleThemeM, mainInputTheme } from '../../themes';
@@ -8,6 +8,7 @@ import {
   IconButton, Button, OutlinedInput, Collapse, ToggleButtonGroup, ToggleButton,
 } from '@mui/material';
 import Slider from "react-slick";
+import { isMobile } from 'react-device-detect';
 
 import taco from '../../assets/images/taco.jpg'
 
@@ -35,7 +36,7 @@ export const MainCategory = (props) => {
   }));
 
   return (
-    <div className='flex flex-col w-[410px]'>
+    <div className='flex flex-col w-[410px] max-[800px]:max-w-[410px] max-[800px]:w-full'>
       <div className='flex flex-row justify-between border-b border-gray2 px-[8px] py-[4px] cursor-pointer' onClick={handleExpandClick} >
         <div className='flex flex-row flex-wrap w-[360px] gap-[5px]'>
           {
@@ -107,7 +108,7 @@ export const MainInput = (props) => {
       {
         props.targets
           ? <Collapse in={props.targets.length > 0} timeout="auto">
-            <div className='flex flex-row flex-wrap w-[410px] gap-[5px] mt-[10px]'>
+            <div className='flex flex-row flex-wrap max-w-[410px] w-full gap-[5px] mt-[10px]'>
               {
                 props.targets.map((item, idx) => (
                   <div className='flex flex-row output-wrap2' key={`tag-${idx}`}>
@@ -158,8 +159,8 @@ export const MainNutrient = (props) => {
   }
 
   return (
-    <div className='flex flex-col'>
-      <div className="flex flex-row gap-[24px] items-end">
+    <div className='flex flex-col max-w-[410px] w-full '>
+      <div className="flex flex-row justify-between items-end">
         <div className='w-[100px]'>
           <FormControl variant="standard" size={props.size} fullWidth>
             <ThemeProvider theme={mainSelectTheme}>
@@ -200,7 +201,7 @@ export const MainNutrient = (props) => {
         <IconButton className='p-0 pb-[5px]' disableRipple onClick={handleAdd}><Plus /></IconButton>
       </div>
       <Collapse in={props.selectedNutrients && (Object.keys(props.selectedNutrients).length > 0)} timeout="auto">
-        <div className='flex flex-row flex-wrap w-[410px] gap-[5px] mt-[10px]'>
+        <div className='flex flex-row flex-wrap max-w-[410px] max-[800px]:w-full gap-[5px] mt-[10px]'>
           {
             Object.keys(props.selectedNutrients).map((item, idx) => (
               <div className='flex flex-row output-wrap2' key={`nut-${idx}`}>
@@ -250,10 +251,18 @@ const recRecipe = [
   },
 ]
 
+function ArrowPrev({ onClick }) {
+  return (<div className='slick-arrow slick-prev slick-prev-main' onClick={onClick} />)
+}
+function ArrowNext({ onClick }) {
+  return (<div className='slick-arrow slick-next slick-next-main' onClick={onClick} />)
+}
 export function RecSlide() {
+  // console.log(window.matchMedia("all and (max-width: 767px)"))
   const settings = {
-    className: "center", dots: true, infinite: true, slidesToShow: 3,
-    slidesToScroll: 3, centerMode: false, variableWidth: true, dotsClass: 'slick-dots',
+    className: "center", dots: true, infinite: true, slidesToShow: 2,
+    slidesToScroll: 2, centerMode: false, variableWidth: true, dotsClass: 'slick-dots',
+    nextArrow: <ArrowNext />, prevArrow: <ArrowPrev />,
   }
   return (
     <Slider {...settings}>

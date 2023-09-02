@@ -81,11 +81,14 @@ export const handleSend = (setSent, runTimer, setRunTimer, email) => {
         if (response.errorCode === "C00000") {
           setSent(true);
           setRunTimer(runTimer + 1);
-        } else if (response.errorCode === "C100000") {
+        } else if (response.errorCode === "C10000") {
 
         }
       }
     )
+    .catch((error) => {
+      alert("이미 가입된 이메일입니다.")
+    })
 }
 
 // - 인증코드 확인
