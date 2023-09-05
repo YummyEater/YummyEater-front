@@ -61,7 +61,7 @@ const Register = () => {
     register(navigate, { "code": code, "email": email, "username": username, "password": password });
   }
 
-  const inputtitle = 'w-[150px] max-w-[528px] text-[16px] font-normal'
+  const inputtitle = 'w-[150px] max-[700px]:w-full max-w-[528px] text-[16px] font-normal'
   const itemwrap = 'flex flex-row flex-wrap items-center max-[700px]:w-full max-[700px]:gap-[5px]'
   return (
     <div className='w-[680px] container1 max-[700px]:w-screen max-[700px]:px-[25px]'>
@@ -87,7 +87,7 @@ const Register = () => {
             </div>
           </div>
 
-          <Collapse in={sent} timeout={0} className='max-[700px]:max-w-[528px] w-full'>
+          <Collapse in={true} timeout={0} className='max-[700px]:max-w-[528px] w-full'>
             <div className={itemwrap + ' justify-between pt-[15px]'}>
               <span className={inputtitle + ' self-start pt-[7px]'}>인증코드</span>
               <div className='flex flex-col max-w-[528px] max-[700px]:w-full'>
@@ -128,7 +128,7 @@ const Register = () => {
                   <Button type='button' onClick={e => usrCheck(usrnameRef, setUsrname, setUsrnameChecked)} className='ms-[16px]'>중복확인</Button>
                 </ThemeProvider>
               </div>
-              <div className='flex flex-col ps-[10px] pt-[5px]'>
+              <div className='flex flex-col ps-[10px]'>
                 <span className='text-[13px] text-gray3'>3자 이상의 한글, 영문, 숫자를 사용해 입력해주세요.</span>
                 <UserVerifyText usrname={usrname} usrnameChecked={usrnameChecked} />
               </div>

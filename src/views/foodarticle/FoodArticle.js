@@ -61,12 +61,12 @@ const FoodArticle = () => {
     console.log(foodData);
 
     return (
-      <div className='w-[725px] container1'>
+      <div className='w-[725px] container1 max-[725px]:w-screen max-[725px]:px-[30px]'>
         <ArticleTitle foodData={foodData} foodDetail={foodDetail} navigate={navigate} handleUserClick={handleUserClick} />
         <div className='pt-[45px] pb-[60px]'><ArticleInfo foodData={foodData} /></div>
         <Divider />
         <div className='flex justify-center'>
-          <div className='flex flex-col py-[60px] w-[650px]'>
+          <div className='flex flex-col py-[60px] max-w-[650px] w-full'>
             <Viewer initialValue={foodData.content} />
             {
               userinfo.id === foodData.userId
@@ -83,9 +83,9 @@ const FoodArticle = () => {
         <Divider />
         <Review reviews={reviews} setReviews={setReviews} data={foodData} state={state} updateReview={updateReview} usrId={userinfo.id} />
         <div className='flex flex-col justify-center pt-[45px]'>
-          <div className='flex flex-col w-[640px] self-center items-center pb-[30px]'>
+          <div className='flex flex-col max-w-[640px] w-full self-center items-center pb-[30px]'>
             <span className='text-[16px] font-semibold self-start'>리뷰 작성</span>
-            <div className='px-[15px] pt-[4px]  w-[100%]'>
+            <div className='px-[15px] pt-[4px] w-full max-[725px]:px-0'>
               <ReviewInput updateReview={updateReview} foodId={foodId} val={null} formId='newReview' usrId={userinfo.id} />
             </div>
           </div>

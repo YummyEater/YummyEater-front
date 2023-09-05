@@ -25,7 +25,7 @@ const Login = () => {
         <div className='w-[700px] max-[700px]:max-w-[700px] max-[700px]:w-screen container1 px-[25px]'>
           <ContentHeader title='로그인' />
           <div className='flex flex-col justify-center items-center'>
-            <form className='flex flex-col justify-center items-center w-[550px] max-[700px]:max-w-[550px] max-[700px]:w-full'
+            <form className='flex flex-col justify-center items-center max-w-[550px] w-full'
               onSubmit={handleSubmit} id='login-form'>
               <div className={inputwrap}>
                 <span className='text-[16px] font-normal max-w-[400px] max-[550px]:w-full'>이메일</span>

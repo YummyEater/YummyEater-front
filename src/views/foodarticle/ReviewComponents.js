@@ -7,14 +7,14 @@ import { RatingFilled, RatingEmpty, MoreV } from '../../assets/icons'
 import { Rating, ThemeProvider, styled, LinearProgress, linearProgressClasses, Menu, MenuItem, IconButton } from '@mui/material'
 
 const BorderLinearProgress = styled(LinearProgress)({
-  height: 16, width: '150px', borderRadius: 6,
+  height: 16, borderRadius: 6,
   [`&.${linearProgressClasses.colorPrimary}`]: { backgroundColor: colors.palette.gray.light, },
   [`& .${linearProgressClasses.bar}`]: { backgroundColor: colors.palette.orange.main, },
 });
 
 export const ReviewStats = (props) => {
   return (
-    <div className='flex flex-row flex-wrap w-[400px] pt-[10px] justify-self-center justify-between items-center'>
+    <div className='flex flex-row flex-wrap max-w-[400px] w-full pt-[10px] justify-self-center justify-between items-center'>
       <div className='flex flex-col items-center'>
         <span className='text-[14px]'>총 {props.num}건</span>
         <span className='text-[18px] font-semibold leading-[160%]'>{props.rating.toFixed(1)}</span>
@@ -27,7 +27,7 @@ export const ReviewStats = (props) => {
           Object.keys(props.ratingData).slice(0).reverse().map((rt, idx) => {
             let curr = Object.keys(props.ratingData).length - idx
             return (
-              <div className='grid grid-cols-[24px_150px_auto] gap-[15px] items-center ' key={`reviewstat-row-${idx}`}>
+              <div className='grid grid-cols-[24px_150px_auto] max-[450px]:grid-cols-[24px_125px_auto] gap-[15px] items-center ' key={`reviewstat-row-${idx}`}>
                 <span className='w-[24px]'>{curr}점</span>
                 <BorderLinearProgress variant="determinate" value={props.ratingData[rt] === 0 ? 0 : (props.ratingData[rt] / props.num) * 100} />
                 <span className='justify-self-end'><span>{props.ratingData[rt]}</span></span>

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  margin: 0;
+  background-color: #FFFFFF;
+}
+
 html,
 body,
 .MuiTypography-root,
@@ -10,6 +15,14 @@ body,
 .MuiInputLabel-root,
 .MuiTableCell-root {
   font-family: 'SUIT', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif !important;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.MuiIconButton-root {
+  padding: 0 !important;
 }
 
 em {
@@ -272,4 +285,8 @@ input.filled:focus-visible {
 
 input:placeholder-shown {
   text-overflow: ellipsis;
+}
+
+.toastui-editor-defaultUI-toolbar {
+  flex-wrap: wrap;
 }

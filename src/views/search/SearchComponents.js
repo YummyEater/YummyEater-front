@@ -13,10 +13,10 @@ import thumb from '../../assets/images/thumb.png'
 export const SearchHeader = (props) => {
   console.log(props.searched)
   return (
-    <div className='sticky top-[146px] bg-white z-10'>
+    <div className='sticky top-[146px] max-[740px]:top-[120px] bg-white z-10 max-[850px]:w-screen max-[850px]:self-center'>
       <div className='flex flex-col pb-[14px]'>
-        <div className='flex flex-row justify-between w-[800px] py-[20px]'>
-          <div className='flex flex-col w-[625px]' id='section1'>
+        <div className='flex flex-row justify-between w-[800px] py-[20px] max-[850px]:w-full max-[850px]:px-[50px]'>
+          <div className='flex flex-col w-[625px] max-[850px]:w-auto' id='section1'>
             <span className='text-[18px] font-semibold'>{props.searched.sTitle}</span>
             <div className='flex flex-row flex-wrap pt-[8px] gap-[5px]'>
               {
@@ -79,14 +79,15 @@ export const SearchHeader = (props) => {
               }
             </div>
           </div>
-          <div className='flex justify-end w-[150px]' id='section2'>
+          <div className='flex justify-end w-[150px] max-[850px]:w-auto' id='section2'>
             {
               (props.searched.sResponse === undefined || props.searched.sResponse.totalElements === 0)
                 ? <></>
                 : <div className='flex flex-col gap-[5px] items-end'>
                   <div className='flex flex-row text-[14px]'>
                     <span className='font-semibold'>{props.searched.sResponse.totalElements}</span>
-                    <span>개의 검색결과</span>
+                    <span>개의</span>
+                    <span>&nbsp;검색결과</span>
                   </div>
                   <div className='w-[85px]'>
                     <Sorting size="small" value={props.sort} apiURL={props.apiURL} path={props.path}
@@ -105,9 +106,9 @@ export const SearchHeader = (props) => {
 export const UserSearchHeader = (props) => {
   console.log(props.searched)
   return (
-    <div className='sticky top-[146px] bg-white z-10'>
+    <div className='sticky top-[146px] max-[740px]:top-[120px] bg-white z-10 max-[850px]:w-screen max-[850px]:self-center'>
       <div className='flex flex-col pb-[14px]'>
-        <div className='flex flex-row justify-between w-[800px] py-[20px]'>
+        <div className='flex flex-row justify-between w-[800px] py-[20px] max-[850px]:w-full max-[850px]:px-[50px]'>
           <div className='flex flex-col w-[625px]' id='section1'>
             <span className='text-[18px] font-semibold'>{props.params.get('userName')}</span>
           </div>
@@ -151,9 +152,11 @@ export const ArticleList = (props) => {
 
   const Block = (props) => {
     return (
-      <div className='flex flex-row w-[350px] h-[150px] justify-between'>
-        <img height={150} width={175} className='h-[150px] w-[175px] object-cover rounded-[5px]' src={props.data.imgUrl || thumb} />
-        <div className='flex flex-col w-[165px] justify-between'>
+      <div className='flex flex-row min-h-[150px] justify-between w-[350px] max-[740px]:w-screen max-[740px]:px-[100px] max-[550px]:w-[350px] max-[550px]:p-0'>
+        <div>
+          <img height={150} width={175} className='h-[150px] w-[175px] object-cover rounded-[5px]' src={props.data.imgUrl || thumb} />
+        </div>
+        <div className='flex flex-col w-[165px] max-[740px]:ps-[25px] max-[740px]:w-full max-[550px]:w-[165px] max-[550px]:ps-0 justify-between'>
           <div className='flex flex-col'>
             <span className='text-[18px] font-semibold cursor-pointer' id={props.data.id} onClick={handleClick}>{props.data.title}</span>
             <div className='flex flex-row justify-between items-center'>
@@ -184,12 +187,12 @@ export const ArticleList = (props) => {
               {
                 props.data.maker === null || props.data.maker === "" || props.data.maker === undefined
                   ? <></>
-                  : <span>{props.data.maker}</span>
+                  : <span className='w-[72px] truncate'>{props.data.maker}</span>
               }
               {
                 props.data.price === null || props.data.price === "" || props.data.price === undefined
                   ? <></>
-                  : <span>가격 {props.data.price}원</span>
+                  : <span className='w-[82px] truncate text-end'>가격 {props.data.price}원</span>
               }
             </div>
             <div className='flex flex-row justify-between'>
@@ -212,7 +215,7 @@ export const ArticleList = (props) => {
     console.log(props.data.content)
     return (
       <div className='flex flex-col items-center'>
-        <div className='grid grid-cols-2 gap-x-[100px] gap-y-[25px] content-between'>
+        <div className='grid grid-cols-2 gap-x-[100px] gap-y-[25px] max-[840px]:gap-x-[35px] max-[740px]:grid-cols-1 max-[740px]:gap-y-[45px]'>
           {
             props.data.content.map((item, idx) => {
               return (

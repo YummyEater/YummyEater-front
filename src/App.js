@@ -1,10 +1,13 @@
 import './App.css';
 import React, { Component, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { CircularProgress } from '@mui/material'
 
 const loading = (
-  <div className="pt-3 text-center">
-    <div className="sk-spinner sk-spinner-pulse"></div>
+  <div className="body flex grow justify-center">
+    <div className='flex w-[800px] pt-[50px] justify-center'>
+      <CircularProgress className='text-primary-orange' />
+    </div>
   </div>
 )
 
@@ -29,6 +32,7 @@ class App extends Component {
         </Suspense>
       </BrowserRouter>
     )
+
   }
 }
 

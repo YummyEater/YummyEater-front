@@ -33,7 +33,7 @@ const SearchUser = () => {
     <div className='flex flex-col'>
       <UserSearchHeader searched={searched} sort={selectedSort} apiURL={apiURL} path='/search/user'
         setSort={setSelectedSort} setPage={setSelectedPage} params={searchParams} />
-      <div className='flex w-[800px] pt-[16px] pb-[75px] justify-center'>
+      <div className='flex w-[800px] pt-[16px] pb-[75px] justify-center max-[850px]:w-full'>
         {
           Object.keys(searched).length === 0
             ? <CircularProgress className='text-primary-orange' />

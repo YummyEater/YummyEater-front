@@ -45,14 +45,14 @@ export const Review = (props) => {
                 console.log('&&&' + props.usrId)
                 return (
                   <div className='flex flex-col' key={`review-${idx}`}>
-                    <div className='flex flex-row self-center w-[660px] py-[20px]' >
-                      <span className='w-[150px] me-[15px] font-semibold text-[16px]'>{review.userName}</span>
+                    <div className='flex flex-row self-center max-w-[660px] w-full py-[20px]' >
+                      <span className='w-[150px] me-[15px] font-semibold text-[16px] truncate'>{review.userName}</span>
                       <div className='flex flex-row w-[495px]'>
                         {
                           editTarget !== null && editTarget === review.id
                             ? <ReviewInput updateReview={props.updateReview} foodId={props.data.id} val={review.content}
                               rt={review.rating} formId={review.id} setEditTarget={setEditTarget} usrId={props.usrId} />
-                            : <div className='flex flex-col w-[100%]'>
+                            : <div className='flex flex-col w-full'>
                               <div className='flex flex-row justify-between items-center'>
                                 <div className='flex flex-row gap-[25px]'>
                                   <ThemeProvider theme={commentRatingTheme}>
@@ -83,11 +83,11 @@ export const Review = (props) => {
 
   return (
     <div className='flex flex-col justify-center pt-[60px]'>
-      <div className='flex flex-col w-[640px] self-center items-center pb-[30px]'>
+      <div className='flex flex-col max-w-[640px] w-full self-center items-center pb-[30px]'>
         <span className='text-[16px] font-semibold self-start'>리뷰</span>
         <ReviewStats num={props.reviews.totalElements} rating={props.data.rating} ratingData={props.data.foodReviewRatingCount} />
       </div>
-      <div className='flex flex-col w-[725px]'>
+      <div className='flex flex-col max-w-[725px] w-full'>
         {
           (Object.keys(props.reviews).length === 0 || props.reviews.totalElements === 0)
             ? <></>
@@ -140,7 +140,7 @@ export const ReviewInput = (props) => {
   console.log('^*^*^'+props.usrId)
 
   return (
-    <form onSubmit={submitReview} id={props.formId} className='w-[100%]'>
+    <form onSubmit={submitReview} id={props.formId} className='w-full'>
       <div className='flex flex-col gap-[6px]'>
         <div className='flex flex-row justify-between'>
           <div className='flex flex-row gap-[10px]'>

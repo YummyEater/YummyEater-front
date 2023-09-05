@@ -98,7 +98,7 @@ const ArticleEditor = () => {
       setInitialImgList(imgSrcs)
     }
   }, [editorFilled])
-  
+
   // 등록 요청
   const [articleData, setArticleData] = useState({});
   const editorRef = useRef();
@@ -133,23 +133,23 @@ const ArticleEditor = () => {
   }
 
   const mounted1 = useRef(false);
-  useEffect(() => {
-    if (!mounted1.current) { mounted1.current = true; }
-    else {
-      // console.log(articleData.resourceURLList)
-      const method = foodId ? "PATCH" : "POST"
-      const apiUrl = foodId ? `/api/food/${foodId}` : `/api/food`
-      callH(apiUrl, method, articleData)
-        .then((response) => {
-          console.log(response);
-          if (response.errorCode === 'C00000') {
-            alert(foodId ? '게시물이 성공적으로 수정되었습니다.' : '게시물이 성공적으로 등록되었습니다.')
-            navigate(foodId ? `/foodarticle/${foodId}` : `/foodarticle/${response.data.id}`);
-          }
-        })
-        .catch((error) => { alert(foodId ? '게시물 수정을 실패했습니다.' : '게시물 등록을 실패했습니다.') })
-    }
-  }, [articleData, foodId, navigate]);
+  // useEffect(() => {
+  //   if (!mounted1.current) { mounted1.current = true; }
+  //   else {
+  //     // console.log(articleData.resourceURLList)
+  //     const method = foodId ? "PATCH" : "POST"
+  //     const apiUrl = foodId ? `/api/food/${foodId}` : `/api/food`
+  //     callH(apiUrl, method, articleData)
+  //       .then((response) => {
+  //         console.log(response);
+  //         if (response.errorCode === 'C00000') {
+  //           alert(foodId ? '게시물이 성공적으로 수정되었습니다.' : '게시물이 성공적으로 등록되었습니다.')
+  //           navigate(foodId ? `/foodarticle/${foodId}` : `/foodarticle/${response.data.id}`);
+  //         }
+  //       })
+  //       .catch((error) => { alert(foodId ? '게시물 수정을 실패했습니다.' : '게시물 등록을 실패했습니다.') })
+  //   }
+  // }, [articleData, foodId, navigate]);
 
   // toast editor 이미지 첨부
   const onUploadImage = async (blob, callback) => {
@@ -163,32 +163,34 @@ const ArticleEditor = () => {
       .catch((err) => { callback('image_load_fail', 'alt text'); })
   }
 
+  const inputtitle = 'self-start pt-[3.5px] w-[122px] max-[800px]:w-full'
+  const itemwrap = 'flex flex-row flex-wrap items-center max-[800px]:w-full max-[800px]:gap-[5px] pb-[15px]'
   return (
-    <div className='flex w-[800px] pt-[65px] pb-[100px] justify-center'>
+    <div className='flex max-w-[800px] w-full max-[800px]:px-[20px] pt-[65px] pb-[100px] justify-center'>
       {
         (foodId && Object.keys(foodData).length === 0)
           ? <CircularProgress className='text-primary-orange' />
           : <form className='flex flex-col' onSubmit={handleSubmit}>
             <div className='flex flex-col px-[25px] pb-[30px]'>
-              <div className='flex flex-row items-center pb-[15px]'>
+              <div className={itemwrap}>
                 <TitleLabel label='제목' req={1} />
                 <ThemeProvider theme={editorInputTheme}>
-                  <TextField className='w-[450px]' variant="outlined" placeholder='제목 입력' name='inputTitle' id='inputTitle'
-                    defaultValue={foodId ? foodData.title : ''} required />
+                  <TextField variant="outlined" placeholder='제목 입력' name='inputTitle' id='inputTitle' defaultValue={foodId ? foodData.title : ''}
+                     className='w-[450px] max-[800px]:w-full max-[800px]:max-w-[450px]' required />
                 </ThemeProvider>
               </div>
-              <div className='flex flex-row items-center pb-[15px]'>
+              <div className={itemwrap}>
                 <TitleLabel label='분류' req={1} />
                 <FoodType selectedType={selectedType} setSelectedType={setSelectedType} rq={true} />
               </div>
               <div className='mx-[12.5px]'><Divider /></div>
-              <div className='flex flex-row items-center py-[15px]'>
-                <div className='self-start pt-[3.5px]'><TitleLabel label='카테고리' req={0} /></div>
+              <div className={itemwrap + ' pt-[15px]'}>
+                <div className={inputtitle}><TitleLabel label='카테고리' req={0} /></div>
                 <FoodCategory selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
               </div>
 
               <div className='mx-[12.5px]'><Divider /></div>
-              <div className='flex flex-row items-center py-[15px]'>
+              <div className={itemwrap + ' pt-[15px]'}>
                 <TitleLabel label='가격' req={0} />
                 <ThemeProvider theme={editorInputTheme}>
                   <TextField className='w-[150px]' variant="outlined" placeholder='가격 입력' name='inputPrice' id='inputPrice'
@@ -196,9 +198,9 @@ const ArticleEditor = () => {
                 </ThemeProvider>
                 <span className='ps-[10px] text-[14px]'>원</span>
               </div>
-              
+
               <Collapse in={selectedType === 'RECIPE'} timeout={0}>
-                <div className='flex flex-row items-center pb-[15px]'>
+                <div className={itemwrap}>
                   <TitleLabel label='인원' req={0} />
                   <ThemeProvider theme={editorInputTheme}>
                     <TextField className='w-[125px]' variant="outlined" placeholder='인원 수 입력' name='inputServings' id='inputServings'
@@ -206,14 +208,14 @@ const ArticleEditor = () => {
                   </ThemeProvider>
                   <span className='ps-[10px] text-[14px]'>인분</span>
                 </div>
-                <div className='flex flex-row items-center pb-[15px]'>
-                  <div className='self-start pt-[3.5px]'><TitleLabel label='재료' req={0} /></div>
+                <div className={itemwrap}>
+                  <div className={inputtitle}><TitleLabel label='재료' req={0} /></div>
                   <InputIngredient setTargets={setIngredients} targets={ingredients} />
                 </div>
               </Collapse>
 
               <Collapse in={selectedType === 'PRODUCT'} timeout={0}>
-                <div className='flex flex-row items-center pb-[15px]'>
+                <div className={itemwrap}>
                   <TitleLabel label='중량' req={0} />
                   <ThemeProvider theme={editorInputTheme}>
                     <TextField className='w-[150px]' variant="outlined" placeholder='단품별 용량 입력' name='inputAmount' id='inputAmount'
@@ -221,7 +223,7 @@ const ArticleEditor = () => {
                   </ThemeProvider>
                   <span className='ps-[10px] text-[14px]'>g</span>
                 </div>
-                <div className='flex flex-row items-center pb-[15px]'>
+                <div className={itemwrap}>
                   <TitleLabel label='판매사' req={0} />
                   <ThemeProvider theme={editorInputTheme}>
                     <TextField className='w-[172px]' variant="outlined" placeholder='제조사 및 판매사 입력' name='inputMaker' id='inputMaker'
@@ -231,32 +233,34 @@ const ArticleEditor = () => {
               </Collapse>
 
               <div className='mx-[12.5px]'><Divider /></div>
-              <div className='flex flex-row items-center py-[15px]'>
-                <div className='self-start pt-[3.5px]'><TitleLabel label='영양정보' req={0} /></div>
-                <div className='grid grid-cols-3 gap-x-[45px] gap-y-[10px]'>
-                  {
-                    nutrientInfo(foodId ? foodData.nutrient : null).map((item, idx) => (
-                      <FormControl key={`nutrient-${idx}`}>
-                        <ThemeProvider theme={editorInputTheme}>
-                          <InputLabel htmlFor={item.value}>{item.label}</InputLabel>
-                          <OutlinedInput className='w-[150px]' variant="outlined" name={item.value} id={item.value}
-                            type='number' onWheel={e => e.target.blur()} step="0.00001"
-                            defaultValue={foodId && item.var !== null && item.var !== "" && item.var !== undefined ? item.var : ''}
-                            endAdornment={<InputAdornment position="end">{nutrientUnit(item.value)}</InputAdornment>} />
-                        </ThemeProvider>
-                      </FormControl>
-                    ))
-                  }
+              <div className={itemwrap + ' pt-[15px]'}>
+                <div className={inputtitle}><TitleLabel label='영양정보' req={0} /></div>
+                <div className='flex max-[800px]:w-full max-[800px]:justify-center'>
+                  <div className='grid grid-cols-3 max-[800px]:grid-cols-[150px_150px] max-[800px]:w-full max-[800px]:justify-evenly gap-x-[45px] gap-y-[10px]'>
+                    {
+                      nutrientInfo(foodId ? foodData.nutrient : null).map((item, idx) => (
+                        <FormControl key={`nutrient-${idx}`}>
+                          <ThemeProvider theme={editorInputTheme}>
+                            <InputLabel htmlFor={item.value}>{item.label}</InputLabel>
+                            <OutlinedInput className='w-[150px]' variant="outlined" name={item.value} id={item.value}
+                              type='number' onWheel={e => e.target.blur()} step="0.00001"
+                              defaultValue={foodId && item.var !== null && item.var !== "" && item.var !== undefined ? item.var : ''}
+                              endAdornment={<InputAdornment position="end">{nutrientUnit(item.value)}</InputAdornment>} />
+                          </ThemeProvider>
+                        </FormControl>
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
               <div className='mx-[12.5px]'><Divider /></div>
-              <div className='flex flex-row items-center pt-[15px]'>
-                <div className='self-start pt-[3.5px]'><TitleLabel label='대표 이미지' req={0} /></div>
+              <div className={itemwrap + ' pt-[15px]'}>
+                <div className={inputtitle}><TitleLabel label='대표 이미지' req={0} /></div>
                 <InputThumb thumbRef={thumbRef} thumbImg={thumbImg} setThumbImg={setThumbImg} />
               </div>
             </div>
 
-            <div className='w-[800px]' ref={editorColRef}>
+            <div className='max-w-[800px] w-full' ref={editorColRef}>
               <Editor
                 previewStyle='vertical' height='500px' initialEditType='wysiwyg' useCommandShortcut={false} plugins={[colorSyntax]}
                 language="ko-KR" hideModeSwitch={true} autofocus={false} ref={editorRef} hooks={{ addImageBlobHook: onUploadImage }}
@@ -265,8 +269,8 @@ const ArticleEditor = () => {
               </Editor>
             </div>
 
-            <div className='flex flex-row items-center px-[25px] py-[30px]'>
-              <div className='self-start pt-[3.5px]'><TitleLabel label='태그' req={0} /></div>
+            <div className='flex flex-row flex-wrap items-center max-[800px]:w-full max-[800px]:gap-[5px] px-[25px] py-[30px]'>
+              <div className={inputtitle}><TitleLabel label='태그' req={0} /></div>
               <InputTag setTargets={setTags} targets={tags} />
             </div>
             <ThemeProvider theme={uploadButtonTheme}>

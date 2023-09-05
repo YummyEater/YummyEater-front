@@ -84,7 +84,7 @@ export const FoodCategory = (props) => {
   }
 
   return (
-    <div className='flex flex-row w-[628px]'>
+    <div className='flex flex-row max-w-[628px] w-full'>
       <ThemeProvider theme={categoryToggleTheme}>
         <ToggleButtonGroup value={props.selectedCategories} exclusive onChange={handleCategoryChange}>
           {

@@ -9,12 +9,14 @@ import { ThemeProvider, Button } from '@mui/material'
 
 export const ArticleTitle = (props) => {
   return (
-    <div className='flex flex-row'>
-      <img height={200} width={200} className='h-[200px] w-[200px] object-cover me-[25px]' src={props.foodData.imgUrl || thumb} />
-      <div className='flex flex-col h-[200px] justify-between'>
+    <div className='flex flex-row flex-wrap gap-[25px]'>
+      <div className='max-[725px]:w-full'>
+        <img height={200} width={200} className='h-[200px] w-[200px] object-cover' src={props.foodData.imgUrl || thumb} />
+      </div>
+      <div className='flex flex-col min-h-[200px] max-w-[500px] justify-between max-[725px]:h-auto'>
         <div className='flex flex-col'>
           <div className='font-semibold text-[20px]'>{props.foodData.title}</div>
-          <div className='flex flex-row pt-[15px] gap-[5px]'>
+          <div className='flex flex-row flex-wrap pt-[15px] gap-[5px]'>
             <ThemeProvider theme={typeButtonTheme}>
               <Button disabled>{TypeLabel(props.foodData.type)}</Button>
             </ThemeProvider>
@@ -27,7 +29,7 @@ export const ArticleTitle = (props) => {
               ))
             }
           </div>
-          <div className='flex flex-row pt-[10px] gap-[5px]'>
+          <div className='flex flex-row flex-wrap pt-[10px] gap-[5px]'>
             {
               props.foodData.tags.map((tag, idx) => (
                 <ThemeProvider theme={tagButtonTheme} key={`tag-${idx}`}>
@@ -39,7 +41,7 @@ export const ArticleTitle = (props) => {
             }
           </div>
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col pt-[10px]'>
           <div className='text-[16px] font-semibold cursor-pointer' onClick={props.handleUserClick}>{props.foodData.userName}</div>
           <div className='flex flex-row text-[16px] select-none items-center'>
             <span>{FormatDate(props.foodData.createdAt, 0)}</span>
@@ -79,7 +81,7 @@ export const ArticleInfo = (props) => {
   return (
     <div className='flex justify-center'>
       <div className='flex flex-col w-[645px] gap-[28px]'>
-        <div className='flex flex-row gap-[112px]'>
+        <div className='flex flex-row flex-wrap gap-x-[112px] gap-y-[8px]'>
           <InfoElement title='가격' data={props.foodData.price ? props.foodData.price : '-'} postfix='원' />
           {
             props.foodData.amount 
@@ -100,7 +102,7 @@ export const ArticleInfo = (props) => {
         }
         <div className='flex flex-col items-center'>
           <span className='text-[16px] font-semibold self-start'>영양정보</span>
-          <div className='flex flex-row flex-wrap w-[590px] pt-[8px] justify-self-center gap-[5px] justify-between'>
+          <div className='flex flex-row flex-wrap max-w-[590px] w-full pt-[8px] justify-self-center gap-[5px] justify-between'>
             {
               nutrientInfo(props.foodData.nutrient).map((item, idx) => (
                 <IngredElement title={item.label} data={item.var} nutrient={item.value} key={`ingred-${idx}`} />
