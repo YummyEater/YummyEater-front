@@ -133,23 +133,23 @@ const ArticleEditor = () => {
   }
 
   const mounted1 = useRef(false);
-  // useEffect(() => {
-  //   if (!mounted1.current) { mounted1.current = true; }
-  //   else {
-  //     // console.log(articleData.resourceURLList)
-  //     const method = foodId ? "PATCH" : "POST"
-  //     const apiUrl = foodId ? `/api/food/${foodId}` : `/api/food`
-  //     callH(apiUrl, method, articleData)
-  //       .then((response) => {
-  //         console.log(response);
-  //         if (response.errorCode === 'C00000') {
-  //           alert(foodId ? '게시물이 성공적으로 수정되었습니다.' : '게시물이 성공적으로 등록되었습니다.')
-  //           navigate(foodId ? `/foodarticle/${foodId}` : `/foodarticle/${response.data.id}`);
-  //         }
-  //       })
-  //       .catch((error) => { alert(foodId ? '게시물 수정을 실패했습니다.' : '게시물 등록을 실패했습니다.') })
-  //   }
-  // }, [articleData, foodId, navigate]);
+  useEffect(() => {
+    if (!mounted1.current) { mounted1.current = true; }
+    else {
+      // console.log(articleData.resourceURLList)
+      const method = foodId ? "PATCH" : "POST"
+      const apiUrl = foodId ? `/api/food/${foodId}` : `/api/food`
+      callH(apiUrl, method, articleData)
+        .then((response) => {
+          console.log(response);
+          if (response.errorCode === 'C00000') {
+            alert(foodId ? '게시물이 성공적으로 수정되었습니다.' : '게시물이 성공적으로 등록되었습니다.')
+            navigate(foodId ? `/foodarticle/${foodId}` : `/foodarticle/${response.data.id}`);
+          }
+        })
+        .catch((error) => { alert(foodId ? '게시물 수정을 실패했습니다.' : '게시물 등록을 실패했습니다.') })
+    }
+  }, [articleData, foodId, navigate]);
 
   // toast editor 이미지 첨부
   const onUploadImage = async (blob, callback) => {

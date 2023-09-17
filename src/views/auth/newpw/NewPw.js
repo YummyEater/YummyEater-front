@@ -11,7 +11,7 @@ const NewPw = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const email = data.get("inputEmail");
-    call(`/api/user/sendResetPasswordLink`, "POST", { "email": email })
+    call(`/api/user/resetPassword`, "POST", { "email": email })
       .then(
         (response) => {
           if (response.errorCode === "C00000") {

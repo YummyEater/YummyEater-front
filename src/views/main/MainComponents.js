@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { nutrientText, nutrientInfo, nutrientUnit } from '../../service/Functions';
 import { categories } from '../../service/Category'
-import { mainSelectTheme, mainButtonTheme, categoryToggleThemeM, mainInputTheme } from '../../themes';
+import { mainSelectTheme, mainButtonTheme, categoryToggleThemeM, mainInputTheme, periodRadioTheme } from '../../themes';
 import { ChevronDownGray, XOrange, Plus, StarSm, EyeSm } from '../../assets/icons';
 import {
   styled, ThemeProvider, InputLabel, Select, FormControl, MenuItem, TextField,
   IconButton, Button, OutlinedInput, Collapse, ToggleButtonGroup, ToggleButton,
 } from '@mui/material';
 import Slider from "react-slick";
-import { isMobile } from 'react-device-detect';
+// import { isMobile } from 'react-device-detect';
 
 import taco from '../../assets/images/taco.jpg'
 
@@ -216,79 +216,67 @@ export const MainNutrient = (props) => {
   )
 }
 
-const recRecipe = [
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888
-  },
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888
-  },
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888
-  },
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888
-  },
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888
-  },
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888
-  },
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888,
-  },
-  {
-    title: '아보카도 타코', userName: '요리왕',
-    rating: 4.8, views: 88888
-  },
-]
-
 function ArrowPrev({ onClick }) {
   return (<div className='slick-arrow slick-prev slick-prev-main' onClick={onClick} />)
 }
 function ArrowNext({ onClick }) {
   return (<div className='slick-arrow slick-next slick-next-main' onClick={onClick} />)
 }
-export function RecSlide() {
+export function RecSlide(props) {
   // console.log(window.matchMedia("all and (max-width: 767px)"))
+  console.log(props.data)
   const settings = {
     className: "center", dots: true, infinite: true, slidesToShow: 2,
     slidesToScroll: 2, centerMode: false, variableWidth: true, dotsClass: 'slick-dots',
     nextArrow: <ArrowNext />, prevArrow: <ArrowPrev />,
   }
   return (
-    <Slider {...settings}>
-      {recRecipe.map((post, idx) =>
-        <RecBlock img={post.img} title={idx + post.title} userName={post.userName}
-          rating={post.rating} views={post.views} key={`rec-${idx}`} />)}
-    </Slider>
+    (props.data.content === undefined || props.data.content.length === 0 || props.data.totalElements === 0)
+      ? <></>
+      : <Slider {...settings}>
+        {props.data.content.map((post, idx) =>
+          <RecBlock img={post.imgUrl} title={post.title} userName={post.userName} postId={post.id}
+            rating={post.rating} views={post.views} key={`rec-${idx}`} />)}
+      </Slider>
   )
 }
 
 function RecBlock(props) {
   return (
-    <div className='flex flex-col w-[200px] rounded-[18px] shadow mx-[10px] bg-white'>
-      <img className='w-[200px] h-[130px] object-cover rounded-[18px]' src={taco} />
-      <div className='flex flex-col mx-[14px] my-[10px]'>
-        <span className='text-[18px] font-semibold'>{props.title}</span>
-        <span className='text-[14px]'>{props.userName}</span>
-        <div className='flex flex-row gap-[30px]'>
-          <div className='flex flex-row text-[13px] gap-[6px] items-center'>
-            <StarSm />{props.rating}
-          </div>
-          <div className='flex flex-row text-[13px] gap-[6px] items-center'>
-            <EyeSm />{props.views}
+    <a href={`/foodarticle/${props.postId}`}>
+      <div className='flex flex-col w-[200px] rounded-[18px] shadow mx-[10px] bg-white'>
+        <img className='w-[200px] h-[130px] object-cover rounded-[18px]' src={props.img} />
+        <div className='flex flex-col mx-[14px] my-[10px]'>
+          <span className='text-[18px] font-semibold'>{props.title}</span>
+          <span className='text-[14px]'>{props.userName}</span>
+          <div className='flex flex-row gap-[30px]'>
+            <div className='flex flex-row text-[13px] gap-[6px] items-center'>
+              <StarSm />{props.rating.toFixed(1)}
+            </div>
+            <div className='flex flex-row text-[13px] gap-[6px] items-center'>
+              <EyeSm />{props.views}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </a>
+  )
+}
+
+export function RecButtons(props) {
+  const handlePeriod = (e) => {
+    console.log(e.target.value)
+    if (e.target.value !== undefined) {
+      props.setPeriod(e.target.value)
+    }
+  }
+  return (
+    <ThemeProvider theme={periodRadioTheme}>
+      <ToggleButtonGroup value={props.period} exclusive onChange={handlePeriod}>
+        <ToggleButton value='day'>오늘</ToggleButton>
+        <ToggleButton value='week'>이번주</ToggleButton>
+        <ToggleButton value='month'>이번달</ToggleButton>
+      </ToggleButtonGroup>
+    </ThemeProvider>
   )
 }

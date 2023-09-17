@@ -87,7 +87,7 @@ const Register = () => {
             </div>
           </div>
 
-          <Collapse in={true} timeout={0} className='max-[700px]:max-w-[528px] w-full'>
+          <Collapse in={sent} timeout={0} className='max-[700px]:max-w-[528px] w-full'>
             <div className={itemwrap + ' justify-between pt-[15px]'}>
               <span className={inputtitle + ' self-start pt-[7px]'}>인증코드</span>
               <div className='flex flex-col max-w-[528px] max-[700px]:w-full'>

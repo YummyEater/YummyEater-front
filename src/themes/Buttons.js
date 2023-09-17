@@ -183,7 +183,7 @@ export const infoButtonTheme = createTheme({
             backgroundColor: colors.palette.gray.dark,
             border: '1px solid ${colors.palette.gray.dark} !important'
           },
-          '&.Mui-disabled': {color: colors.palette.black,}
+          '&.Mui-disabled': { color: colors.palette.black, }
         }
       }
     }
@@ -307,7 +307,7 @@ export const categoryToggleTheme = createTheme({
     MuiToggleButtonGroup: {
       styleOverrides: {
         root: { flexWrap: 'wrap !important', border: 'none', gap: '5px', },
-        grouped: { '&:not(:first-of-type)' : { marginLeft: 'unset' } }
+        grouped: { '&:not(:first-of-type)': { marginLeft: 'unset' } }
       }
     },
     MuiToggleButton: {
@@ -357,7 +357,7 @@ export const categoryToggleThemeM = createTheme({
     MuiToggleButtonGroup: {
       styleOverrides: {
         root: { flexWrap: 'wrap !important', border: 'none', gap: '4px', },
-        grouped: { '&:not(:first-of-type)' : { marginLeft: 'unset' } }
+        grouped: { '&:not(:first-of-type)': { marginLeft: 'unset' } }
       }
     },
     MuiToggleButton: {
@@ -420,6 +420,25 @@ export const uploadImgButtonTheme = createTheme({
           backgroundColor: colors.palette.gray.light,
           '&:hover, &:focus': { backgroundColor: '#f2f0ef', },
           '&:active': { backgroundColor: '#f1eeed', }
+        }
+      }
+    }
+  },
+});
+
+export const periodRadioTheme = createTheme({
+  components: {
+    MuiButtonBase: { defaultProps: { disableRipple: true, }, },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          padding: '0 8px', lineHeight:'100%', fontSize: '13px',
+          border: 'none', color: colors.palette.black,
+          '&:hover, &:focus, &:active, &.Mui-selected:hover': { backgroundColor: 'transparent', },
+          '&.Mui-selected': { 
+            backgroundColor: 'transparent', fontWeight: 600, color: colors.palette.orange.dark
+          },
+          '&:not(:first-of-type)': { borderLeft: `1px solid ${colors.palette.gray.dark} !important` }
         }
       }
     }

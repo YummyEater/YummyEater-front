@@ -3,7 +3,7 @@ import { submitButtonTheme, verifyButtonTheme, verifyButtonTheme2, loginTextButt
   bTypeButtonTheme, bCategoryButtonTheme,
   articleButtonTheme, uploadButtonTheme, addButtonTheme,
   typeToggleTheme, categoryToggleTheme, categoryToggleThemeM, uploadImgButtonTheme,
-  mainButtonTheme,   } from './Buttons'
+  mainButtonTheme, periodRadioTheme,  } from './Buttons'
 import { loginInputTheme, commentInputTheme, editorInputTheme,
   searchInputTheme, mainInputTheme,
   statRatingTheme, commentRatingTheme, selectTheme, mainSelectTheme, tableTheme } from './Inputs'
@@ -14,7 +14,7 @@ export {
   bTypeButtonTheme, bCategoryButtonTheme,
   articleButtonTheme, uploadButtonTheme, addButtonTheme,
   typeToggleTheme, categoryToggleTheme, categoryToggleThemeM, uploadImgButtonTheme,
-  mainButtonTheme, 
+  mainButtonTheme, periodRadioTheme,
 
   loginInputTheme, commentInputTheme, editorInputTheme,
   searchInputTheme, mainInputTheme,
