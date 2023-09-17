@@ -79,7 +79,7 @@ const UserArticle = () => {
             ? <></>
             : <>
               <div className='flex flex-row self-end gap-[2px] select-none'>
-                총<span className='font-semibold text-point-orange'>88</span>건
+                총<span className='font-semibold text-point-orange'>{articles.totalElements}</span>건
               </div>
               <ArticleTable articles={articles.content} handleClick={handleClick} page={selectedPage ?? 0} />
               <Pagination size="small" count={articles.totalPages} page={selectedPage ?? 0} onChange={handlePage} />

@@ -22,7 +22,7 @@ const OauthSignUp = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const joinToken = searchParams.get("joinToken");
-    const username = data.get("inputUsername");
+    const username = data.get("field1");
     console.log(`${joinToken}, ${username}`)
 
     const userDTO = { "joinToken": joinToken, "username": username }
@@ -46,7 +46,7 @@ const OauthSignUp = () => {
       <AppHeader2 />
       <div className="body flex grow justify-center">
         <div className='w-[680px] container1 max-[700px]:w-screen max-[700px]:px-[25px]'>
-          <ContentHeader title='회원정보 변경' />
+          <ContentHeader title='회원가입' />
           <form className='flex flex-col justify-center' onSubmit={handleSubmit}>
             <div className={itemwrap}>
               <span className={inputtitle}>이메일</span>
