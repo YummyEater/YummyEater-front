@@ -33,7 +33,7 @@ const UserInfo = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const password = data.get("inputPassword");
-    const username = data.get("field1") === userinfo.userName ? null : data.get("field1");
+    const username = (data.get("field1") === userinfo.userName || data.get("field1") === "") ? null : data.get("field1");
     const newPassword = data.get("inputNewPw") === '' ? null : data.get("inputNewPw");
     modifyuser(navigate, { "password": password, "newUserName": username, "newPassword": newPassword });
   }

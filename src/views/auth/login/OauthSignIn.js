@@ -12,7 +12,7 @@ const OauthSignIn = () => {
     localStorage.setItem("ACCESS_TOKEN", searchParams.get("accessToken"));
     localStorage.setItem("REFRESH_TOKEN", searchParams.get("refreshToken"));
     localStorage.setItem("SAVED_TIME", date.getTime());
-    // navigate("/");
+    navigate("/");
   })
 
   return (

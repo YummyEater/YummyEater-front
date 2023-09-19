@@ -30,7 +30,7 @@ const OauthSignUp = () => {
       .then((response) => {
         if (response.errorCode === "C00000") {
           alert("성공적으로 가입되었습니다.");
-          navigate('/dashboard');
+          navigate('/');
         }
       }).catch((error) => {
         if (error.errorCode === "C100000") {
