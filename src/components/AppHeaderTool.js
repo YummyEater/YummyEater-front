@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Menu, MenuItem, ListItemIcon, IconButton, Divider } from '@mui/material';
-import { checkLogged, signout } from '../service/ApiService'
+import { signout } from '../service/ApiService'
 import { Login, Edit, User, UserThin, Document, Logout } from '../assets/icons'
 
-const AppHeaderTool = () => {
+const AppHeaderTool = (props) => {
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
   const navigate = useNavigate();
-
-  const [logged, setLogged] = useState();
-  useEffect(() => {
-    console.log(`${accessToken} | ############ logged : ${logged}`);
-    // const check = checkLogged();
-    if (accessToken && accessToken !== null && accessToken !== 'null') {
-      const check = checkLogged(navigate);
-      setLogged(check);
-    } else { setLogged(false); }
-  },[accessToken, navigate])
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -43,7 +33,7 @@ const AppHeaderTool = () => {
     )
   }
 
-  if (accessToken && accessToken !== null && logged) {
+  if (accessToken && accessToken !== null && props.logged) {
     return (
       <div className='flex flex-row gap-[20px]'>
         <p className="flex w-[20px] h-[20px] ">
