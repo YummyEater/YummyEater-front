@@ -62,10 +62,8 @@ export async function checkLogged(navigate) {
   let elapsed = now.getTime() - loginTime;
 
   if (elapsed < 2 * 1000 * 60) {
-    callH("/api/user/info", "GET", null)
+    await callH("/api/user/info", "GET", null)
       .then((response) => {
-        console.log('===== CHECKED API =====')
-        console.log(response);
         if (response.errorCode === "C00000") {
           return true;
         }
@@ -105,7 +103,7 @@ export async function refreshAccessToken(navigate) {
 
 
 // 로그인 요청
-export async function signin(userDTO, navigate) {
+export async function signin(userDTO, navigate, backTo) {
   return call("/api/user/signIn", "POST", userDTO)
     .then((response) => {
       console.log(response);
@@ -114,8 +112,7 @@ export async function signin(userDTO, navigate) {
         localStorage.setItem("ACCESS_TOKEN", response.data.accessToken);
         localStorage.setItem("REFRESH_TOKEN", response.data.refreshToken);
         localStorage.setItem("SAVED_TIME", date.getTime());
-        // window.location.href = "/";
-        navigate("/");
+        navigate(backTo);
       }
     }).catch((error) => {
       console.error(error)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Menu, MenuItem, ListItemIcon, IconButton, Divider } from '@mui/material';
 import { signout } from '../service/ApiService'
 import { Login, Edit, User, UserThin, Document, Logout } from '../assets/icons'
@@ -13,6 +13,9 @@ const AppHeaderTool = (props) => {
   const handleClick = (e) => { setAnchorEl(e.currentTarget); }
   const handleClose = (e) => { setAnchorEl(null); }
   const handleSignout = (e) => { signout(navigate); }
+
+  const location = useLocation();
+  const handleLogin = (e) => { navigate('/login', {state: location.pathname}) }
 
   const MenuPop = () => {
     return (
@@ -52,7 +55,7 @@ const AppHeaderTool = (props) => {
     return (
       <div className='d-flex flex-row'>
         <p className="flex w-[20px] h-[20px]">
-          <a href="/login"><Login /></a>
+          <IconButton onClick={handleLogin} disableRipple><Login /></IconButton>
         </p>
       </div>
     )

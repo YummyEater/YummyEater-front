@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { nutrientText, nutrientInfo, nutrientUnit } from '../../service/Functions';
 import { categories } from '../../service/Category'
 import { mainSelectTheme, mainButtonTheme, categoryToggleThemeM, mainInputTheme, periodRadioTheme } from '../../themes';
@@ -8,9 +8,6 @@ import {
   IconButton, Button, OutlinedInput, Collapse, ToggleButtonGroup, ToggleButton,
 } from '@mui/material';
 import Slider from "react-slick";
-// import { isMobile } from 'react-device-detect';
-
-import taco from '../../assets/images/taco.jpg'
 
 export const MainCategory = (props) => {
   const [expanded, setExpanded] = useState(false);

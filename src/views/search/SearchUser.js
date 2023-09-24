@@ -13,6 +13,9 @@ const SearchUser = () => {
   const [selectedPage, setSelectedPage] = useState({});
 
   useEffect(() => {
+    if(!searchParams.has('sort')) {
+      searchParams.set('sort', selectedSort);
+    }
     call(apiURL, "GET", null)
       .then((response) => {
         setSearched({ sResponse: response, sUrl: apiURL })
