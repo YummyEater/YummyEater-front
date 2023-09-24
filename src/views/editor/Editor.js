@@ -37,14 +37,12 @@ const ArticleEditor = () => {
       const fdUrl = `/api/food/${foodId}`;
       call(fdUrl, "GET", null)
         .then((response) => {
-          console.log(response.data)
           setFoodData(response.data);
         })
     }
   }, [foodId])
 
   const [initialImgList, setInitialImgList] = useState([]);
-  console.log(`initialImgList: ${initialImgList}`)
   const getImgList = (thumbImg) => {
     const imgList = [];
     // const imgElements = Array.from(document.getElementsByClassName('toastui-editor-ww-container')[0].getElementsByTagName('img'));
@@ -55,12 +53,10 @@ const ArticleEditor = () => {
         if (image.src !== "") { imgList.push(image.src) }
       })
     }
-    console.log(`~: ${imgList}`)
     // 리스트에 대표 이미지 추가
     if (thumbImg && thumbImg !== undefined && thumbImg !== '') {
       imgList.push(thumbImg)
     }
-    console.log(`~~: ${imgList}`)
     return imgList;
   }
 
@@ -68,12 +64,7 @@ const ArticleEditor = () => {
   useEffect(() => {
     if (!mounted2.current) { mounted2.current = true; }
     else if (Object.keys(foodData).length !== 0) {
-      console.log(foodData)
       if (userinfo.id !== foodData.userId) {
-        console.log('***************')
-        console.log(userinfo.id)
-        console.log(foodData.userId)
-        console.log('***************')
         alert('본인이 작성한 게시글만 수정 가능합니다.')
         navigate(`/foodarticle/${foodId}`)
       } else {
@@ -136,12 +127,10 @@ const ArticleEditor = () => {
   useEffect(() => {
     if (!mounted1.current) { mounted1.current = true; }
     else {
-      // console.log(articleData.resourceURLList)
       const method = foodId ? "PATCH" : "POST"
       const apiUrl = foodId ? `/api/food/${foodId}` : `/api/food`
       callH(apiUrl, method, articleData)
         .then((response) => {
-          console.log(response);
           if (response.errorCode === 'C00000') {
             alert(foodId ? '게시물이 성공적으로 수정되었습니다.' : '게시물이 성공적으로 등록되었습니다.')
             navigate(foodId ? `/foodarticle/${foodId}` : `/foodarticle/${response.data.id}`);
@@ -153,10 +142,8 @@ const ArticleEditor = () => {
 
   // toast editor 이미지 첨부
   const onUploadImage = async (blob, callback) => {
-    console.log(blob)
     await uploadImg(blob)
       .then((response) => {
-        console.log(response);
         const url = response.data.resourceURL;
         callback(url, 'alt text');
       })

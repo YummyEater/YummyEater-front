@@ -57,7 +57,6 @@ const Register = () => {
     const email = data.get("inputEmail");
     const username = data.get("field1");
     const password = data.get("inputPassword");
-    console.log(`${code}, ${email}, ${username}, ${password}`)
     register(navigate, { "code": code, "email": email, "username": username, "password": password });
   }
 

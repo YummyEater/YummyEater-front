@@ -16,7 +16,6 @@ export const MainCategory = (props) => {
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => { setExpanded(!expanded); }
   const handleCategoryChange = (e) => {
-    console.log(e.target.value)
     if (e.target.value !== undefined) {
       const index = props.selectedCategories.indexOf(e.target.value)
       if (index === -1) {
@@ -223,8 +222,6 @@ function ArrowNext({ onClick }) {
   return (<div className='slick-arrow slick-next slick-next-main' onClick={onClick} />)
 }
 export function RecSlide(props) {
-  // console.log(window.matchMedia("all and (max-width: 767px)"))
-  console.log(props.data)
   const settings = {
     className: "center", dots: true, infinite: true, slidesToShow: 2,
     slidesToScroll: 2, centerMode: false, variableWidth: true, dotsClass: 'slick-dots',
@@ -265,7 +262,6 @@ function RecBlock(props) {
 
 export function RecButtons(props) {
   const handlePeriod = (e) => {
-    console.log(e.target.value)
     if (e.target.value !== undefined) {
       props.setPeriod(e.target.value)
     }

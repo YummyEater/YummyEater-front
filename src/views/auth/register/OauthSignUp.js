@@ -23,7 +23,6 @@ const OauthSignUp = () => {
     const data = new FormData(e.target);
     const joinToken = searchParams.get("joinToken");
     const username = data.get("field1");
-    console.log(`${joinToken}, ${username}`)
 
     const userDTO = { "joinToken": joinToken, "username": username }
     call("/api/user/oauth/join", "POST", userDTO)

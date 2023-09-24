@@ -3,10 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { call, getUserinfo } from '../../service/ApiService'
 import { ContentHeader } from '../../components'
 import { TypeLabel, FormatDate } from '../../service/Functions'
-import {
-  Pagination, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow,
-  TablePagination, Paper, ThemeProvider
-} from '@mui/material'
+import { Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
 import { tableTheme } from '../../themes'
 
 const UserArticle = () => {
@@ -16,7 +13,6 @@ const UserArticle = () => {
   }, [])
 
   const [articles, setArticles] = useState({})
-  console.log(articles)
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     // searchParams.set('userId', userinfo.id);
@@ -35,7 +31,6 @@ const UserArticle = () => {
   const mounted2 = useRef(false);
 
   const handleClick = (e) => {
-    console.log(e.currentTarget)
     setSelectedArticle(e.currentTarget.id);
   }
   useEffect(() => {
@@ -52,7 +47,6 @@ const UserArticle = () => {
   const handlePage = (e, pg) => {
     searchParams.set('userId', userinfo.id);
     searchParams.set('page', pg - 1);
-    console.log(searchParams.toString())
     setSelectedPage(pg);
     navigate({ pathname: '/userarticle', search: searchParams.toString() });
     window.scrollTo(0, 0);

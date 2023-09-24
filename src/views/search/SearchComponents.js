@@ -11,7 +11,6 @@ import { Frown, Eye, Star } from '../../assets/icons'
 import thumb from '../../assets/images/thumb.png'
 
 export const SearchHeader = (props) => {
-  console.log(props.searched)
   return (
     <div className='sticky top-[146px] max-[740px]:top-[120px] bg-white z-10 max-[850px]:w-screen max-[850px]:self-center'>
       <div className='flex flex-col pb-[14px]'>
@@ -104,7 +103,6 @@ export const SearchHeader = (props) => {
 }
 
 export const UserSearchHeader = (props) => {
-  console.log(props.searched)
   return (
     <div className='sticky top-[146px] max-[740px]:top-[120px] bg-white z-10 max-[850px]:w-screen max-[850px]:self-center'>
       <div className='flex flex-col pb-[14px]'>
@@ -140,6 +138,9 @@ export const ArticleList = (props) => {
   const handleClick = (e) => { props.setSelectedArticle(e.currentTarget.id); }
   const handleChange = (e, pg) => {
     props.params.set('page', pg - 1);
+    if (!props.params.get('sort')) {
+      props.params.set('sort', 'createdAt,desc');
+    }
     props.setSelectedPage(pg);
     navigate({ pathname: props.path, search: props.params.toString() });
     window.scrollTo(0, 0);
@@ -192,7 +193,7 @@ export const ArticleList = (props) => {
               {
                 props.data.price === null || props.data.price === "" || props.data.price === undefined
                   ? <></>
-                  : <span className='w-[82px] truncate text-end'>가격 {props.data.price}원</span>
+                  : <span className='max-w-[82px] truncate text-end'>가격 {props.data.price}원</span>
               }
             </div>
             <div className='flex flex-row justify-between'>
@@ -212,7 +213,6 @@ export const ArticleList = (props) => {
       </div>
     )
   } else {
-    console.log(props.data.content)
     return (
       <div className='flex flex-col items-center'>
         <div className='grid grid-cols-2 gap-x-[100px] gap-y-[25px] max-[840px]:gap-x-[35px] max-[740px]:grid-cols-1 max-[740px]:gap-y-[45px]'>

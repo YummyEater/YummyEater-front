@@ -14,8 +14,6 @@ const AppHeaderTool = () => {
     // const check = checkLogged();
     if (accessToken && accessToken !== null && accessToken !== 'null') {
       const check = checkLogged(navigate);
-      console.log(`############ check : `)
-      console.log(check)
       setLogged(check);
     } else { setLogged(false); }
   },[accessToken, navigate])

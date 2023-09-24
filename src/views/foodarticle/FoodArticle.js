@@ -58,7 +58,6 @@ const FoodArticle = () => {
     )
   } else {
     const foodData = foodDetail.data;
-    console.log(foodData);
 
     return (
       <div className='w-[725px] container1 max-[725px]:w-screen max-[725px]:px-[30px]'>

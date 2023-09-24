@@ -15,7 +15,6 @@ const SearchUser = () => {
   useEffect(() => {
     call(apiURL, "GET", null)
       .then((response) => {
-        console.log(response);
         setSearched({ sResponse: response, sUrl: apiURL })
         setSelectedPage(response.number + 1)
       })

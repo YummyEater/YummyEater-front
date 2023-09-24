@@ -42,7 +42,6 @@ export const Review = (props) => {
             <Divider />
             {
               props.reviews.content.map((review, idx) => {
-                console.log('&&&' + props.usrId)
                 return (
                   <div className='flex flex-col' key={`review-${idx}`}>
                     <div className='flex flex-row self-center max-w-[660px] w-full py-[20px]' >
@@ -120,7 +119,6 @@ export const ReviewInput = (props) => {
     if (reviewRate === 0) { alert('추천도를 선택해주세요.') }
     else {
       callH(apiUrl, method, req).then((response) => {
-        // console.log(response)
         if (response.errorCode === "C00000") {
           if (targetId === 'newReview') { alert('리뷰가 성공적으로 등록되었습니다.') }
           else {
@@ -137,7 +135,6 @@ export const ReviewInput = (props) => {
     }
 
   }
-  console.log('^*^*^'+props.usrId)
 
   return (
     <form onSubmit={submitReview} id={props.formId} className='w-full'>
