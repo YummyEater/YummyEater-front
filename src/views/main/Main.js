@@ -60,7 +60,7 @@ const Main = () => {
         console.log(`-- ${recipePeriod}`)
         console.log(response);
         if (response.errorCode === "C00000") {
-          setRecipeData(response);
+          setRecipeData(response.data);
         } else {
           console.log(response);
         }
@@ -74,7 +74,7 @@ const Main = () => {
         console.log(`@@ ${productPeriod}`)
         console.log(response);
         if (response.errorCode === "C00000") {
-          setProductData(response);
+          setProductData(response.data);
         } else {
           console.log(response);
         }
