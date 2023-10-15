@@ -54,22 +54,30 @@ const Main = () => {
 
   useEffect(() => {
     // const dd = {day: 'rating,desc', week: 'rating,asc', month: 'createdAt,desc'}
-    call(`/api/post/mostViewed?period=${recipePeriod}&type=RECIPE`, "GET", null)
-    // call(`/api/food?sort=${dd[recipePeriod]}`, "GET", null)
+    call(`/api/food/mostViewed?period=${recipePeriod}&type=RECIPE`, "GET", null)
+      // call(`/api/food?sort=${dd[recipePeriod]}`, "GET", null)
       .then((response) => {
         console.log(`-- ${recipePeriod}`)
         console.log(response);
-        setRecipeData(response);
+        if (response.errorCode === "C00000") {
+          setRecipeData(response);
+        } else {
+          console.log(response);
+        }
       })
   }, [recipePeriod])
 
   useEffect(() => {
-    call(`/api/post/mostViewed?period=${productPeriod}&type=PRODUCT`, "GET", null)
-    // call(`/api/food?sort=${dd[productPeriod]}`, "GET", null)
+    call(`/api/food/mostViewed?period=${productPeriod}&type=PRODUCT`, "GET", null)
+      // call(`/api/food?sort=${dd[productPeriod]}`, "GET", null)
       .then((response) => {
         console.log(`@@ ${productPeriod}`)
         console.log(response);
-        setProductData(response);
+        if (response.errorCode === "C00000") {
+          setProductData(response);
+        } else {
+          console.log(response);
+        }
       })
   }, [productPeriod])
 
@@ -125,7 +133,7 @@ const Main = () => {
         </div>
         <Divider />
         <div className='flex flex-col'>
-        <div className='flex flex-row w-full justify-between items-center'>
+          <div className='flex flex-row w-full justify-between items-center'>
             <div className='flex flex-row text-[20px]'>
               <span className='font-semibold'>인기 제품</span>
               <span className='ps-[7px]'>둘러보기</span>
