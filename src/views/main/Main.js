@@ -47,15 +47,15 @@ const Main = () => {
   }, [searchParams, navigate]);
 
 
-  const [recipePeriod, setRecipePeriod] = useState('day')
-  const [productPeriod, setProductPeriod] = useState('day')
+  const [recipePeriod, setRecipePeriod] = useState('DAY')
+  const [productPeriod, setProductPeriod] = useState('DAY')
   const [recipeData, setRecipeData] = useState({});
   const [productData, setProductData] = useState({});
 
   useEffect(() => {
-    const dd = {day: 'rating,desc', week: 'rating,asc', month: 'createdAt,desc'}
-    // call(`/api/post/mostViewed?period=${recipePeriod}&type=recipe`, "GET", null)
-    call(`/api/food?sort=${dd[recipePeriod]}`, "GET", null)
+    // const dd = {day: 'rating,desc', week: 'rating,asc', month: 'createdAt,desc'}
+    call(`/api/post/mostViewed?period=${recipePeriod}&type=RECIPE`, "GET", null)
+    // call(`/api/food?sort=${dd[recipePeriod]}`, "GET", null)
       .then((response) => {
         console.log(`-- ${recipePeriod}`)
         console.log(response);
@@ -64,9 +64,8 @@ const Main = () => {
   }, [recipePeriod])
 
   useEffect(() => {
-    const dd = {day: 'rating,desc', week: 'rating,asc', month: 'createdAt,desc'}
-    // call(`/api/post/mostViewed?period=${productPeriod}&type=product`, "GET", null)
-    call(`/api/food?sort=${dd[productPeriod]}`, "GET", null)
+    call(`/api/post/mostViewed?period=${productPeriod}&type=PRODUCT`, "GET", null)
+    // call(`/api/food?sort=${dd[productPeriod]}`, "GET", null)
       .then((response) => {
         console.log(`@@ ${productPeriod}`)
         console.log(response);

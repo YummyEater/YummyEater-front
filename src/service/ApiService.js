@@ -71,8 +71,8 @@ export async function checkLogged(navigate) {
         return refreshAccessToken(navigate);
       })
   }
-  else { 
-    return refreshAccessToken(navigate); 
+  else {
+    return refreshAccessToken(navigate);
   }
 }
 
@@ -113,6 +113,8 @@ export async function signin(userDTO, navigate, backTo) {
         localStorage.setItem("REFRESH_TOKEN", response.data.refreshToken);
         localStorage.setItem("SAVED_TIME", date.getTime());
         navigate(backTo);
+      } else if (response.errorCode === "UL00000") {
+        alert(response.message)
       }
     }).catch((error) => {
       console.error(error)
@@ -144,7 +146,7 @@ export async function register(nav, userDTO) {
     .then((response) => {
       if (response.errorCode === "C00000") {
         alert("성공적으로 가입되었습니다.");
-        nav('/dashboard');
+        nav('/');
       }
     }).catch((error) => {
       console.error(error)
@@ -177,7 +179,8 @@ export async function modifyuser(nav, userDTO) {
       if (response.errorCode === "C00000") {
         alert("정보가 성공적으로 수정되었습니다.");
         nav('/userinfo');
-      } else if (response.errorCode === "UM00000") {
+      } else if (response.errorCode === "UM00000"
+        || response.errorCode === "UM00001" || response.errorCode === "UM00002") {
         alert(response.message);
         console.log(response);
       }

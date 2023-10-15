@@ -60,7 +60,8 @@ export const handleUsrname = (usrname, setUsrname, setUsrnameChecked) => {
 
 // - 비밀번호 일치 확인
 export const handlePw = (pw1, pw2, setPwMatch) => {
-  const passwordRegEx = /^[A-Za-z0-9`~!@#$%^&*()-_=+\|[\]{};:'",.<>/?]{8,20}$/
+  // const passwordRegEx = /^[A-Za-z0-9`~!@#$%^&*()-_=+\|[\]{};:'",.<>/?]{8,20}$/
+  const passwordRegEx = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,20})/
   if (passwordRegEx.test(pw1)) {
     if (pw2 !== '') {
       if (pw1 === pw2) { setPwMatch({ 'entered1': true, 'entered2': true, 'matched': true, 'formatted': true }); }

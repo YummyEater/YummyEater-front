@@ -40,7 +40,7 @@ export const MainCategory = (props) => {
               ? <ThemeProvider theme={mainButtonTheme}>
                 {
                   props.selectedCategories.map((item, idx) => (
-                    <Button disabled>{item}</Button>
+                    <Button disabled key={`selectCate-${idx}`}>{item}</Button>
                   ))
                 }
               </ThemeProvider>
@@ -138,7 +138,7 @@ export const MainNutrient = (props) => {
       if (!(targetVal in props.selectedNutrients)) {
         props.setSelectedNutrients((prevState) => ({ ...prevState, [targetVal]: nutrientText(targetVal) }))
       }
-      props.setNutrient({ nut: '', range: '', amount: '' });
+      props.setNutrient({ nut: '', range: '', amount: undefined });
       inputRef.current.value = "";
     }
   }
@@ -225,10 +225,10 @@ export function RecSlide(props) {
     nextArrow: <ArrowNext />, prevArrow: <ArrowPrev />,
   }
   return (
-    (props.data.content === undefined || props.data.content.length === 0 || props.data.totalElements === 0)
+    (props.data === undefined || props.data.length === 0)
       ? <></>
       : <Slider {...settings}>
-        {props.data.content.map((post, idx) =>
+        {props.data.map((post, idx) =>
           <RecBlock img={post.imgUrl} title={post.title} userName={post.userName} postId={post.id}
             rating={post.rating} views={post.views} key={`rec-${idx}`} />)}
       </Slider>
@@ -266,9 +266,9 @@ export function RecButtons(props) {
   return (
     <ThemeProvider theme={periodRadioTheme}>
       <ToggleButtonGroup value={props.period} exclusive onChange={handlePeriod}>
-        <ToggleButton value='day'>오늘</ToggleButton>
-        <ToggleButton value='week'>이번주</ToggleButton>
-        <ToggleButton value='month'>이번달</ToggleButton>
+        <ToggleButton value='DAY'>오늘</ToggleButton>
+        <ToggleButton value='WEEK'>이번주</ToggleButton>
+        <ToggleButton value='MONTH'>이번달</ToggleButton>
       </ToggleButtonGroup>
     </ThemeProvider>
   )
