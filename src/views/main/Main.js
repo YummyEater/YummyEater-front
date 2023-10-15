@@ -49,8 +49,8 @@ const Main = () => {
 
   const [recipePeriod, setRecipePeriod] = useState('DAY')
   const [productPeriod, setProductPeriod] = useState('DAY')
-  const [recipeData, setRecipeData] = useState({});
-  const [productData, setProductData] = useState({});
+  const [recipeData, setRecipeData] = useState([]);
+  const [productData, setProductData] = useState([]);
 
   useEffect(() => {
     // const dd = {day: 'rating,desc', week: 'rating,asc', month: 'createdAt,desc'}
