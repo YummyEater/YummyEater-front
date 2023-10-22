@@ -181,14 +181,14 @@ export const Star = () => {
 
 export const StarSm = () => {
   return (<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g clipPath="url(#clip0_307_1228)">
-  <path d="M6 1L7.545 4.13L11 4.635L8.5 7.07L9.09 10.51L6 8.885L2.91 10.51L3.5 7.07L1 4.635L4.455 4.13L6 1Z" fill="#D0CECC" stroke="#D0CECC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </g>
-  <defs>
-  <clipPath id="clip0_307_1228">
-  <rect width="12" height="12" fill="white"/>
-  </clipPath>
-  </defs>
+    <g clipPath="url(#clip0_307_1228)">
+      <path d="M6 1L7.545 4.13L11 4.635L8.5 7.07L9.09 10.51L6 8.885L2.91 10.51L3.5 7.07L1 4.635L4.455 4.13L6 1Z" fill="#D0CECC" stroke="#D0CECC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_307_1228">
+        <rect width="12" height="12" fill="white" />
+      </clipPath>
+    </defs>
   </svg>)
 }
 
@@ -253,5 +253,16 @@ export const Plus = () => {
     <path d="M10 4.16666V15.8333" stroke="#B4B2B0" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M4.16663 10H15.8333" stroke="#B4B2B0" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
+  )
+}
+
+export const AlertCircle = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 8V12" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 16H12.01" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+
   )
 }

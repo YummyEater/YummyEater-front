@@ -53,32 +53,29 @@ const Main = () => {
   const [productData, setProductData] = useState([]);
 
   useEffect(() => {
-    // const dd = {day: 'rating,desc', week: 'rating,asc', month: 'createdAt,desc'}
     call(`/api/food/mostViewed?period=${recipePeriod}&type=RECIPE`, "GET", null)
-      // call(`/api/food?sort=${dd[recipePeriod]}`, "GET", null)
       .then((response) => {
-        console.log(`-- ${recipePeriod}`)
-        console.log(response);
         if (response.errorCode === "C00000") {
           setRecipeData(response.data);
         } else {
           console.log(response);
         }
-      })
+      }).catch((error) => {
+        console.error(error)
+      });
   }, [recipePeriod])
 
   useEffect(() => {
     call(`/api/food/mostViewed?period=${productPeriod}&type=PRODUCT`, "GET", null)
-      // call(`/api/food?sort=${dd[productPeriod]}`, "GET", null)
       .then((response) => {
-        console.log(`@@ ${productPeriod}`)
-        console.log(response);
         if (response.errorCode === "C00000") {
           setProductData(response.data);
         } else {
           console.log(response);
         }
-      })
+      }).catch((error) => {
+        console.error(error)
+      });
   }, [productPeriod])
 
   const searchitem = 'flex flex-row flex-wrap items-center pb-[20px] max-[800px]:gap-[5px]'

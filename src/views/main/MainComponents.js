@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { nutrientText, nutrientInfo, nutrientUnit } from '../../service/Functions';
 import { categories } from '../../service/Category'
 import { mainSelectTheme, mainButtonTheme, categoryToggleThemeM, mainInputTheme, periodRadioTheme } from '../../themes';
-import { ChevronDownGray, XOrange, Plus, StarSm, EyeSm } from '../../assets/icons';
+import { ChevronDownGray, XOrange, Plus, StarSm, EyeSm, AlertCircle } from '../../assets/icons';
 import {
   styled, ThemeProvider, InputLabel, Select, FormControl, MenuItem, TextField,
   IconButton, Button, OutlinedInput, Collapse, ToggleButtonGroup, ToggleButton,
@@ -220,13 +220,15 @@ function ArrowNext({ onClick }) {
 }
 export function RecSlide(props) {
   const settings = {
-    className: "center", dots: true, infinite: true, slidesToShow: 2,
+    className: "center", dots: true, infinite: false, slidesToShow: 2,
     slidesToScroll: 2, centerMode: false, variableWidth: true, dotsClass: 'slick-dots',
     nextArrow: <ArrowNext />, prevArrow: <ArrowPrev />,
   }
   return (
     (props.data === undefined || props.data.length === 0)
-      ? <></>
+      ? <div className='flex flex-col justify-center items-center h-[250px] gap-[10px] m-4 bg-gray1 rounded-[15px]'>
+        <AlertCircle /> <span>현재 집계된 데이터가 없습니다.</span>
+      </div>
       : <Slider {...settings}>
         {props.data.map((post, idx) =>
           <RecBlock img={post.imgUrl} title={post.title} userName={post.userName} postId={post.id}
