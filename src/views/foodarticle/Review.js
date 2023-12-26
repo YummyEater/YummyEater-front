@@ -95,14 +95,12 @@ export const Review = (props) => {
             </div>
         }
         <ReviewSection />
-        {/* <Pagination className='flex mt-[20px] justify-center' count={props.reviews.totalPages} size="small" page={reviewPage.page} onChange={handleChange} /> */}
       </div>
     </div>
   )
 }
 
 export const ReviewInput = (props) => {
-  // const accessToken = localStorage.getItem("ACCESS_TOKEN");
   // 새로운 리뷰
   const [reviewRate, setReviewRate] = useState(props.formId === 'newReview' ? 0 : props.rt);
   const inputRef = useRef(null);

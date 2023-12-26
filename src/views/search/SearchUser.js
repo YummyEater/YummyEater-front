@@ -46,7 +46,6 @@ const SearchUser = () => {
       </div>
     </div>
   )
-
 }
 
 export default SearchUser;

@@ -134,7 +134,6 @@ const Register = () => {
             </div>
           </div>
 
-
           <div className={itemwrap + ' self-start pt-[15px]'}>
             <span className={inputtitle + ' self-start pt-[7px]'}>비밀번호</span>
             <div className='flex flex-col gap-[5px] max-w-[528px] max-[700px]:w-full'>
@@ -157,7 +156,6 @@ const Register = () => {
               <PwMatchText pwMatch={pwMatch}></PwMatchText>
             </div>
           </div>
-
 
           <div className='flex justify-center items-center pt-[50px]'>
             <ThemeProvider theme={submitButtonTheme}>

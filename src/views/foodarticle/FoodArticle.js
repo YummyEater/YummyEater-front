@@ -53,9 +53,7 @@ const FoodArticle = () => {
   }
 
   if (Object.keys(foodDetail).length === 0) {
-    return (
-      <></>
-    )
+    return ( <></> )
   } else {
     const foodData = foodDetail.data;
 

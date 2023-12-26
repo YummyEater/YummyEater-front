@@ -10,7 +10,6 @@ const DefaultLayout = ({ type, component: Component }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(`${accessToken} | ############ logged : ${logged}`);
     if (accessToken && accessToken !== null && accessToken !== 'null') {
       const check = checkLogged(navigate);
       setLogged(check);
