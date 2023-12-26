@@ -65,7 +65,6 @@ export const verifyButtonTheme2 = createTheme({
           border: `1px solid ${colors.palette.orange.main} !important`, borderRadius: '20px!important',
           '&:hover, &:focus, &:active': {
             backgroundColor: colors.palette.orange.light,
-            // border: `1px solid ${colors.palette.orange.main} !important`,
           },
         }
       }

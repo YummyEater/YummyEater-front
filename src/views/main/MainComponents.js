@@ -227,7 +227,7 @@ export function RecSlide(props) {
   return (
     (props.data === undefined || props.data.length === 0)
       ? <div className='flex flex-col justify-center items-center h-[250px] gap-[10px] m-4 bg-gray1 rounded-[15px]'>
-        <AlertCircle /> <span>현재 집계된 데이터가 없습니다.</span>
+        <AlertCircle /> <span>현재 집계된 데이터가 없습니다..</span>
       </div>
       : <Slider {...settings}>
         {props.data.map((post, idx) =>

@@ -16,7 +16,6 @@ export async function call(api, method, request) {
   }
 
   return fetch(options.url, options).then(async (response) => {
-    console.log(`&&& ${response.status}`)
     if (response.status === 200) {
       return response.json();
     }
@@ -46,7 +45,6 @@ export async function callH(api, method, request) {
   }
 
   return fetch(options.url, options).then(async (response) => {
-    console.log(`&&& ${response.status}`)
     if (response.status === 200) {
       return response.json();
     }
@@ -84,14 +82,12 @@ export async function refreshAccessToken(navigate) {
 
   return call("/api/user/refreshAccessToken", "POST", tokens)
     .then((response) => {
-      console.log(response);
       if (response.errorCode === "C00000") {
         const date = new Date();
         localStorage.setItem("ACCESS_TOKEN", response.data.accessToken);
         // // refresh token도 재발급하는 경우
         // localStorage.setItem("REFRESH_TOKEN", response.data.refreshToken);
         localStorage.setItem("SAVED_TIME", date.getTime());
-        console.log('===== TOKEN REFRESHED =====')
         return true;
       }
     })
@@ -106,7 +102,6 @@ export async function refreshAccessToken(navigate) {
 export async function signin(userDTO, navigate, backTo) {
   return call("/api/user/signIn", "POST", userDTO)
     .then((response) => {
-      console.log(response);
       if (response.errorCode === "C00000") {
         const date = new Date();
         localStorage.setItem("ACCESS_TOKEN", response.data.accessToken);
@@ -117,7 +112,6 @@ export async function signin(userDTO, navigate, backTo) {
         alert(response.message)
       }
     }).catch((error) => {
-      console.error(error)
       if (error.errorCode === "UL00000") {
         alert("로그인에 실패했습니다. 입력 정보를 다시 확인해주세요.");
       }
@@ -149,7 +143,6 @@ export async function register(nav, userDTO) {
         nav('/');
       }
     }).catch((error) => {
-      console.error(error)
       if (error.errorCode === "C10000") {
         alert("가입에 실패했습니다. 입력 정보를 다시 확인해주세요.");
       }
@@ -160,7 +153,6 @@ export async function register(nav, userDTO) {
 export async function getUserinfo(setUserinfo) {
   callH("/api/user/info", "GET", null)
     .then((response) => {
-      console.log(response);
       if (response.errorCode === "C00000") {
         setUserinfo(response.data);
       }
@@ -175,14 +167,12 @@ export async function getUserinfo(setUserinfo) {
 export async function modifyuser(nav, userDTO) {
   return callH("/api/user/info", "PATCH", userDTO)
     .then((response) => {
-      console.log(response)
       if (response.errorCode === "C00000") {
         alert("정보가 성공적으로 수정되었습니다.");
         nav('/userinfo');
       } else if (response.errorCode === "UM00000"
         || response.errorCode === "UM00001" || response.errorCode === "UM00002") {
         alert(response.message);
-        console.log(response);
       }
     })
     .catch((error) => {
@@ -210,8 +200,6 @@ export async function uploadImg(blob) {
       return response.json();
     }
   }).catch((error) => {
-    console.log("http error");
-    console.log(error);
     alert('이미지 업로드를 실패했습니다. 다시 시도해주세요.')
   });
 }
@@ -221,7 +209,6 @@ export async function deleteArticle(articleId, navigate) {
   let apiUrl = `/api/food/${articleId}`;
   return callH(apiUrl, "DELETE", null)
     .then((response) => {
-      console.log(response.errorCode);
       if (response.errorCode === "C00000") {
         alert("게시물이 삭제되었습니다.");
         navigate(-1);
@@ -240,7 +227,6 @@ export async function deleteReview(reviewId, updateReview) {
   let apiUrl = `/api/food/review/${reviewId}`;
   return callH(apiUrl, "DELETE", null)
     .then((response) => {
-      console.log(response.errorCode);
       if (response.errorCode === "C00000") {
         alert("리뷰가 삭제되었습니다.");
         updateReview();

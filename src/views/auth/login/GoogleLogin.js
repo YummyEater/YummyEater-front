@@ -11,7 +11,6 @@ export const GoogleLogin = () => {
           </div>
         </button>
       </a>
-
     </div>
   )
 }

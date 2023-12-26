@@ -45,7 +45,6 @@ const ArticleEditor = () => {
   const [initialImgList, setInitialImgList] = useState([]);
   const getImgList = (thumbImg) => {
     const imgList = [];
-    // const imgElements = Array.from(document.getElementsByClassName('toastui-editor-ww-container')[0].getElementsByTagName('img'));
     const imgElements = Array.from(document.getElementsByClassName('toastui-editor-contents')[0].getElementsByTagName('img'));
     if (imgElements.length > 0) {
       imgElements.forEach(image => {

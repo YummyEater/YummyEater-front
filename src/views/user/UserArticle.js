@@ -15,7 +15,6 @@ const UserArticle = () => {
   const [articles, setArticles] = useState({})
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
-    // searchParams.set('userId', userinfo.id);
     const sPage = searchParams.get('page') || 0
     if (Object.keys(userinfo).length !== 0 && userinfo.id !== undefined) {
       call(`/api/food?userId=${userinfo.id}&page=${sPage}&size=10&sort=createdAt,desc`, "GET", null)
@@ -117,7 +116,6 @@ const ArticleTable = (props) => {
     </ThemeProvider>
 
   )
-
 }
 
 export default UserArticle;

@@ -24,13 +24,9 @@ class App extends Component {
       <BrowserRouter>
         <Suspense fallback={loading}>
           <Routes>
-            {/* <Route exact path="/login" name="Login Page" element={<Login />} />
-            <Route exact path="/oauth/signin" name="Oauth SignIn" element={<OauthSignIn />} />
-            <Route exact path="/oauth/signup" name="Oauth SignUp" element={<OauthSignUp />} /> */}
             <Route exact path="/login" name="Login Page" element={<DefaultLayout type={1} component={<Login />} />} />
             <Route exact path="/oauth/signin" name="Oauth SignIn" element={<DefaultLayout type={1} component={<OauthSignIn />} />} />
             <Route exact path="/oauth/signup" name="Oauth SignUp" element={<DefaultLayout type={1} component={<OauthSignUp />} />} />
-
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>

@@ -94,7 +94,6 @@ export const mainSelectTheme = createTheme({
         root: { cursor: 'pointer !important', },
         input: {
           fontSize: '14px', paddingLeft: '5px',
-          // padding: '5px 5px 5px 10px',
           minWidth: 'unset !important', boxSizing: 'border-box',
           '&:focus': { backgroundColor: 'transparent', }
         }
@@ -266,7 +265,6 @@ export const tableTheme = createTheme({
         },
         head: {
           fontSize: '16px', fontWeight: 600,
-          // '&:not(:last-of-type)': { paddingRight: '15px' }
         }
       }
     }

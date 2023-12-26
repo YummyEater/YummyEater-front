@@ -57,12 +57,8 @@ const Main = () => {
       .then((response) => {
         if (response.errorCode === "C00000") {
           setRecipeData(response.data);
-        } else {
-          console.log(response);
         }
-      }).catch((error) => {
-        console.error(error)
-      });
+      }).catch((error) => {});
   }, [recipePeriod])
 
   useEffect(() => {
@@ -70,12 +66,8 @@ const Main = () => {
       .then((response) => {
         if (response.errorCode === "C00000") {
           setProductData(response.data);
-        } else {
-          console.log(response);
         }
-      }).catch((error) => {
-        console.error(error)
-      });
+      }).catch((error) => {});
   }, [productPeriod])
 
   const searchitem = 'flex flex-row flex-wrap items-center pb-[20px] max-[800px]:gap-[5px]'

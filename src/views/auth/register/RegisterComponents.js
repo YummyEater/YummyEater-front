@@ -31,5 +31,4 @@ export const Timer = (props) => {
       {time.min}:{(time.sec < 10) ? `0${time.sec}` : time.sec}
     </div>
   );
-
 };
