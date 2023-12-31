@@ -29,7 +29,7 @@ const DefaultLayout = ({ type, component: Component }) => {
             type === 1 ? <AppContent logged={logged} component={Component} /> : <AppContent logged={logged} />
           }
         </div>
-        <AppFooter />
+        {/* <AppFooter /> */}
       </div>
     )
   } else {
