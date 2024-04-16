@@ -55,7 +55,7 @@ export const MainCategory = (props) => {
             <ToggleButtonGroup value={props.selectedCategories} exclusive onChange={handleCategoryChange}>
               {
                 categories.map((item, idx) => (
-                  <ToggleButton className={(idx === 11 || idx === 18 || idx === 25 || idx === 31) ? 'first-cate ms-[12px]' : ''}
+                  <ToggleButton className={(idx === 11 || idx === 18 || idx === 24 || idx === 30) ? 'first-cate ms-[12px]' : ''}
                     value={item} key={`type-${idx}`}>{item} </ToggleButton>
                 ))
               }

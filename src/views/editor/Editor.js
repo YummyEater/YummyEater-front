@@ -143,10 +143,10 @@ const ArticleEditor = () => {
   const onUploadImage = async (blob, callback) => {
     await uploadImg(blob)
       .then((response) => {
-        const url = response.data.resourceURL;
-        callback(url, 'alt text');
+        console.log(response)
+        callback(response.data.resourceURL, response.data.resourceKey);
       })
-      .catch((err) => { callback('image_load_fail', 'alt text'); })
+      .catch((err) => { callback('image_load_fail'); })
   }
 
   const inputtitle = 'self-start pt-[3.5px] w-[122px] max-[800px]:w-full'

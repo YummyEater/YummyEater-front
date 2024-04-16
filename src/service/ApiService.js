@@ -14,7 +14,7 @@ export async function call(api, method, request) {
   if (request) {
     options.body = JSON.stringify(request);
   }
-
+  console.log(options.url)
   return fetch(options.url, options).then(async (response) => {
     if (response.status === 200) {
       return response.json();
@@ -43,7 +43,7 @@ export async function callH(api, method, request) {
   if (request) {
     options.body = JSON.stringify(request);
   }
-
+  console.log(options.url)
   return fetch(options.url, options).then(async (response) => {
     if (response.status === 200) {
       return response.json();

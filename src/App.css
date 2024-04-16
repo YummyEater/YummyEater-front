@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   margin: 0;
   background-color: #FFFFFF;
 }
@@ -207,6 +208,15 @@ input.filled:focus-visible {
   z-index: 9;
 }
 
+.toastui-editor-defaultUI-toolbar {
+  flex-wrap: wrap;
+}
+
+.toastui-editor-popup-body label[for=toastuiAltTextInput],
+#toastuiAltTextInput {
+  display: none !important;
+}
+
 .slick-dots {
   display: flex !important;
   position: unset;
@@ -277,8 +287,4 @@ input.filled:focus-visible {
 
 input:placeholder-shown {
   text-overflow: ellipsis;
-}
-
-.toastui-editor-defaultUI-toolbar {
-  flex-wrap: wrap;
 }
